@@ -69,6 +69,12 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/logout")
+	public String logoutUser(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "/users/login";
+	}
+	
 	
 	
 }
