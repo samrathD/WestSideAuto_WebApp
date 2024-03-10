@@ -14,7 +14,9 @@ import com.westside.west_side_auto.models.UserRepository;
 
 import org.springframework.stereotype.Controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -41,6 +43,36 @@ public class UserController {
 		
 		model.addAttribute("usrs", users);
 		return "/users/showAll";
+	}
+	
+	@GetMapping("/login")
+	public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+		User user = (User) session.getAttribute("session_user");
+		if(user == null) return "users/login";
+		else {
+			model.addAttribute("user", user);
+			return "users/account";
+		}
+	}
+	
+	@PostMapping("/login")
+	public String loginUser(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session) {
+		String email = formData.get("email");
+		String password = formData.get("password");
+		List<User> userList = userRepo.findByEmailAndPassword(email, password);
+		if(userList.isEmpty()) return "users/login";
+		else {
+			User user = userList.get(0);
+			request.getSession().setAttribute("session_user", user);
+			model.addAttribute("user", user);
+			return "users/account";
+		}
+	}
+	
+	@GetMapping("/logout")
+	public String logoutUser(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "/users/login";
 	}
 	
 	
