@@ -1,0 +1,12 @@
+.container{
+    height:500px;
+    width:500px;
+    border:2px solid black;
+}
+
+#upload_img{
+    height:100px;
+    width:100px;
+    object-fit:contain;
+    display:none;
+}
