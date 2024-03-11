@@ -9,25 +9,25 @@
   <body>
     <div class="form-container">
       <p class="title">Sign Up</p>
-      <form class="form" action="/users/add" method="post">
+      <form class="form">
         <div class="input-group">
-          <label for="name">Name: </label>
-          <input type="text" id="name" name="name">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" placeholder="">
         </div>
         <div class="input-group">
-          <label for="name">Email: </label>
-          <input type="text" id="email" name="email">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="">
         </div>
         <div class="input-group">
-          <label for="name">Password: </label>
-          <input type="text" id="password" name="password">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="">
         </div>
         <div class="submit">
-          <input class="sign" type="submit" value="SEND"></input>
+          <button class="sign">Submit</button>
         </div>
       </form>
       <p class="account">Already have an account?
-        <a rel="noopener noreferrer" href="/login" class="">Login In</a>
+        <a rel="noopener noreferrer" href="#" class="">Login In</a>
       </p>
     </div>
   </body>
