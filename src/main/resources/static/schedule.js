@@ -36,12 +36,23 @@ function validateForm() {
         return;
     }
 
-    // Check if the appointment time is within valid hours
-    if (appointment < min_date || appointment > max_date) {
-        updateValidity("Invalid Date");
+    else if(appointment.getHours()<min_date.getHours()||
+    appointment.getHours()>max_date.getHours()){
+        console.log("Invalid Time hours");
+        updateValidity("Invalid Time");
         return;
     }
-
+    //If hours are satisfied but not minutes
+    else if((appointment.getHours()==min_date.getHours()&&
+            appointment.getMinutes()<min_date.getMinutes()) ||
+            (appointment.getHours()==max_date.getHours()&&
+            appointment.getMinutes()>max_date.getMinutes())){
+            
+            updateValidity("Invalid Time");
+            return;
+    }
+    // If time is valid
+    updateValidity("Valid Date and Time");
     // Check if email field is empty
     if (emailInput.value.trim() === "") {
         alert("Please enter your email.");
@@ -55,9 +66,6 @@ function validateForm() {
         descriptionInput.focus();
         return;
     }
-
-    // All fields are filled, form is valid
-    updateValidity("Valid Date and Time");
 }
 
 function updateValidity(message) {
@@ -68,6 +76,7 @@ function updateValidity(message) {
         submit.disabled = true;
     } else {
         valid.classList.add("valid");
+        valid.style.color = "green";
         submit.disabled = false;
     }
 }
