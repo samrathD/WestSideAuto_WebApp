@@ -1,101 +1,81 @@
-// get the element with the appointment input
 let slots = document.querySelector("#slots");
+let emailInput = document.querySelector("#email");
+let descriptionInput = document.querySelector("#description");
 let submit = document.querySelector("#submit");
 let valid = document.querySelector("#valid");
-// let invalid = document.querySelector("#invalid");
 
-console.log(valid);
-
-//Set the minimum booking date and time
+// Set the minimum booking date and time
 const today = new Date();
 const year = today.getFullYear();
 const month = (today.getMonth() + 1).toString().padStart(2, '0');
-const day = (today.getDate()+1).toString().padStart(2, '0');
-let min = year+"-"+month+"-"+day+"T09:30";
+const day = (today.getDate() + 1).toString().padStart(2, '0');
+let min = `${year}-${month}-${day}T09:30`;
 slots.min = min;
 
-// slots.max = "0000-00-00T17:00"
-console.log(slots.max);
-console.log(slots.min);
+// Event handler for the appointment input
+slots.onchange = function() {
+    validateForm();
+}
 
-const dayNames = ["Sunday", "Monday", "Tuesday" , "Wednesday"];
-slots.onchange = function(){
+emailInput.oninput = function() {
+    validateForm();
+}
+
+descriptionInput.oninput = function() {
+    validateForm();
+}
+
+function validateForm() {
     let appointment = new Date(slots.value);
     let min_date = new Date(min);
     let max_date = new Date("2024-12-31T17:00");
 
-    console.log(`min hours ${min_date.getHours()}`);
-    console.log(`Appointment hours ${appointment.getHours()}`);
-    console.log(`max hours ${max_date.getHours()}`);
-    console.log(`Appointment mins ${appointment.getMinutes()}`);
-    console.log(`min Minutes ${min_date.getMinutes()}`);
-    console.log(`max Minutes ${max_date.getMinutes()}`);
-    
+    // Check if the appointment is on a weekend
+    if (appointment.getDay() === 0 || appointment.getDay() === 6) {
+        updateValidity("Invalid Date");
+        return;
+    }
 
-    //checking if the date is valid 
-    let day_num = appointment.getDay();
-    console.log(day_num);
+    // Check if the appointment time is within valid hours
+    if (appointment < min_date || appointment > max_date) {
+        updateValidity("Invalid Date");
+        return;
+    }
 
-    //day_num = 0 means Sunday and day_num = 6 means Saturday
-    //If appointment is on Saturnday or Sunday show status as invalid
-    if(day_num == 0 || day_num == 6 ){
-        console.log("Invalid date");
-        submit.disabled = true;
-        valid.style.display= "inline";
-        valid.style.color = "red";
-        valid.innerHTML = "✖ Invalid Date"
+    // Check if email field is empty
+    if (emailInput.value.trim() === "") {
+        alert("Please enter your email.");
+        emailInput.focus();
+        return;
     }
-    //Check hours
-    else if(appointment.getHours()<min_date.getHours()||
-    appointment.getHours()>max_date.getHours()){
-        console.log("Invalid Time hours");
-        submit.disabled = true;
-        valid.style.display= "inline";
-        valid.style.color = "red";
-        valid.innerHTML = "✖ Invalid Date"
+
+    // Check if description field is empty
+    if (descriptionInput.value.trim() === "") {
+        alert("Please provide a description of your service.");
+        descriptionInput.focus();
+        return;
     }
-    //If hours are satisfied but not minutes
-    else if((appointment.getHours()==min_date.getHours()&&
-            appointment.getMinutes()<min_date.getMinutes()) ||
-            (appointment.getHours()==max_date.getHours()&&
-            appointment.getMinutes()>max_date.getMinutes())){
-        console.log("Invalid Time minutes");
+
+    // All fields are filled, form is valid
+    updateValidity("Valid Date and Time");
+}
+
+function updateValidity(message) {
+    valid.textContent = message;
+    valid.style.display = "inline";
+    if (message !== "Valid Date and Time") {
+        valid.classList.add("invalid");
         submit.disabled = true;
-        valid.style.display= "inline";
-        valid.style.color = "red";
-        valid.innerHTML = "✖ Invalid Date"
-    }
-    else{
-        console.log("Valid Time");
+    } else {
+        valid.classList.add("valid");
         submit.disabled = false;
-        valid.style.display= "inline";
-        valid.style.color = "green";
-        valid.innerHTML = "✓ Valid Date and Time"
     }
+}
 
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Event listener for form submission
+submit.addEventListener("click", function(event) {
+    if (valid.textContent !== "Valid Date and Time") {
+        event.preventDefault();
+        alert("Please fill in all fields before submitting the form.");
+    }
+});
