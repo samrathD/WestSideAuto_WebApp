@@ -1,6 +1,7 @@
 package com.westside.west_side_auto.models;
 
 
+import java.time.LocalTime;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -15,17 +16,27 @@ public class userAppointment{
 	private String username;
 	private String email;
 	private String description;
-    private Date appointmentDate ;
+    private Date appointmentDate;
+    private LocalTime appointmentTime;
     public userAppointment() {
     }
-    public userAppointment(String username, String email, String description, Date appointmentDate) {
+    
+    public userAppointment(String username, String email, String description, Date appointmentDate,
+            LocalTime appointmentTime) {
         this.username = username;
         this.email = email;
         this.description = description;
         this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
     }
     public int getUid() {
         return uid;
+    }
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
+    }
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
     public void setUid(int uid) {
         this.uid = uid;

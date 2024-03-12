@@ -1,7 +1,11 @@
 package com.westside.west_side_auto.controllers;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -90,14 +94,27 @@ public class UserController {
 		String dateString = appointmentData.get("slots");
 		String description = appointmentData.get("description");
 		
-				Date appointmentDate = null;
-		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		    	try{
-		        	appointmentDate = dateFormat.parse(dateString);
-		    	}catch (ParseException e) {
-		        e.printStackTrace(); 
-		    	}
-				
+		Date appointmentDate = null;
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		// SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		try{
+	    	appointmentDate = dateFormat.parse(dateString);
+	    }catch (ParseException e) {
+		    e.printStackTrace(); 
+			}
+		System.out.println("Parsed Date: " + appointmentDate);
+		
+        // Parse the time part
+        LocalTime appointmentTime = null;
+        try {
+            appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Output the result
+        System.out.println("Parsed Time: " + appointmentTime);
+
 				 // Check if there's an existing appointment for the user and email
 				List<userAppointment> existingAppointments = appointmentRepo.findByUsernameAndEmail(name, email);
 				if (!existingAppointments.isEmpty()) {
@@ -107,11 +124,12 @@ public class UserController {
 					model.addAttribute("email", email);
 					model.addAttribute("description", description);
 					model.addAttribute("appointmentDate", dateString);
+					model.addAttribute("appointmentTime", appointmentTime);
 					System.out.println("An appointment already exists for this user and email.");
 					//return "/appointment/appointmentExistsConfirmation"; 
 					return "/appointment/appoinmentExistsConfirmation";
 				}
-			userAppointment appointment = new userAppointment(name, email, description, appointmentDate);
+			userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
 			appointmentRepo.save(appointment);
 		System.out.println("It works here!");
 		return "/appointment/appointmentConfirmation";
@@ -126,13 +144,20 @@ public class UserController {
 		String dateString = formData.get("appointmentDate");
 		String description = formData.get("description");
 		Date appointmentDate = null;
+		LocalTime appointmentTime = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			appointmentDate = dateFormat.parse(dateString);
 		} catch (ParseException e) {
 			e.printStackTrace(); 
 		}
-		userAppointment appointment = new userAppointment(name, email, description, appointmentDate);
+		try {
+            appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+		userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
 		appointmentRepo.save(appointment);
 		return "/appointmentConfirmation";
 	}

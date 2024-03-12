@@ -59,8 +59,9 @@
     
     <p>Name: <span th:text="${name}"></span></p>
     <p>Email: <span th:text="${email}"></span></p>
-    <p>Message: <span th:text="${message}"></span></p>
+    <p>Description: <span th:text="${description}"></span></p>
     <p>Appointment Date: <span th:text="${appointmentDate}"></span></p>
+    <p>Appointment Date: <span th:text="${appointmentTime}"></span></p>
     
     <p>Do you want to book another appointment?</p>
     <form action="/appointments/addConfirmation" method="post">
@@ -68,9 +69,10 @@
         <input type="hidden" name="email" th:value="${email}" />
         <input type="hidden" name="description" th:value="${description}" />
         <input type="hidden" name="appointmentDate" th:value="${appointmentDate}" />
+        <input type="hidden" name="appointmentTime" th:value="${appointmentTime}" />
         <button type="submit">Yes</button>
     </form>
     
-    <a href="/">No, Go to Home</a> 
+    <a href="/home.html">No, Go to Home</a> 
 </body>
 </html>
