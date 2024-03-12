@@ -31,7 +31,7 @@ public class UserController {
 	
 	@Autowired
 	private appointmentRepository appointmentRepo;
-		
+
 	@PostMapping("/users/add")
 	public String addUser(@RequestParam Map<String,String> newUser, HttpServletResponse response) {
 		System.out.println("Adding new user");
@@ -87,9 +87,9 @@ public class UserController {
 	public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
 		String name = appointmentData.get("name");
 		String email = appointmentData.get("email");
-		String dateString = appointmentData.get("appointmentDate");
+		String dateString = appointmentData.get("slots");
 		String message = appointmentData.get("message");
-
+		
 				Date appointmentDate = null;
 		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    	try{
@@ -108,11 +108,12 @@ public class UserController {
 					model.addAttribute("message", message);
 					model.addAttribute("appointmentDate", dateString);
 					System.out.println("An appointment already exists for this user and email.");
-					return "/appointment/appointmentExistsConfirmation"; 
+					//return "/appointment/appointmentExistsConfirmation"; 
+					return "/appointment/appointmentConfirmation";
 				}
-				userAppointment appointment = new userAppointment(name, email, message, appointmentDate);
-				appointmentRepo.save(appointment);
-		
+			userAppointment appointment = new userAppointment(name, email, message, appointmentDate);
+			appointmentRepo.save(appointment);
+		System.out.println("It works here!");
 		return "/appointment/appointmentConfirmation";
 	}
 
