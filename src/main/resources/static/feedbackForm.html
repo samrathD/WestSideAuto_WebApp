@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel = "stylesheet" href = "feedback.css">
+    <link rel="stylesheet" type="text/css" href = "feedback.css">
+    <nav class="top-nav">
+        <a href="home.html">Home</a>
+        <a href="schedule.html">Schedule Appointment</a>
+        <a href="feedbackForm.html">Update</a>
+        <a href="/login">Sign In</a>
+    </nav>
 </head>
 <body>
-    <div class="container">
-        <form>
-        <label for="get_img">Upload Image</label>
-        <input type = "file" id = "get_img" name = "carImg" accept="image/png, image/jpeg">
-        <img src = "" id = "upload_img">
-        <p id = "display"></p>
-    </form>
+    <div class="form-container">
+        <p class="title">Feedback Form</p>
+        <form class="form">
+            <div class="input-group">
+                <!-- Use label as a button -->
+                <div class="upload-icon">
+                    <i class="fa-solid fa-upload" style="font-size: 80px;"></i>
+                </div>
+                <label for="get_img" class="file-upload-button">Upload Image</label>
+                <!-- Actual file input, hidden from view -->
+                <div class="hide-button">
+                    <input type="file" id="get_img" name="carImg" accept="image/png, image/jpeg">
+                    <img src = "" id = "upload_img">
+                </div>
+                <p id="display"></p>
+            </div>
+        </form>
     </div>
     
 
     <script src = "feedback.js"></script>
+    <script src="https://kit.fontawesome.com/35d7b9869b.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,0 +1,92 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(17, 24, 39, 1);
+}
+.title {
+  color: rgba(243, 244, 246, 1);
+}
+.container {
+  height: auto;
+  margin: 20px auto;
+  margin-top: 50px;
+  padding: 20px;
+  max-width: 400px;
+  border: 2px solid rgba(156, 163, 175, 1);
+  /* border: 2px solid rgba(156, 163, 175, 1); */
+  border-radius: 10px;
+  color: rgba(156, 163, 175, 1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="datetime-local"],
+input[type="email"],
+textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(156, 163, 175, 1);
+  border-radius: 5px;
+  color: rgba(156, 163, 175, 1);
+  background-color: rgba(17, 24, 39, 1); /* Set background color */
+}
+
+button[type="submit"] {
+  background-color: #385e8e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.3s ease; 
+}
+
+button[type="submit"]:hover {
+  transform: scale(1.05);
+}
+
+.validity {
+  display: none;
+}
+
+.valid {
+  display: inline;
+  color: green;
+}
+
+.invalid {
+  display: inline;
+  color: red;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(17, 24, 39, 1);
+  padding: 10px 0;
+  z-index: 999; /* Ensure navigation bar is above other content */
+}
+
+/* Target the internal components of datetime-local input */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert the color to white */
+}

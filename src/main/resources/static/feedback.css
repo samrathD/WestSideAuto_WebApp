@@ -1,4 +1,4 @@
-.container{
+/* .container{
     height:500px;
     width:500px;
     border:2px solid black;
@@ -9,4 +9,97 @@
     width:100px;
     object-fit:contain;
     display:none;
+} */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(17, 24, 39, 1);
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    line-height: 0rem;
+    font-weight: 700;
+    color: rgba(243, 244, 246, 1);
+    margin-top: 70px; /* Adjust the margin-top value as needed */
+    margin-bottom: 100px;
+  }
+  
+  .form {
+    text-align: center;
+    width: 320px;
+    border-radius: 0.75rem;
+    background-color: rgba(17, 24, 39, 1);
+    color: rgba(243, 244, 246, 1);
+    margin-bottom: 30px;
+  }
+  
+  .input-group {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    align-items: center;
+  }
+
+  .input-group input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(55, 65, 81, 1);
+    outline: 0;
+    background-color: rgba(17, 24, 39, 1);
+    padding: 0.75rem 1rem;
+    color: rgba(243, 244, 246, 1);
+  }
+  
+.file-upload-button {
+  margin-top: 50px;
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem;
+  /* background-color: rgba(167, 139, 250, 1);
+  color: rgba(17, 24, 39, 1); */
+  background-color: #385e8e;
+  color: #fff;
+  font-weight: 600; 
+  transition: transform 0.3s ease;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 14px;
+  text-align: center;
 }
+
+.file-upload-button:hover {
+  transform: scale(1.05);
+}
+
+.hide-button {
+  display: none;
+}
+
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(17, 24, 39, 1);
+  padding: 10px 0;
+  z-index: 999; /* Ensure navigation bar is above other content */
+}
+
+
+
+
