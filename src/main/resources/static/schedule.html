@@ -21,24 +21,29 @@
                 <input 
                     type="datetime-local"
                     id="slots"
+                    name = "slots"
                     min=""
                     max="2024-04-30T17:30"
+                    step="900"
                     required
                 >        
                 <span class="validity" id="valid"></span>
             </div>
-
+            <div>
+                <label for="name" required>Please Enter your Full-Name</label>
+                <input type = "text" id = "name" name = "name">
+            </div>
             <div>
                 <label for="email">Please Enter your email:</label>
-                <input type="email" id="email" placeholder="e.g., example@example.com" required>
+                <input type="email" id="email" name = "email" placeholder="e.g., example@example.com" required>
             </div>
         
             <div>
-                <label for="description">Please provide a description of your service:</label>
-                <textarea id="description" rows="4" required></textarea>
+                <label for="description" >Please provide a description of your service:</label>
+                <textarea id="description" rows="4" name = "description" required></textarea>
             </div>
             <div>
-                <button type="submit" id="submit">Submit</button>
+                <button type="submit" id="submit" value = "Book">Book</button>
             </div>
         </div>
     </form>
