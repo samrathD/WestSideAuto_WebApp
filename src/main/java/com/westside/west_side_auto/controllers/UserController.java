@@ -135,35 +135,96 @@ public class UserController {
 		return "/appointment/appointmentConfirmation";
 	}
 
-	@PostMapping("/appointments/addConfirmation")
-	public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
-	String confirmation = formData.get("confirmation");
-	if ("yes".equals(confirmation)) {
-		String name = formData.get("name");
-		String email = formData.get("email");
-		String dateString = formData.get("appointmentDate");
-		String description = formData.get("description");
-		Date appointmentDate = null;
-		LocalTime appointmentTime = null;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			appointmentDate = dateFormat.parse(dateString);
-		} catch (ParseException e) {
-			e.printStackTrace(); 
-		}
-		try {
-            appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+// 	@PostMapping("/appointments/addConfirmation")
+// 	public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
+// 	String confirmation = formData.get("confirmation");
+// 	if ("yes".equals(confirmation)) {
+// 		String name = formData.get("name");
+// 		String email = formData.get("email");
+// 		String dateString = formData.get("appointmentDate");
+// 		String description = formData.get("description");
+// 		Date appointmentDate = null;
+// 		LocalTime appointmentTime = null;
+// 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+// 		try {
+// 			appointmentDate = dateFormat.parse(dateString);
+// 		} catch (ParseException e) {
+// 			e.printStackTrace(); 
+// 		}
+// 		try {
+//             appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         }
 
-		userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
-		appointmentRepo.save(appointment);
-		return "/appointmentConfirmation";
-	}
-	else {
-		return "redirect:/appointments/add"; 
-	}
-}	
+// 		userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
+// 		appointmentRepo.save(appointment);
+// 		return "/appointmentConfirmation";
+// 	}
+// 	else {
+// 		return "redirect:/appointments/add"; 
+// 	}
+// }	
+
+
+@PostMapping("/appointments/addConfirmation")
+    public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
+        String replaceOption = formData.get("replace");
+
+
+        if ("yes".equals(replaceOption)) {
+            String name = formData.get("name");
+            String email = formData.get("email");
+            String dateString = formData.get("appointmentDate");
+            String description = formData.get("description");
+            Date appointmentDate = null;
+			LocalTime appointmentTime = null;
+
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                appointmentDate = dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+			try {
+				appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+
+            // Replace the existing appointment
+            List<userAppointment> existingAppointments = appointmentRepo.findByUsernameAndEmail(name, email);
+            if (!existingAppointments.isEmpty()) {
+                for (userAppointment appointment : existingAppointments) {
+                    appointment.setDescription(description);
+                    appointment.setAppointmentDate(appointmentDate);
+					appointment.setAppointmentTime(appointmentTime);
+                    appointmentRepo.save(appointment);
+                }
+            }
+            return "/appointment/appointmentConfirmation";
+        } else {
+            // Redirect to the add appointment page after 5 seconds
+            model.addAttribute("redirectDelay", 5000); // 5 seconds delay
+            return "redirect:/appointments/add";
+        }
+    }
+
+	@GetMapping("/appointments/add")
+    public String showAddAppointmentForm() {
+        // Return the view name for the add appointment form
+        return "redirect:/schedule.html"; // Adjust the view name as per your application
+    }
+
+
+
 
 }
+
+
+
+
+

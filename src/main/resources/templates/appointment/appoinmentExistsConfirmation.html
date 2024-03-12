@@ -1,78 +1,108 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Appointment Exists Confirmation</title>
-</head>
-<body>
-    <h1>Appointment Exists Confirmation</h1>
-    
-    <p th:text="${message}"></p>
-    
-    <h2>Existing Appointments:</h2>
-    <ul>
-        <li th:each="appointment : ${existingAppointments}">
-            <span th:text="${appointment.name}"></span> - <span th:text="${appointment.appointmentDate}"></span>
-        </li>
-    </ul>
-    
-    <p>Name: <span th:text="${name}"></span></p>
-    <p>Email: <span th:text="${email}"></span></p>
-    <p>Message: <span th:text="${message}"></span></p>
-    <p>Appointment Date: <span th:text="${appointmentDate}"></span></p>
-    
-    <p>Do you want to book another appointment?</p>
-    <form action="/appointment/addConfirmation" method="get">
-        <input type="hidden" name="name" th:value="${name}" />
-        <input type="hidden" name="email" th:value="${email}" />
-        <input type="hidden" name="message" th:value="${message}" />
-        <input type="hidden" name="appointmentDate" th:value="${appointmentDate}" />
-        <button type="submit">Yes</button>
-    </form>
-    
-    <a href="/">No, Go to Home</a> 
-    
-
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Appointment Exists Confirmation</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            color: #666;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="hidden"] {
+            display: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #666;
+        }
+        a:hover {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Appointment Exists Confirmation</h1>
-    <!-- <p>Hello</p> -->
-    <p th:text="${description}"></p>
-    
-    <h2>Existing Appointments:</h2>
-    <ul>
-        <!-- <span th:each="appointment : ${existingAppointments}">
-            <li th:text="${appointment.username}"></li>
-        </span> -->
-        <li th:each="appointment : ${existingAppointments}">
-            <span th:text="${appointment.username}"></span> - <span th:text="${appointment.appointmentDate}"></span>
-        </li>
-    </ul>
-    
-    <p>Name: <span th:text="${name}"></span></p>
-    <p>Email: <span th:text="${email}"></span></p>
-    <p>Description: <span th:text="${description}"></span></p>
-    <p>Appointment Date: <span th:text="${appointmentDate}"></span></p>
-    <p>Appointment Date: <span th:text="${appointmentTime}"></span></p>
-    
-    <p>Do you want to book another appointment?</p>
-    <form action="/appointments/addConfirmation" method="post">
-        <input type="hidden" name="name" th:value="${name}" />
-        <input type="hidden" name="email" th:value="${email}" />
-        <input type="hidden" name="description" th:value="${description}" />
-        <input type="hidden" name="appointmentDate" th:value="${appointmentDate}" />
-        <input type="hidden" name="appointmentTime" th:value="${appointmentTime}" />
-        <button type="submit">Yes</button>
-    </form>
-    
-    <a href="/home.html">No, Go to Home</a> 
+    <div class="container">
+        <h1>Appointment Exists Confirmation</h1>
+        
+        <div class="existing-appointments">
+            <h2>Existing Appointments:</h2>
+            <ul>
+                <li th:each="appointment : ${existingAppointments}">
+                    <span th:text="${appointment.username}"></span> - <span th:text="${appointment.appointmentDate}"></span>
+                    - <span th:text="${appointment.appointmentTime}"></span> - <span th:text="${appointment.description}"></span>
+                </li>
+            </ul>
+        </div>
+       
+        <div class="appointment-details">
+            <h2>New Appointments:</h2>
+            <p><strong>Name:</strong> <span th:text="${name}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${email}"></span></p>
+            <p><strong>Message:</strong> <span th:text="${description}"></span></p>
+            <p><strong>Appointment Date:</strong> <span th:text="${appointmentDate}"></span></p>
+            <p><strong>Appointment Time:</strong> <span th:text="${appointmentTime}"></span></p>
+        </div>
+       
+        <div class="confirmation-buttons">
+            <p>Do you want to replace the existing appointment with the new one?</p>
+            <form action="/appointments/addConfirmation" method="post">
+                <input type="hidden" name="name" th:value="${name}" />
+                <input type="hidden" name="email" th:value="${email}" />
+                <input type="hidden" name="description" th:value="${description}" />
+                <input type="hidden" name="appointmentDate" th:value="${appointmentDate}" />
+                <input type="hidden" name="appointmentTime" th:value="${appointmentTime}" />
+                <button type="submit" name="replace" value="yes">Yes</button>
+                <button type="submit" name="replace" value="no">No</button>
+            </form>
+        </div>
+       
+        <div class="home-link">
+            <a href="/home.html">Go to Home</a>
+        </div>
+    </div>
 </body>
 </html>
