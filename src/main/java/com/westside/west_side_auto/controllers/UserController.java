@@ -88,7 +88,7 @@ public class UserController {
 		String name = appointmentData.get("name");
 		String email = appointmentData.get("email");
 		String dateString = appointmentData.get("slots");
-		String message = appointmentData.get("message");
+		String description = appointmentData.get("description");
 		
 				Date appointmentDate = null;
 		    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -101,17 +101,17 @@ public class UserController {
 				 // Check if there's an existing appointment for the user and email
 				List<userAppointment> existingAppointments = appointmentRepo.findByUsernameAndEmail(name, email);
 				if (!existingAppointments.isEmpty()) {
-					model.addAttribute("message", "An appointment already exists for this user and email.");
+					model.addAttribute("description", "An appointment already exists for this user and email.");
 					model.addAttribute("existingAppointments", existingAppointments);
 					model.addAttribute("name", name); 
 					model.addAttribute("email", email);
-					model.addAttribute("message", message);
+					model.addAttribute("description", description);
 					model.addAttribute("appointmentDate", dateString);
 					System.out.println("An appointment already exists for this user and email.");
 					//return "/appointment/appointmentExistsConfirmation"; 
-					return "/appointment/appointmentConfirmation";
+					return "/appointment/appoinmentExistsConfirmation";
 				}
-			userAppointment appointment = new userAppointment(name, email, message, appointmentDate);
+			userAppointment appointment = new userAppointment(name, email, description, appointmentDate);
 			appointmentRepo.save(appointment);
 		System.out.println("It works here!");
 		return "/appointment/appointmentConfirmation";
@@ -124,7 +124,7 @@ public class UserController {
 		String name = formData.get("name");
 		String email = formData.get("email");
 		String dateString = formData.get("appointmentDate");
-		String message = formData.get("message");
+		String description = formData.get("description");
 		Date appointmentDate = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -132,7 +132,7 @@ public class UserController {
 		} catch (ParseException e) {
 			e.printStackTrace(); 
 		}
-		userAppointment appointment = new userAppointment(name, email, message, appointmentDate);
+		userAppointment appointment = new userAppointment(name, email, description, appointmentDate);
 		appointmentRepo.save(appointment);
 		return "/appointmentConfirmation";
 	}
