@@ -47,9 +47,16 @@ public class UserController {
 		//TODO HASH PASSWORD SO ITS NOT JUST PLAIN TEXT
 		String newPassword = newUser.get("password");
 		
-		userRepo.save(new User(newName, newEmail, newPassword));
-		response.setStatus(201);
-		return "users/showAll";
+		if(userRepo.findByEmail(newEmail).size()==0) {
+			userRepo.save(new User(newName, newEmail, newPassword));
+			response.setStatus(201);
+			return "redirect:/login";
+		}
+		else {
+			return "redirect:/signup.html";
+		}
+		
+		
 	}
 	
 	@GetMapping("/users/viewAllUsers")
