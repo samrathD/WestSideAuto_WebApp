@@ -281,9 +281,9 @@ public String addAppointment(@RequestParam Map<String,String> appointmentData, M
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
             appointmentRepo.deleteAll(appointmentsToDelete);
-            return "redirect:/home.html";
+            return "/appointment/deleteConfirmation";
         } else {
-            return "redirect:/appointments/add";
+            return "/appointment/NoAppointment";
         }
     }
 
