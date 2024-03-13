@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .appointment-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .appointment-name {
+            font-weight: bold;
+        }
+        .appointment-info {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center mb-4">Appointments</h1>
+                <div th:each="appointment:${appointments}" class="appointment-card">
+                    <h2 class="appointment-name" th:text="${appointment.username}"></h2>
+                    <ul class="appointment-info">
+                        <li><strong>Email:</strong> <span th:text="${appointment.email}"></span></li>
+                        <li><strong>Date:</strong> <span th:text="${appointment.appointmentDate}"></span></li>
+                        <li><strong>Time:</strong> <span th:text="${appointment.appointmentTime}"></span></li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <a href="/home.html" class="btn btn-primary">Go Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
