@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -287,6 +288,20 @@ public String addAppointment(@RequestParam Map<String,String> appointmentData, M
         }
     }
 
+	@GetMapping("/appointments/view")
+	public String getMethodName(Model model) {
+		// List<userAppointment> appointments = appointmentRepo.findAll();
+		List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointmentDate", "appointmentTime"));
+
+
+		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
+
+
+		model.addAttribute("appointments", appointments);
+
+		return"/appointment/showAllAppointments";
+	}
+	
 }
 
 
