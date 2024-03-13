@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class UserController {
@@ -274,8 +275,17 @@ public String addAppointment(@RequestParam Map<String,String> appointmentData, M
         return "redirect:/schedule.html"; // Adjust the view name as per your application
     }
 
-
-
+	@Transactional
+    @PostMapping("/appointments/delete")
+    public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
+        List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
+        if (!appointmentsToDelete.isEmpty()) {
+            appointmentRepo.deleteAll(appointmentsToDelete);
+            return "redirect:/home.html";
+        } else {
+            return "redirect:/appointments/add";
+        }
+    }
 
 }
 
