@@ -11,6 +11,16 @@ body {
   .title {
     color: rgba(243, 244, 246, 1);
   }
+
+  .timings {
+    color: rgba(243, 244, 246, 1);
+    text-align: center;
+  }
+
+  .time {
+    color: rgba(243, 244, 246, 1);
+    text-align: center;
+  }
   .container {
     height: auto;
     margin: 20px auto;
