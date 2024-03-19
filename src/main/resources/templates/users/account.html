@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Account</title>
+  <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
+  <nav class="top-nav">
+    <a href="/html/home.html">Home</a>
+    <a href="/html/schedule.html">Schedule Appointment</a>
+    <a href="/html/feedbackForm.html">Update</a>
+    <a href="/login">Sign In</a>
+  </nav>
+</head>
   <body>
     <h1>This is your account</h1>
 
     <h2 th:text="${user.username}"></h2>
+
+    <h2>Your Appointments</h2>
+
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Description</th>
+      <tr>
+       <tr th:each="app:${appointments}">
+         <td th:text="${app.appointmentDate}"></td>
+         <td th:text="${app.appointmentTime}"></td>
+         <td th:text="${app.description}"></td>
+       </tr>
+    </table>
+
+    <h2>Edit User Profile</h2>
 
     <a href="/logout">Logout</a>
   </body>

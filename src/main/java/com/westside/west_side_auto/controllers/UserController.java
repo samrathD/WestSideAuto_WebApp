@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.UserRepository;
 import com.westside.west_side_auto.models.appointmentRepository;
+import com.westside.west_side_auto.models.userAppointment;
 
 import org.springframework.stereotype.Controller;
 
@@ -62,6 +63,10 @@ public class UserController {
 		if(user == null) return "users/login";
 		else {
 			model.addAttribute("user", user);
+			
+			List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
+			model.addAttribute("appointments", userAppointments);
+			
 			return "users/account";
 		}
 	}
@@ -76,6 +81,10 @@ public class UserController {
 			User user = userList.get(0);
 			request.getSession().setAttribute("session_user", user);
 			model.addAttribute("user", user);
+			
+			List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
+			model.addAttribute("appointments", userAppointments);
+			
 			return "users/account";
 		}
 	}
