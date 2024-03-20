@@ -95,6 +95,30 @@ public class UserController {
 		return "/users/login";
 	}
 	
+	@PostMapping("/users/edit")
+	public String editStudent(@RequestParam Map<String,String> editUser, HttpServletResponse response, HttpSession session) {
+		User user = (User) session.getAttribute("session_user");
+		
+		if(user == null) return "/users/login";
+		else {
+			String password = editUser.get("password");
+			String confirmPassword = editUser.get("confirm-password");
+			
+			if(password.equals(confirmPassword)) {
+				System.out.println("User updated successfully");
+				user.setUsername(editUser.get("username"));
+				user.setEmail(editUser.get("email"));
+				user.setPassword(password);
+				
+				userRepo.save(user);
+				response.setStatus(201);
+				return "/users/updateProfile";
+			}
+			System.out.println("Passwords did not match");
+			return "/users/updateError";
+		}
+	}
+	
 }
 
 
