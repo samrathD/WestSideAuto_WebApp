@@ -15,9 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.westside.west_side_auto.models.EmailStructure;
 import com.westside.west_side_auto.models.appointmentRepository;
 import com.westside.west_side_auto.models.userAppointment;
+import com.westside.west_side_auto.service.EmailSenderService;
 
 import jakarta.transaction.Transactional;
 
@@ -26,6 +29,12 @@ public class AppointmentController {
 
     @Autowired
 	private appointmentRepository appointmentRepo;
+    private EmailSenderService emailSenderService;
+
+    @Autowired
+    public AppointmentController(EmailSenderService emailSenderService){
+        this.emailSenderService = emailSenderService;
+    }
 
     @PostMapping("/appointments/add")
     public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
@@ -76,7 +85,12 @@ public class AppointmentController {
 
     userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
     appointmentRepo.save(appointment);
+    
+    //email being made
+    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed for...");
+    
     System.out.println("It works here!");
+    emailSenderService.sendEmail("samrath2004@gmail.com", emailStructure);
     return "/appointment/appointmentConfirmation";
 }
 
