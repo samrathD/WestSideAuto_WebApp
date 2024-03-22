@@ -90,8 +90,8 @@ public class AppointmentController {
     EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed");
     
     System.out.println("It works here!");
-    //emailSenderService.sendEmail(email, emailStructure);
-    return "/appointment/appointmentConfirmation";
+    emailSenderService.sendEmail(email, emailStructure);
+    return "/appointment/appointmentConfirmation.html";
 }
 
 
