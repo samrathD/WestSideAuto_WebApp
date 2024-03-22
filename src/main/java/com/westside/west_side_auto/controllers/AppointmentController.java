@@ -118,7 +118,7 @@ public class AppointmentController {
             }
 
 			try {
-				appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+				appointmentTime = LocalTime.parse(dateString.substring(11)); 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

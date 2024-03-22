@@ -17,9 +17,9 @@ slots.onchange = function() {
     validateForm();
 }
 
-emailInput.oninput = function() {
-    validateForm();
-}
+// emailInput.oninput = function() {
+//     validateForm();
+// }
 
 descriptionInput.oninput = function() {
     validateForm();
