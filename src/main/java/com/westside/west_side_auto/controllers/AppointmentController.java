@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.RestController;
 
 import com.westside.west_side_auto.models.EmailStructure;
 import com.westside.west_side_auto.models.appointmentRepository;
@@ -87,10 +87,10 @@ public class AppointmentController {
     appointmentRepo.save(appointment);
     
     //email being made
-    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed for...");
+    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed");
     
     System.out.println("It works here!");
-    emailSenderService.sendEmail("samrath2004@gmail.com", emailStructure);
+    emailSenderService.sendEmail(email, emailStructure);
     return "/appointment/appointmentConfirmation";
 }
 
@@ -154,6 +154,10 @@ public class AppointmentController {
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
             appointmentRepo.deleteAll(appointmentsToDelete);
+            //email being made
+    EmailStructure emailStructure = new EmailStructure("Cancel Appointment Confirmation", "Your appointment has been cancelled");
+    System.out.println("It works here!");
+    emailSenderService.sendEmail(email, emailStructure);
             return "/appointment/deleteConfirmation";
         } else {
             return "/appointment/NoAppointment";
