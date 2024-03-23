@@ -90,11 +90,9 @@ public class AppointmentController {
     EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed");
     
     System.out.println("It works here!");
-    //emailSenderService.sendEmail(email, emailStructure);
+    emailSenderService.sendEmail(email, emailStructure);
     return "/appointment/appointmentConfirmation";
 }
-
-
 
 @PostMapping("/appointments/addConfirmation")
     public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {

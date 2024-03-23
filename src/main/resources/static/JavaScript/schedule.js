@@ -27,6 +27,7 @@ descriptionInput.oninput = function() {
 
 function validateForm() {
     let appointment = new Date(slots.value);
+    console.log(appointment);
     let min_date = new Date(min);
     let max_date = new Date("2024-12-31T17:00");
 
