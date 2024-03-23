@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.UserRepository;
@@ -28,7 +29,12 @@ public class UserController {
 	
 	@Autowired
 	private appointmentRepository appointmentRepo;
-
+	
+	@GetMapping("/")
+	public RedirectView process() {
+		return new RedirectView("/html/home.html");
+	}
+	
 	@PostMapping("/users/add")
 	public String addUser(@RequestParam Map<String,String> newUser, HttpServletResponse response) {
 		System.out.println("Adding new user");
