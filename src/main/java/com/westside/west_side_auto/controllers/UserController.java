@@ -92,11 +92,11 @@ public class UserController {
 	@GetMapping("/logout")
 	public String logoutUser(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return "/users/login";
+		return "users/login";
 	}
 	
 	@PostMapping("/users/edit")
-	public String editStudent(@RequestParam Map<String,String> editUser, HttpServletResponse response, HttpSession session) {
+	public String editUser(@RequestParam Map<String,String> editUser, HttpServletResponse response, HttpSession session) {
 		User user = (User) session.getAttribute("session_user");
 		
 		if(user == null) return "/users/login";
