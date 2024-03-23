@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RestController;
 
 import com.westside.west_side_auto.models.EmailStructure;
+import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.appointmentRepository;
 import com.westside.west_side_auto.models.userAppointment;
 import com.westside.west_side_auto.service.EmailSenderService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Controller
@@ -34,6 +37,20 @@ public class AppointmentController {
     @Autowired
     public AppointmentController(EmailSenderService emailSenderService){
         this.emailSenderService = emailSenderService;
+    }
+    
+    @GetMapping("/bookAppointment")
+    public String appointmentBookingSetup(HttpServletRequest request, Model model, HttpSession session) {
+    	User user = (User) session.getAttribute("session_user");
+		if(user != null) {
+			model.addAttribute("user", user);
+		}
+		else {
+			User emptyUser = new User();
+			model.addAttribute(emptyUser);
+		}
+		
+    	return "/appointment/schedule";
     }
 
     @PostMapping("/appointments/add")
