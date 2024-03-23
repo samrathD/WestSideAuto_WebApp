@@ -66,7 +66,7 @@ public class AppointmentController {
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         System.out.println("An appointment already exists for this date and time.");
-        return "/appointment/appointmentDateBooked";
+        return "appointment/appointmentDateBooked";
     }
 
     // Check if there's an existing appointment for the user and email
@@ -80,7 +80,7 @@ public class AppointmentController {
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         System.out.println("An appointment already exists for this user and email.");
-        return "/appointment/appoinmentExistsConfirmation";
+        return "appointment/appoinmentExistsConfirmation";
     }
 
     userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
@@ -133,7 +133,7 @@ public class AppointmentController {
                     appointmentRepo.save(appointment);
                 }
             }
-            return "/appointment/appointmentConfirmation";
+            return "appointment/appointmentConfirmation";
         } else {
             // Redirect to the add appointment page after 5 seconds
             model.addAttribute("redirectDelay", 5000); // 5 seconds delay
@@ -157,9 +157,9 @@ public class AppointmentController {
     EmailStructure emailStructure = new EmailStructure("Cancel Appointment Confirmation", "Your appointment has been cancelled");
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
-            return "/appointment/deleteConfirmation";
+            return "appointment/deleteConfirmation";
         } else {
-            return "/appointment/NoAppointment";
+            return "appointment/NoAppointment";
         }
     }
 
@@ -175,6 +175,6 @@ public class AppointmentController {
 		model.addAttribute("appointments", appointments);
         System.out.println("view page show");
 
-		return"/appointment/showAllAppointments";
+		return"appointment/showAllAppointments";
 	}
 }
