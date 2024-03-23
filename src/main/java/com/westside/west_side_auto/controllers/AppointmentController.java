@@ -92,7 +92,7 @@ public class AppointmentController {
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
     // return "/appointment/appointmentConfirmation.html";
-    return "redirect:/appointmentConfirmation";
+    return "redirect:/appointment/appointmentConfirmation.html";
 }
 
 
@@ -175,6 +175,7 @@ public class AppointmentController {
 
 
 		model.addAttribute("appointments", appointments);
+        System.out.println("view page show");
 
 		return"/appointment/showAllAppointments";
 	}
