@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Detailing Price Estimator</title>
+    <!-- Add any necessary CSS stylesheets -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<h1>Car Data Form</h1>
+
+<form action="/clientCarDataSubmit" th:action="@{/estimate}" th:object="${clientData}" method="post" enctype="multipart/form-data">
+    <!-- Client Information -->
+    <div>
+        <label for="clientName">Name:</label>
+        <input type="text" id="clientName" name="clientName" th:field="*{clientName}">
+    </div>
+    <div>
+        <label for="clientEmail">Email:</label>
+        <input type="email" id="clientEmail" name="clientEmail" th:field="*{clientEmail}">
+    </div>
+    <div>
+        <label for="clientPhone">Phone:</label>
+        <input type="tel" id="clientPhone" name="clientPhone" th:field="*{clientPhone}">
+    </div>
+    <div>
+        <label for="clientAddress">Address:</label>
+        <input type="text" id="clientAddress" name="clientAddress" th:field="*{clientAddress}">
+    </div>
+    <div>
+        <label for="todayDate">Today Date:</label>
+        <input type="text" id="todayDate" name="todayDate" th:field="*{todayDate}">
+    </div>
+
+    <!-- Car Information -->
+    <div>
+        <label for="clientCar">Car:</label>
+        <input type="text" id="clientCar" name="clientCar" th:field="*{clientCar}">
+    </div>
+    <div>
+        <label for="clientCarMake">Car Make:</label>
+        <input type="text" id="clientCarMake" name="clientCarMake" th:field="*{clientCarMake}">
+    </div>
+    <div>
+        <label for="clientCarModel">Car Model:</label>
+        <input type="text" id="clientCarModel" name="clientCarModel" th:field="*{clientCarModel}">
+    </div>
+    <div>
+        <label for="clientCarYear">Car Year:</label>
+        <input type="text" id="clientCarYear" name="clientCarYear" th:field="*{clientCarYear}">
+    </div>
+
+    <!-- Last Service Date -->
+    <div>
+        <label for="clientCarServices">Last Service Date:</label>
+        <input type="text" id="clientCarServices" name="clientCarServices" th:field="*{clientCarServices}">
+    </div>
+
+    <!-- Car Pictures -->
+    <div>
+        <label for="clientCarPics">Car Pictures:</label><br>
+        <input type="file" id="clientCarPics" name="clientCarPics" accept="image/*" multiple>
+    </div>
+
+    <!-- Comments -->
+    <div>
+        <label for="anyComments">Comments:</label><br>
+        <textarea id="anyComments" name="anyComments" rows="4" cols="50" th:field="*{anyComments}"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+</body>
+</html>

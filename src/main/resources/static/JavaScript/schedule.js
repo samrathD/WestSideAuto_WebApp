@@ -6,10 +6,14 @@ let valid = document.querySelector("#valid");
 
 // Set the minimum booking date and time
 const today = new Date();
-const year = today.getFullYear();
-const month = (today.getMonth() + 1).toString().padStart(2, '0');
-const day = (today.getDate() + 1).toString().padStart(2, '0');
-let min = `${year}-${month}-${day}T09:30`;
+const yesterday = new Date(today.getTime());
+yesterday.setDate(today.getDate() - 1);
+console.log(`Today is ${today}`);
+const year = yesterday.getFullYear();
+const month = (yesterday.getMonth() + 1).toString().padStart(2, '0');
+const day = (yesterday.getDate() + 1).toString().padStart(2, '0');
+let min = `${year}-${month}-${day}`;
+console.log(`Min is ${min}`);
 slots.min = min;
 
 // Event handler for the appointment input
@@ -17,9 +21,9 @@ slots.onchange = function() {
     validateForm();
 }
 
-emailInput.oninput = function() {
-    validateForm();
-}
+// emailInput.oninput = function() {
+//     validateForm();
+// }
 
 descriptionInput.oninput = function() {
     validateForm();
@@ -27,11 +31,13 @@ descriptionInput.oninput = function() {
 
 function validateForm() {
     let appointment = new Date(slots.value);
+    console.log(appointment);
+    console.log(appointment.getDay());
     let min_date = new Date(min);
     let max_date = new Date("2024-12-31T17:00");
 
     // Check if the appointment is on a weekend
-    if (appointment.getDay() === 0 || appointment.getDay() === 6) {
+    if (appointment.getDay() === 5 || appointment.getDay() === 6) {
         updateValidity("Invalid Date");
         return;
     }
@@ -52,17 +58,17 @@ function validateForm() {
             return;
     }
     // If time is valid
-    updateValidity("Valid Date and Time");
+    updateValidity("Valid Date");
     // Check if email field is empty
     if (emailInput.value.trim() === "") {
-        alert("Please enter your email.");
+        //alert("Please enter your email.");
         emailInput.focus();
         return;
     }
 
     // Check if description field is empty
     if (descriptionInput.value.trim() === "") {
-        alert("Please provide a description of your service.");
+        //alert("Please provide a description of your service.");
         descriptionInput.focus();
         return;
     }

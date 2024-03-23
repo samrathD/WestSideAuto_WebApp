@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Data</title>
+    <!-- Add any necessary CSS stylesheets -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<h1>Client Car Data</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Today Date</th>
+            <th>Car</th>
+            <th>Car Make</th>
+            <th>Car Model</th>
+            <th>Car Year</th>
+            <th>Last Service Date</th>
+            <th>Car Pictures</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr th:each="item : ${data}">
+            <td th:text="${item.clientName}"></td>
+            <td th:text="${item.clientEmail}"></td>
+            <td th:text="${item.clientPhone}"></td>
+            <td th:text="${item.clientAddress}"></td>
+            <td th:text="${item.todayDate}"></td>
+            <td th:text="${item.clientCar}"></td>
+            <td th:text="${item.clientCarMake}"></td>
+            <td th:text="${item.clientCarModel}"></td>
+            <td th:text="${item.clientCarYear}"></td>
+            <td th:text="${item.clientCarServices}"></td>
+            <td th:text="${item.clientCarPics}"></td>
+            <td th:text="${item.anyComments}"></td>
+            
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

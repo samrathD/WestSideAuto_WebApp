@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule an Appointment</title>
-    <link rel="stylesheet" href="schedule.css">
+    <link rel="stylesheet" href="/css/schedule.css">
     <nav class="top-nav">
         <a href="home.html">Home</a>
         <a href="schedule.html">Schedule Appointment</a>
@@ -15,16 +15,16 @@
 <body>
     <form class="schedule" action = "/appointments/add" method = "post">
         <h1 class="title">Schedule an Appointment</h1>
+        <h2 class="timings">Hours of Operation</h2>
+        <h3 class="time">9:00 AM To 5:00 PM</h3>
         <div class="container">
             <div>
                 <label for="slots">Please choose your slot:</label>
                 <input 
-                    type="datetime-local"
+                    type="date"
                     id="slots"
                     name = "slots"
                     min=""
-                    max="2024-04-30T17:30"
-                    step="900"
                     required
                 >        
                 <span class="validity" id="valid"></span>
@@ -47,6 +47,6 @@
             </div>
         </div>
     </form>
-    <script src="schedule.js"></script>
+    <script src="/JavaScript/schedule.js"></script>
 </body>
 </html>
