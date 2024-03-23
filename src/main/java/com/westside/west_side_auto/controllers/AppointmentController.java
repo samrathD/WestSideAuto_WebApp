@@ -91,8 +91,8 @@ public class AppointmentController {
     
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
-    // return "/appointment/appointmentConfirmation.html";
-    return "redirect:/appointment/appointmentConfirmation";
+    return "/appointment/appointmentConfirmation";
+    // return "/src/main/resources/templates/appointment/appointmentConfirmation.html";
 }
 
 
