@@ -3,45 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule an Appointment</title>
-    <link rel="stylesheet" href="test.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="test.css">
     <nav class="top-nav">
         <a href="home.html">Home</a>
         <a href="schedule.html">Schedule Appointment</a>
         <a href="feedbackForm.html">Update</a>
-        <a href="/login">Login</a>
-    </nav>
+        <a href="/login">Sign In</a>
+      </nav>
 </head>
 <body>
-    <form class="schedule" action = "/appointments/add" method = "post">
-        <h1 class="title">Schedule an Appointment</h1>
-        <div class="container">
-            <div>
-                <label for="slots">Please choose your slot:</label>
-                <input 
-                    type="datetime-local"
-                    id="slots"
-                    min=""
-                    max="2024-04-30T17:30"
-                    required
-                >        
-                <span class="validity" id="valid"></span>
-            </div>
-
-            <div>
-                <label for="email">Please Enter your email:</label>
-                <input type="email" id="email" placeholder="e.g., example@example.com" required>
-            </div>
-        
-            <div>
-                <label for="description">Please provide a description of your service:</label>
-                <textarea id="description" rows="4" required></textarea>
-            </div>
-            <div>
-                <button type="submit" id="submit">Submit</button>
+    <p class="title">Welcome to West Side Auto!</p>
+    <div class="info">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Opening Hours</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
+                </ul>
             </div>
         </div>
-    </form>
-    <script src="schedule.js"></script>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">West Side Autoworks</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">West Side Autoworks</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
+                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+    
