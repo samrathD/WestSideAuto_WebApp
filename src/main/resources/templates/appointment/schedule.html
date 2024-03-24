@@ -6,7 +6,7 @@
     <title>Schedule an Appointment</title>
     <link rel="stylesheet" href="/css/schedule.css">
     <nav class="top-nav">
-        <a href="home.html">Home</a>
+        <a href="/">Home</a>
         <a href="/bookAppointment">Schedule Appointment</a>
         <a href="feedbackForm.html">Update</a>
         <a href="/login">Sign In</a>
@@ -31,11 +31,11 @@
             </div>
             <div>
                 <label for="name" required>Please Enter your Full-Name</label>
-                <input type = "text" id = "name" name = "name">
+                <input type = "text" id = "name" name = "name" th:value="${user.username}">
             </div>
             <div>
                 <label for="email">Please Enter your email:</label>
-                <input type="email" id="email" name = "email" placeholder="e.g., example@example.com" required>
+                <input type="email" id="email" name = "email" placeholder="e.g., example@example.com" th:value="${user.email}" required>
             </div>
 
             <div>
