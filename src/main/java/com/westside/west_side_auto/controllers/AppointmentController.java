@@ -24,6 +24,7 @@ import com.westside.west_side_auto.models.userAppointment;
 import com.westside.west_side_auto.service.EmailSenderService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
@@ -42,9 +43,7 @@ public class AppointmentController {
     @GetMapping("/bookAppointment")
     public String appointmentBookingSetup(HttpServletRequest request, Model model, HttpSession session) {
     	User user = (User) session.getAttribute("session_user");
-		if(user != null) {
-			model.addAttribute("user", user);
-		}
+		if(user != null) model.addAttribute("user", user);
 		else {
 			User emptyUser = new User();
 			model.addAttribute(emptyUser);
@@ -193,5 +192,42 @@ public class AppointmentController {
         System.out.println("view page show");
 
 		return"appointment/showAllAppointments";
+	}
+	
+	@PostMapping("/updateAppointment")
+	public String updateAppointment(Model model, HttpSession session, @RequestParam String uid) {
+		User user = (User) session.getAttribute("session_user");
+		if(user == null) return "users/login";
+		else {
+			model.addAttribute("user", user);
+			List<userAppointment> selectedAppointment = appointmentRepo.findByUid(Integer.parseInt(uid));
+			model.addAttribute("appt", selectedAppointment.get(0));
+		}
+		
+		return "appointment/updateAppointment";
+	}
+	
+	@PostMapping("/updateAppointmentInformation")
+	public String updateSelectedAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
+		String name = appointmentData.get("name");
+	    String email = appointmentData.get("email");
+	    String dateString = appointmentData.get("slots");
+	    String description = appointmentData.get("description");
+	    
+	    Date appointmentDate = null;
+	    LocalTime appointmentTime = null;
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    try {
+	        appointmentDate = dateFormat.parse(dateString);
+	        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+	    } catch (ParseException | DateTimeParseException e) {
+	        e.printStackTrace(); 
+	    }
+	    
+	    List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
+
+		
+		
+		return "appointment/appointmentDateBooked";
 	}
 }
