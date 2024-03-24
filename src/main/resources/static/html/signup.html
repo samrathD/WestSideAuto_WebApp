@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script>
+      function validateForm() {
+        var passwordValid = validatePassword();
+        var emailValid = validateEmail();
+  
+        return passwordValid && emailValid;
+      }
+  
+      function validatePassword() {
+        var password = document.getElementById("password").value;
+        var uppercaseRegex = /[A-Z]/;
+        var lowercaseRegex = /[a-z]/;
+        var numberRegex = /[0-9]/;
+        var passwordError = document.getElementById("password-error");
+  
+        if (password.length < 6 || !uppercaseRegex.test(password) || !lowercaseRegex.test(password) || !numberRegex.test(password)) {
+          passwordError.textContent = "Password must be at least 6 characters long with one uppercase letter, lowercase letter and number";
+          return false;
+        } else {
+          passwordError.textContent = "";
+          return true;
+        }
+      }
+  
+      function validateEmail() {
+        var email = document.getElementById("email").value;
+        var emailError = document.getElementById("email-error");
+  
+        if (!email.includes('@')) {
+          emailError.textContent = "Please enter a valid email address.";
+          return false;
+        } else {
+          emailError.textContent = "";
+          return true;
+        }
+      }
+    </script>
     <nav class="top-nav">
       <a href="home.html">Home</a>
       <!-- <a href="schedule.html">Schedule Appointment</a>
@@ -15,7 +52,7 @@
   <body>
     <div class="form-container">
       <p class="title">Sign Up</p>
-      <form class="form" action="/users/add" method="post">
+      <form class="form" action="/users/add" method="post" onsubmit="return validateForm()">
         <div class="input-group">
           <label for="name">Name: </label>
           <input type="text" id="name" name="name">
@@ -23,10 +60,12 @@
         <div class="input-group">
           <label for="name">Email: </label>
           <input type="text" id="email" name="email">
+          <span id="email-error" class="error-message"></span> <!-- Validation message for email -->
         </div>
         <div class="input-group">
           <label for="name">Password: </label>
           <input type="password" id="password" name="password">
+          <span id="password-error" class="error-message"></span> <!-- Validation message for password -->
         </div>
         <div class="submit">
           <input class="sign" type="submit" value="SEND"></input>
