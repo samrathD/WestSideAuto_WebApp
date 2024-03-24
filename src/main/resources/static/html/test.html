@@ -3,72 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD:src/main/resources/static/test.html
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="test.css">
-=======
-    <title>Schedule an Appointment</title>
-    <link rel="stylesheet" href="/css/test.css">
->>>>>>> 161c3983003bdd1d2df05b6bec75996ed9a646a8:src/main/resources/static/html/test.html
+    <link rel="stylesheet" type="text/css" href = "/css/feedback.css">
     <nav class="top-nav">
-        <a href="home.html">Home</a>
-        <a href="schedule.html">Schedule Appointment</a>
+        <a href="/">Home</a>
+        <a href="/bookAppointment">Schedule Appointment</a>
         <a href="feedbackForm.html">Update</a>
         <a href="/login">Sign In</a>
-      </nav>
+    </nav>
 </head>
 <body>
-    <p class="title">Welcome to West Side Auto!</p>
-    <div class="info">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Opening Hours</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
-                </ul>
+    <div class="form-container">
+        <p class="title">Feedback Form</p>
+        <form class="form">
+            <div class="input-group">
+                <!-- Use label as a button -->
+                <div class="upload-icon">
+                    <i class="fa-solid fa-upload" style="font-size: 80px;"></i>
+                </div>
+                <label for="get_img" class="file-upload-button">Upload Image</label>
+                <!-- Actual file input, hidden from view -->
+                <div class="hide-button">
+                    <input type="file" id="get_img" name="carImg" accept="image/png, image/jpeg">
+                    <img src = "" id = "upload_img">
+                </div>
+                <p id="display"></p>
             </div>
-        </div>
-<<<<<<< HEAD:src/main/resources/static/test.html
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">West Side Autoworks</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
-                </ul>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">West Side Autoworks</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">MON 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">TUE 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">WED 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">THU 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">FRI 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SAT 08:00 AM - 08:00 PM</li>
-                    <li class="list-group-item">SUN 08:00 AM - 08:00 PM</li>
-                </ul>
-            </div>
-        </div>
+        </form>
     </div>
-=======
-    </form>
-    <script src="/JavaScript/schedule.js"></script>
->>>>>>> 161c3983003bdd1d2df05b6bec75996ed9a646a8:src/main/resources/static/html/test.html
+
+
+    <script src = "/JavaScript/feedback.js"></script>
+    <script src="https://kit.fontawesome.com/35d7b9869b.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
-    

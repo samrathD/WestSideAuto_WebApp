@@ -1,61 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Account</title>
-  <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
-  <nav class="top-nav">
-    <a href="/">Home</a>
-    <a href="/bookAppointment">Schedule Appointment</a>
-    <a href="/html/feedbackForm.html">Update</a>
-    <a href="/login">Sign In</a>
-  </nav>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Account</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-nav {
+            background-color: #343a40;
+            padding: 10px;
+        }
+
+        .top-nav a {
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .top-nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 30px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #343a40;
+            color: #fff;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1a1e21;
+        }
+    </style>
 </head>
-  <body>
-    <h1>This is your account</h1>
+<body>
 
-    <h2 th:text="${user.username}"></h2>
+<nav class="top-nav navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Your Account</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/html/feedbackForm.html">Update</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <section>
-      <h2>Your Appointments</h2>
-      <table>
+<h1 class="text-center mt-4">This is your account</h1>
+
+<section>
+    <h2>Your Appointments</h2>
+    <table class="table">
+        <thead>
         <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Description</th>
-        <tr>
-         <tr th:each="app:${appointments}">
-           <td th:text="${app.appointmentDate}"></td>
-           <td th:text="${app.appointmentTime}"></td>
-           <td th:text="${app.description}"></td>
-           <td> <button type="button" action="" method="post">Update</button> </td>
-         </tr>
-      </table>
-    </section>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through appointments -->
+        <tr th:each="app:${appointments}">
+            <td th:text="${app.appointmentDate}"></td>
+            <td th:text="${app.appointmentTime}"></td>
+            <td th:text="${app.description}"></td>
+            <td><button type="button" class="btn btn-primary">Update</button></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 
+<section>
+    <h2>Edit User Profile</h2>
+    <form action="/users/edit" method="post">
+        <div class="form-group">
+            <label for="username">Name:</label>
+            <input type="text" id="username" name="username" class="form-control" th:value="${user.username}">
+        </div>
 
-    <section>
-      <h2>Edit User Profile</h2>
-      <form action="/users/edit" method="post">
-        <label for="username">Name: </label>
-        <input type="text" id="username" name="username" th:value="${user.username}">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" class="form-control" th:value="${user.email}">
+        </div>
 
-        <label for="email">Email: </label>
-        <input type="text" id="email" name="email" th:value="${user.email}">
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
 
-        <label for="password">Password: </label>
-        <input type="password" id="password" name="password">
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" class="form-control">
+        </div>
 
-        <label for="confirm-password">Confirm Password: </label>
-        <input type="password" id="confirm-password" name="confirm-password">
+        <input type="submit" value="Update Information" class="btn btn-primary">
+    </form>
+</section>
 
-        <input type="submit" value="Update Information"></input>
-      </form>
-    </section>
+<a href="/logout" class="d-block text-center mt-4">Logout</a>
 
-
-    <a href="/logout">Logout</a>
-  </body>
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>

@@ -1,36 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <nav class="top-nav">
-      <a href="/">Home</a>
-      <a href="/bookAppointment">Schedule Appointment</a>
-      <a href="/html/feedbackForm.html">Update</a>
-      <a href="/login">Sign In</a>
-    </nav>
-  </head>
-  <body>
-    <div class="form-container">
-      <p class="title">Sign In</p>
-      <form class="form" action="/login" method="post">
+    <title>Sign In</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .top-nav {
+            background-color: #343a40;
+            padding: 10px;
+            margin-bottom: 30px; /* Add space below the navigation */
+        }
+
+        .top-nav a {
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .top-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .submit {
+            text-align: center;
+        }
+
+        .submit input {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit input:hover {
+            background-color: #1a1e21;
+        }
+
+        .account {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Sign In</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/html/feedbackForm.html">Update</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="form-container">
+    <p class="title">Sign In</p>
+    <form class="form" action="/login" method="post">
         <div class="input-group">
-          <label for="name">Email: </label>
-          <input type="text" id="email" name="email">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
         </div>
         <div class="input-group">
-          <label for="name">Password: </label>
-          <input type="password" id="password" name="password">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
         </div>
         <div class="submit">
-          <input class="sign" type="submit" value="Sign in"></input>
+            <input class="sign" type="submit" value="Sign in">
         </div>
-      </form>
-      <p class="account">Don't have an account?
-        <a rel="noopener noreferrer" href="/html/signup.html" class="">Sign Up</a>
-      </p>
-    </div>
-  </body>
+    </form>
+    <p class="account">Don't have an account? <a href="/html/signup.html">Sign Up</a></p>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
