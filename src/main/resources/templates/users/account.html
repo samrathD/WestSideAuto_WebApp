@@ -106,23 +106,18 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Description</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Loop through appointments -->
-        <tr th:each="app:${appointments}">
-            <td th:text="${app.appointmentDate}"></td>
-            <td th:text="${app.appointmentTime}"></td>
-            <td th:text="${app.description}"></td>
-            <td><button type="button" class="btn btn-primary">Update</button></td>
-        </tr>
-        </tbody>
-    </table>
-</section>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Description</th>
+        <tr>
+         <tr th:each="app:${appointments}">
+           <td th:text="${app.appointmentDate}"></td>
+           <td th:text="${app.appointmentTime}"></td>
+           <td th:text="${app.description}"></td>
+           <td> <form action="/updateAppointment" method="post"> <input type="text" name="uid" th:value="${app.uid}" hidden> <input type="submit" value="Update"</input> </form> </td>
+         </tr>
+      </table>
+    </section>
 
 <section>
     <h2>Edit User Profile</h2>
