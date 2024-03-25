@@ -48,24 +48,25 @@ public class AppointmentController {
 			User emptyUser = new User();
 			model.addAttribute(emptyUser);
 		}
-		
+		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
+        model.addAttribute("appointment",appointments);
     	return "/appointment/schedule";
     }
 
     @PostMapping("/appointments/add")
     public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
-    String name = appointmentData.get("name");
-    String email = appointmentData.get("email");
-    String dateString = appointmentData.get("slots");
-    String description = appointmentData.get("description");
+        String name = appointmentData.get("name");
+        String email = appointmentData.get("email");
+        String dateString = appointmentData.get("slots");
+        String description = appointmentData.get("description");
+        String appointmentTime = appointmentData.get("time");
+        Date appointmentDate = null;
+        System.out.println(appointmentTime);
     
-    Date appointmentDate = null;
-    LocalTime appointmentTime = null;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
         appointmentDate = dateFormat.parse(dateString);
-        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+        // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
     } catch (ParseException | DateTimeParseException e) {
         e.printStackTrace(); 
         // Handle parsing exception here

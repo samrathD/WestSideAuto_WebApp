@@ -100,4 +100,15 @@ body {
   input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     filter: invert(1); /* Invert the color to white */
   }
-  
+
+  .timeContainer{
+    height: 400px;
+    width: 400px;
+    border:2px solid white;
+    justify-content: space-between;
+    align-items: center;
+    padding:4px;
+    display:none;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
