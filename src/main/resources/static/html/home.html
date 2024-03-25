@@ -6,15 +6,18 @@
     <title>West Side Autoworks</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Add your custom styles here */
         body {
             background-color: #f8f9fa;
             color: #333;
             font-family: Arial, sans-serif;
         }
-        /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/starlightRoof.png");*/
+
         .hero-image {
-            background-image:  url("/starlightRoof.png");
+            background-image: url("/photos/starlightRoof.png"); /* Placeholder image */
             height: 50vh;
             background-position: center;
             background-repeat: no-repeat;
@@ -32,7 +35,7 @@
         }
         
         .navbar {
-            background-color: #343a40 !important;
+            background-color: black!important;
         }
 
         .navbar-brand {
@@ -50,17 +53,49 @@
         section {
             padding: 60px 0;
         }
+
+        /* Additional styles for enhancements */
+        .icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .services-icon {
+            font-size: 48px;
+            color: #007bff;
+        }
+
+        .service-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Carousel styles */
+        .carousel-item img {
+            width: 100%;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">West Side Autoworks</a>
+            <a class="navbar-brand" href="#">
+                <img src="/photos/logo.jpeg" alt="Company Logo" height="50"> <!-- Adjust the height here -->
+            </a>
+            <!-- Rest of the navbar content -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+    
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -84,14 +119,78 @@
                 </ul>
             </div>
         </div>
-    </nav>
-
+    </nav>    
+    
     <div class="hero-image">
         <div class="hero-text">
             <h1 class="display-3">WEST SIDE AUTOWORKS</h1>
             <a href="/bookAppointment" class="btn btn-primary btn-lg">Book Now</a>
         </div>
     </div>
+
+    <section id="services" class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-5">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/carplaysInstall.png" class="card-img-top" style="height: 200px;" alt="Carplay Screen Installations">
+                        <div class="card-body">
+                            <h4 class="card-title">Carplay Screen Installations</h4>
+                            <p class="card-text">Enhance your driving experience with seamless connectivity.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/backupInstall.png" class="card-img-top" style="height: 200px;" alt="Backup Camera Installations">
+                        <div class="card-body">
+                            <h4 class="card-title">Backup Camera Installations</h4>
+                            <p class="card-text">Ensure safety and convenience with state-of-the-art cameras.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/headlightRestore.png" class="card-img-top" style="height: 200px;" alt="Headlight Restorations">
+                        <div class="card-body">
+                            <h4 class="card-title">Headlight Restorations</h4>
+                            <p class="card-text">Revive the brilliance of your headlights for better visibility.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/detail.png" class="card-img-top" style="height: 200px;" alt="Carplay Screen Installations">
+                        <div class="card-body">
+                            <h4 class="card-title">Detaling</h4>
+                            <p class="card-text">Restore your vehicle's shine with professional detailing services.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/ambientlighting.png" class="card-img-top" style="height: 200px;" alt="Backup Camera Installations">
+                        <div class="card-body">
+                            <h4 class="card-title">Ambient Lighting</h4>
+                            <p class="card-text">Add ambiance and style to your vehicle with custom lighting installations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <img src="/photos/starlightInstall.png" class="card-img-top" style="height: 200px;" alt="Headlight Restorations">
+                        <div class="card-body">
+                            <h4 class="card-title">Starlight Headliner</h4>
+                            <p class="card-text">Transform your car's interior with a starry night sky headliner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
 
     <section>
         <div class="container">
@@ -115,6 +214,52 @@
             </div>
         </div>
     </section>
+
+    <section id="gallery" class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-5">Gallery</h2>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="/photos/g1.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/photos/g2.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/photos/g3.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="/photos/g4.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/photos/g5.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/photos/g6.png" class="d-block w-100 img-fluid" style="height: 300px;" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more carousel items as needed -->
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
 
     <!-- Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
