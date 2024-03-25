@@ -18,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RestController;
 
 import com.westside.west_side_auto.models.EmailStructure;
+import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.appointmentRepository;
 import com.westside.west_side_auto.models.userAppointment;
 import com.westside.west_side_auto.service.EmailSenderService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Controller
@@ -35,21 +39,34 @@ public class AppointmentController {
     public AppointmentController(EmailSenderService emailSenderService){
         this.emailSenderService = emailSenderService;
     }
+    
+    @GetMapping("/bookAppointment")
+    public String appointmentBookingSetup(HttpServletRequest request, Model model, HttpSession session) {
+    	User user = (User) session.getAttribute("session_user");
+		if(user != null) model.addAttribute("user", user);
+		else {
+			User emptyUser = new User();
+			model.addAttribute(emptyUser);
+		}
+		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
+        model.addAttribute("appointment",appointments);
+    	return "/appointment/schedule";
+    }
 
     @PostMapping("/appointments/add")
     public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
-    String name = appointmentData.get("name");
-    String email = appointmentData.get("email");
-    String dateString = appointmentData.get("slots");
-    String description = appointmentData.get("description");
+        String name = appointmentData.get("name");
+        String email = appointmentData.get("email");
+        String dateString = appointmentData.get("slots");
+        String description = appointmentData.get("description");
+        String appointmentTime = appointmentData.get("time");
+        Date appointmentDate = null;
+        System.out.println(appointmentTime);
     
-    Date appointmentDate = null;
-    LocalTime appointmentTime = null;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
         appointmentDate = dateFormat.parse(dateString);
-        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+        // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
     } catch (ParseException | DateTimeParseException e) {
         e.printStackTrace(); 
         // Handle parsing exception here
@@ -94,8 +111,6 @@ public class AppointmentController {
     return "appointment/appointmentConfirmation";
     // return "/src/main/resources/templates/appointment/appointmentConfirmation.html";
 }
-
-
 
 @PostMapping("/appointments/addConfirmation")
     public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
@@ -178,5 +193,42 @@ public class AppointmentController {
         System.out.println("view page show");
 
 		return"appointment/showAllAppointments";
+	}
+	
+	@PostMapping("/updateAppointment")
+	public String updateAppointment(Model model, HttpSession session, @RequestParam String uid) {
+		User user = (User) session.getAttribute("session_user");
+		if(user == null) return "users/login";
+		else {
+			model.addAttribute("user", user);
+			List<userAppointment> selectedAppointment = appointmentRepo.findByUid(Integer.parseInt(uid));
+			model.addAttribute("appt", selectedAppointment.get(0));
+		}
+		
+		return "appointment/updateAppointment";
+	}
+	
+	@PostMapping("/updateAppointmentInformation")
+	public String updateSelectedAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
+		String name = appointmentData.get("name");
+	    String email = appointmentData.get("email");
+	    String dateString = appointmentData.get("slots");
+	    String description = appointmentData.get("description");
+	    
+	    Date appointmentDate = null;
+	    LocalTime appointmentTime = null;
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    try {
+	        appointmentDate = dateFormat.parse(dateString);
+	        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+	    } catch (ParseException | DateTimeParseException e) {
+	        e.printStackTrace(); 
+	    }
+	    
+	    List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
+
+		
+		
+		return "appointment/appointmentDateBooked";
 	}
 }

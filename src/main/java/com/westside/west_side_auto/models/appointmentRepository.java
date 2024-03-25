@@ -9,5 +9,5 @@ public interface appointmentRepository extends JpaRepository<userAppointment,Int
 	ArrayList<userAppointment> findByUid(int uid);
 	ArrayList<userAppointment> findByUsernameAndEmail(String name, String email);
 	ArrayList<userAppointment> findByEmail(String email);
-	ArrayList<userAppointment> findByAppointmentDateAndAppointmentTime(Date appointmentDate, LocalTime appointmentTime);
+	ArrayList<userAppointment> findByAppointmentDateAndAppointmentTime(Date appointmentDate, String appointmentTime);
 }

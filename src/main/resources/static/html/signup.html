@@ -1,40 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <nav class="top-nav">
-      <a href="home.html">Home</a>
-      <!-- <a href="schedule.html">Schedule Appointment</a>
-      <a href="feedbackForm.html">Update</a> -->
-      <a href="/login">Login</a>
-    </nav>
-  </head>
-  <body>
-    <div class="form-container">
-      <p class="title">Sign Up</p>
-      <form class="form" action="/users/add" method="post">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: black!important;
+        }
+
+        .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            color: #dc3545; /* Bootstrap's danger color */
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .submit {
+            text-align: center;
+        }
+        
+        .sign {
+            background-color: #000; /* Setting the background color to black */
+            color: #fff; /* Setting the text color to white */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; /* Adding transition for background color and text color */
+            border: 2px solid #000; /* Adding a black border on hover */
+            font-weight: 500;
+            font-size: 1em;
+        }
+        
+        .sign:hover {
+            background-color: #fff; /* Changing background color to white on hover */
+            color: #000; /* Changing text color to black on hover */
+            border: 2px solid #000; /* Adding a black border on hover */
+        }        
+
+        .account {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/photos/logo.jpeg" alt="Company Logo" height="50"> <!-- Adjust the height here -->
+            </a>
+            <!-- Rest of the navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedbackForm.html">Update</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="delete.html">Delete Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/appointments/view">See All Appointments</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>    
+
+
+<div class="form-container mt-5">
+    <p class="title">Sign Up</p>
+    <form class="form" action="/users/add" method="post" onsubmit="return validateForm()">
         <div class="input-group">
-          <label for="name">Name: </label>
-          <input type="text" id="name" name="name">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
         </div>
         <div class="input-group">
-          <label for="name">Email: </label>
-          <input type="text" id="email" name="email">
+            <label for="name">Email:</label>
+            <input type="text" id="email" name="email">
+            <span id="email-error" class="error-message"></span> <!-- Validation message for email -->
         </div>
         <div class="input-group">
-          <label for="name">Password: </label>
-          <input type="password" id="password" name="password">
+            <label for="name">Password:</label>
+            <input type="password" id="password" name="password">
+            <span id="password-error" class="error-message"></span> <!-- Validation message for password -->
         </div>
         <div class="submit">
-          <input class="sign" type="submit" value="SEND"></input>
+            <input class="sign" type="submit" value="SEND"></input>
         </div>
-      </form>
-      <p class="account">Already have an account?
-        <a rel="noopener noreferrer" href="/login" class="">Login In</a>
-      </p>
-    </div>
-  </body>
+    </form>
+    <p class="account">Already have an account? <a rel="noopener noreferrer" href="/login" class="">Sign In</a></p>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function validateForm() {
+        var passwordValid = validatePassword();
+        var emailValid = validateEmail();
+
+        return passwordValid && emailValid;
+    }
+
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var uppercaseRegex = /[A-Z]/;
+        var lowercaseRegex = /[a-z]/;
+        var numberRegex = /[0-9]/;
+        var passwordError = document.getElementById("password-error");
+
+        if (password.length < 6 || !uppercaseRegex.test(password) || !lowercaseRegex.test(password) || !numberRegex.test(password)) {
+            passwordError.textContent = "Password must be at least 6 characters long with one uppercase letter, lowercase letter and number";
+            return false;
+        } else {
+            passwordError.textContent = "";
+            return true;
+        }
+    }
+
+    function validateEmail() {
+        var email = document.getElementById("email").value;
+        var emailError = document.getElementById("email-error");
+
+        if (!email.includes('@')) {
+            emailError.textContent = "Please enter a valid email address.";
+            return false;
+        } else {
+            emailError.textContent = "";
+            return true;
+        }
+    }
+</script>
+</body>
 </html>
+

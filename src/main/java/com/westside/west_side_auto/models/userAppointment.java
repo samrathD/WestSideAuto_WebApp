@@ -17,12 +17,13 @@ public class userAppointment{
 	private String email;
 	private String description;
     private Date appointmentDate;
-    private LocalTime appointmentTime;
+    //private LocalTime appointmentTime;
+    private String appointmentTime;
     public userAppointment() {
     }
     
     public userAppointment(String username, String email, String description, Date appointmentDate,
-            LocalTime appointmentTime) {
+            String appointmentTime) {
         this.username = username;
         this.email = email;
         this.description = description;
@@ -32,10 +33,10 @@ public class userAppointment{
     public int getUid() {
         return uid;
     }
-    public LocalTime getAppointmentTime() {
+    public String getAppointmentTime() {
         return appointmentTime;
     }
-    public void setAppointmentTime(LocalTime appointmentTime) {
+    public void setAppointmentTime(String appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
     public void setUid(int uid) {

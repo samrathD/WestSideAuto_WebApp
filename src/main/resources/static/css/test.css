@@ -3,70 +3,39 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  /* background-color: rgba(17, 24, 39, 1); */
   background-color: rgba(17, 24, 39, 1);
 }
+
+/* div {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  div {
+    flex-direction: column;
+  }
+} */
+
+/* div p {
+  padding: 15%;
+  background-color: rgb(28, 55, 108);
+  margin: 5px;
+} */
+
 .title {
+  text-align: center;
+  font-size: 2.5rem;
+  line-height: 0rem;
+  font-weight: 700;
   color: rgba(243, 244, 246, 1);
-}
-.container {
-  height: auto;
-  margin: 20px auto;
-  margin-top: 50px;
-  padding: 20px;
-  max-width: 400px;
-  border: 2px solid rgba(156, 163, 175, 1);
-  /* border: 2px solid rgba(156, 163, 175, 1); */
-  border-radius: 10px;
-  color: rgba(156, 163, 175, 1);
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="datetime-local"],
-input[type="email"],
-textarea {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(156, 163, 175, 1);
-  border-radius: 5px;
-  color: rgba(156, 163, 175, 1);
-  background-color: rgba(17, 24, 39, 1); /* Set background color */
-}
-
-button[type="submit"] {
-  background-color: #385e8e;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.3s ease; 
-}
-
-button[type="submit"]:hover {
-  transform: scale(1.05);
-}
-
-.validity {
-  display: none;
-}
-
-.valid {
-  display: inline;
-  color: green;
-}
-
-.invalid {
-  display: inline;
-  color: red;
+  margin-top: 10%;
+  margin-bottom: 5%;
 }
 
 nav a {
@@ -86,7 +55,13 @@ nav a {
   z-index: 999; /* Ensure navigation bar is above other content */
 }
 
-/* Target the internal components of datetime-local input */
-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* Invert the color to white */
+.card {
+  color: rgba(243, 244, 246, 1);
+  margin: 5px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
