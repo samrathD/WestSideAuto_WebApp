@@ -15,19 +15,20 @@
             padding: 0;
         }
 
-        .top-nav {
-            background-color: #343a40;
-            padding: 10px;
-            margin-bottom: 30px; /* Add space below the navigation */
+        .navbar {
+            background-color: black!important;
         }
 
-        .top-nav a {
+        .navbar-brand {
             color: #fff;
-            margin-right: 10px;
         }
 
-        .top-nav a:hover {
-            text-decoration: underline;
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
         }
 
         .form-container {
@@ -66,19 +67,24 @@
             text-align: center;
         }
 
-        .submit input {
-            background-color: #343a40;
-            color: #fff;
+        .sign {
+            background-color: #000; /* Setting the background color to black */
+            color: #fff; /* Setting the text color to white */
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s; /* Adding transition for background color and text color */
+            border: 2px solid #000; /* Adding a black border on hover */
+            font-weight: 500;
+            font-size: 1em;
         }
-
-        .submit input:hover {
-            background-color: #1a1e21;
-        }
+        
+        .sign:hover {
+            background-color: #fff; /* Changing background color to white on hover */
+            color: #000; /* Changing text color to black on hover */
+            border: 2px solid #000; /* Adding a black border on hover */
+        }        
 
         .account {
             text-align: center;
@@ -88,34 +94,43 @@
 </head>
 <body>
 
-<nav class="top-nav navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Sign In</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/html/feedbackForm.html">Update</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Sign In</a>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/photos/logo.jpeg" alt="Company Logo" height="50"> <!-- Adjust the height here -->
+            </a>
+            <!-- Rest of the navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feedbackForm.html">Update</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="delete.html">Delete Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/appointments/view">See All Appointments</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>    
 
-<div class="form-container">
+
+<div class="form-container mt-5">
     <p class="title">Sign In</p>
     <form class="form" action="/login" method="post">
         <div class="input-group">
