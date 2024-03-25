@@ -146,7 +146,7 @@ public class AppointmentController {
                 for (userAppointment appointment : existingAppointments) {
                     appointment.setDescription(description);
                     appointment.setAppointmentDate(appointmentDate);
-					appointment.setAppointmentTime(appointmentTime);
+					//appointment.setAppointmentTime(appointmentTime);
                     appointmentRepo.save(appointment);
                 }
             }
@@ -205,30 +205,40 @@ public class AppointmentController {
 			model.addAttribute("appt", selectedAppointment.get(0));
 		}
 		
+		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
+        model.addAttribute("appointment",appointments);
+		
 		return "appointment/updateAppointment";
 	}
 	
 	@PostMapping("/updateAppointmentInformation")
-	public String updateSelectedAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
+	public String updateSelectedAppointment(@RequestParam Map<String,String> appointmentData, HttpServletResponse response) {
+		int uid = Integer.parseInt(appointmentData.get("uid"));
 		String name = appointmentData.get("name");
-	    String email = appointmentData.get("email");
-	    String dateString = appointmentData.get("slots");
-	    String description = appointmentData.get("description");
-	    
-	    Date appointmentDate = null;
-	    LocalTime appointmentTime = null;
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    try {
-	        appointmentDate = dateFormat.parse(dateString);
-	        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
-	    } catch (ParseException | DateTimeParseException e) {
-	        e.printStackTrace(); 
-	    }
-	    
-	    List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
-
-		
-		
-		return "appointment/appointmentDateBooked";
+        String email = appointmentData.get("email");
+        String dateString = appointmentData.get("slots");
+        String description = appointmentData.get("description");
+        String appointmentTime = appointmentData.get("time");
+        Date appointmentDate = null;
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+        appointmentDate = dateFormat.parse(dateString);
+        // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+    } catch (ParseException | DateTimeParseException e) {
+        e.printStackTrace(); 
+        // Handle parsing exception here
+    }    
+    
+    	userAppointment editAppointment = appointmentRepo.findByUid(uid).get(0);
+    	editAppointment.setUsername(name);
+    	editAppointment.setEmail(email);
+    	editAppointment.setAppointmentDate(appointmentDate);
+    	editAppointment.setDescription(description);
+    	editAppointment.setAppointmentTime(appointmentTime);
+    	
+    	appointmentRepo.save(editAppointment);
+    	response.setStatus(201);
+		return "appointment/appointmentConfirmation";
 	}
 }
