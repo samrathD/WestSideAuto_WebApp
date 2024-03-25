@@ -14,10 +14,11 @@
 </head>
 <body>
     <form class="schedule" action = "/updateAppointmentInformation" method = "post">
-        <h1 class="title">Edit Appointment</h1>
+        <h1 class="title">Edit this Appointment</h1>
         <h2 class="timings">Hours of Operation</h2>
-        <h3 class="time">9:00 AM To 5:00 PM</h3>
+        <h3 class="time">8:00 AM To 8:00 PM</h3>
         <div class="container">
+          <input type="text" name="uid" th:value="${appt.uid}" hidden>
             <div>
                 <label for="slots">Please choose your slot:</label>
                 <input
@@ -25,11 +26,20 @@
                     id="slots"
                     name = "slots"
                     min=""
-                    th:field="${appt.appointmentDate}"
                     required
                 >
                 <span class="validity" id="valid"></span>
             </div>
+            <div class="timeContainer">
+
+            </div>
+
+            <!-- A display:none text box that stores the time -->
+            <div>
+                <input type = "text" id = "time" name = "time"
+                style = "display:none">
+            </div>
+
             <div>
                 <label for="name" required>Please Enter your Full-Name</label>
                 <input type = "text" id = "name" name = "name" th:value="${user.username}">
@@ -48,6 +58,13 @@
             </div>
         </div>
     </form>
-    <script src="/JavaScript/schedule.js"></script>
+
+    <!--Get all the existing appointment info -->
+    <div th:each = "appointment:${appointment}" style = "color:white">
+        <span class = "existingAppointments" th:attr = "data-time = ${appointment.appointmentTime},
+        data-date = ${appointment.appointmentDate}"></span>
+    </div>
+    <!-- <script src="/JavaScript/schedule.js"></script> -->
+    <script th:src="@{/JavaScript/schedule.js}"></script>
 </body>
 </html>
