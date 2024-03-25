@@ -111,4 +111,11 @@ body {
     display:none;
     flex-wrap: wrap;
     flex-direction: row;
+    cursor:pointer;
   }
+
+  /* .selected {
+    background-color: white;
+    color: rgba(17, 24, 39, 1);
+} */
+

@@ -123,7 +123,7 @@ public class AppointmentController {
             String dateString = formData.get("appointmentDate");
             String description = formData.get("description");
             Date appointmentDate = null;
-			LocalTime appointmentTime = null;
+			String appointmentTime = formData.get("appointmentDate"); //made change here
 
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -132,12 +132,13 @@ public class AppointmentController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            //change here(commented)
 
-			try {
-				appointmentTime = LocalTime.parse(dateString.substring(11)); 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// try {
+			// 	appointmentTime = LocalTime.parse(dateString.substring(11)); 
+			// } catch (Exception e) {
+			// 	e.printStackTrace();
+			// }
 
 
             // Replace the existing appointment
@@ -214,13 +215,15 @@ public class AppointmentController {
 	    String email = appointmentData.get("email");
 	    String dateString = appointmentData.get("slots");
 	    String description = appointmentData.get("description");
+        //change here
+        String appointmentTime = appointmentData.get("appointmentDate");
 	    
 	    Date appointmentDate = null;
-	    LocalTime appointmentTime = null;
+	    // LocalTime appointmentTime = null;
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    try {
 	        appointmentDate = dateFormat.parse(dateString);
-	        appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+	        // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
 	    } catch (ParseException | DateTimeParseException e) {
 	        e.printStackTrace(); 
 	    }

@@ -4,6 +4,7 @@ let descriptionInput = document.querySelector("#description");
 let submit = document.querySelector("#submit");
 let valid = document.querySelector("#valid");
 let timeSlotContainer = document.querySelector(".timeContainer");
+let selectedSlot = null;
 
 
 const times = [];//An array that stores all the time slots
@@ -106,7 +107,7 @@ function timeSlotGen(){
     }
     for(let minutes = 0; minutes<60; minutes+=15){
         const formattedMinutes = minutes.toString().padStart(2,'0');
-        times.push(`12:${formattedMinutes}pm`);
+        times.push(`12:${formattedMinutes} PM`);
     }
 
     for(let hours = 1; hours <8 ;hours++){
@@ -172,20 +173,37 @@ function displayTimeSlots(){
                 }
                 
             })  
-            slot.addEventListener("click",()=>{
-                slot.style.backgroundColor = "white";
-                slot.style.color = "rgba(17, 24, 39, 1)";
-            // console.log("clicked");
-                timeInput.value = time;
-                console.log(timeInput.value);
-                clicked++;
-            }) 
+            slot.addEventListener("click", () => {
+                // If the clicked slot is already selected, deselect it
+                if (slot === selectedSlot) {
+                    slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
+                    slot.style.color = "white";
+                    selectedSlot = null; // Update selectedSlot to indicate no slot is selected
+                    timeInput.value = ""; // Clear the time input value
+                } else {
+                    // Deselect previously selected slot, if any
+                    if (selectedSlot) {
+                        selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
+                        selectedSlot.style.color = "white";
+                    }
+            
+                    // Select the clicked slot
+                    slot.style.backgroundColor = "white";
+                    slot.style.color = "rgba(17, 24, 39, 1)";
+            
+                    // Update the selected slot reference
+                    selectedSlot = slot;
+            
+                    // Update the time input value
+                    timeInput.value = time;
+                    console.log(timeInput.value);
+                }
+            })
         }
         
     }
 }
 
 function removeTimeslot(){
-
 }
 
