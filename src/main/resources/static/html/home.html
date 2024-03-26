@@ -43,12 +43,29 @@
         }
 
         .navbar-nav .nav-link {
-            color: #fff;
+            color: #FAF9F6!important;
+            position: relative; /* Add position relative to the link */
         }
-
-        .navbar-nav .nav-link:hover {
+        
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the underline height */
+            bottom: 0;
+            left: 0;
+            background-color: transparent; /* Set initial background color */
+            transition: background-color 0.3s ease; /* Add transition effect */
+        }
+        
+        .navbar-nav .nav-link:hover::before {
+            background-color: #FAF9F6; /* Change the background color on hover */
+        }
+        
+        /*.navbar-nav .nav-link:hover {
             color: #ffc107;
-        }
+            text-decoration: underline!important;
+        }*/
 
         section {
             padding: 60px 0;
@@ -81,6 +98,10 @@
         .carousel-item img {
             width: 100%;
             border-radius: 10px;
+        }
+
+        .footer {
+            background-color: black!important;
         }
     </style>
 </head>
@@ -124,7 +145,7 @@
     <div class="hero-image">
         <div class="hero-text">
             <h1 class="display-3">WEST SIDE AUTOWORKS</h1>
-            <a href="/bookAppointment" class="btn btn-primary btn-lg">Book Now</a>
+            <a href="/bookAppointment" class="btn btn-outline-light btn-lg">Book Now</a>
         </div>
     </div>
 
@@ -259,6 +280,18 @@
             </div>
         </div>
     </section>
+    
+    <footer class="footer bg-dark text-white text-center py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+17787797239" class="text-white">+1 (778) 779-7239</a></p>
+                    <p><i class="far fa-envelope"></i> <a href="mailto:westsideautoworks@gmail.com" class="text-white">westsideautoworks@gmail.com</a></p>
+                    <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/westsideautoworks_?igsh=a2Z5djZ6Yms3dGdh" class="text-white">westsideautoworks_</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
     
 
     <!-- Bootstrap JS and jQuery -->
