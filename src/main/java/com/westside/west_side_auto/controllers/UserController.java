@@ -110,7 +110,7 @@ public class UserController {
 			String password = editUser.get("password");
 			String confirmPassword = editUser.get("confirm-password");
 			
-			if(password.equals(confirmPassword)) {
+			if(password.equals(confirmPassword) && !password.equals("")) {
 				System.out.println("User updated successfully");
 				user.setUsername(editUser.get("username"));
 				user.setEmail(editUser.get("email"));
