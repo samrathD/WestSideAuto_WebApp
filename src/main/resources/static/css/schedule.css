@@ -119,3 +119,18 @@ body {
     color: rgba(17, 24, 39, 1);
 } */
 
+#service {
+  width: 100%;
+  padding: 2px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  transition: border-color 0.3s;
+  margin-bottom: 10px;
+}
+
+#service:focus {
+  outline: none;
+  border-color: white;
+}

@@ -60,6 +60,7 @@ public class AppointmentController {
         String dateString = appointmentData.get("slots");
         String description = appointmentData.get("description");
         String appointmentTime = appointmentData.get("time");
+        String service = appointmentData.get("service");
         Date appointmentDate = null;
         System.out.println(appointmentTime);
     
@@ -82,6 +83,7 @@ public class AppointmentController {
         model.addAttribute("description", description);
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
+        model.addAttribute("service", service);
         System.out.println("An appointment already exists for this date and time.");
         return "appointment/appointmentDateBooked";
     }
@@ -96,11 +98,13 @@ public class AppointmentController {
         model.addAttribute("description", description);
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
+        model.addAttribute("service", service);
+
         System.out.println("An appointment already exists for this user and email.");
         return "appointment/appoinmentExistsConfirmation";
     }
 
-    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime);
+    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime, service);
     appointmentRepo.save(appointment);
     
     //email being made
@@ -122,6 +126,7 @@ public class AppointmentController {
             String email = formData.get("email");
             String dateString = formData.get("appointmentDate");
             String description = formData.get("description");
+            String service = formData.get("service");
             Date appointmentDate = null;
 			String appointmentTime = formData.get("appointmentDate"); //made change here
 
@@ -147,7 +152,8 @@ public class AppointmentController {
                 for (userAppointment appointment : existingAppointments) {
                     appointment.setDescription(description);
                     appointment.setAppointmentDate(appointmentDate);
-					//appointment.setAppointmentTime(appointmentTime);
+					appointment.setAppointmentTime(appointmentTime);
+                    appointment.setService(service);
                     appointmentRepo.save(appointment);
                 }
             }
@@ -237,6 +243,7 @@ public class AppointmentController {
     	editAppointment.setAppointmentDate(appointmentDate);
     	editAppointment.setDescription(description);
     	editAppointment.setAppointmentTime(appointmentTime);
+        // editAppointment.setService(service);
     	
     	appointmentRepo.save(editAppointment);
     	response.setStatus(201);

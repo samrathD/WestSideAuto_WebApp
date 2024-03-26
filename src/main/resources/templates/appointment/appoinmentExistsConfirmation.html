@@ -73,7 +73,7 @@
             <ul>
                 <li th:each="appointment : ${existingAppointments}">
                     <span th:text="${appointment.username}"></span> - <span th:text="${appointment.appointmentDate}"></span>
-                    - <span th:text="${appointment.appointmentTime}"></span> - <span th:text="${appointment.description}"></span>
+                    - <span th:text="${appointment.appointmentTime}"></span> - <span th:text="${appointment.service}"></span> - <span th:text="${appointment.description}"></span>
                 </li>
             </ul>
         </div>
@@ -82,7 +82,8 @@
             <h2>New Appointments:</h2>
             <p><strong>Name:</strong> <span th:text="${name}"></span></p>
             <p><strong>Email:</strong> <span th:text="${email}"></span></p>
-            <p><strong>Message:</strong> <span th:text="${description}"></span></p>
+            <p><strong>Service:</strong> <span th:text="${service}"></span></p>
+            <p><strong>Description:</strong> <span th:text="${description}"></span></p>
             <p><strong>Appointment Date:</strong> <span th:text="${appointmentDate}"></span></p>
             <p><strong>Appointment Time:</strong> <span th:text="${appointmentTime}"></span></p>
         </div>
