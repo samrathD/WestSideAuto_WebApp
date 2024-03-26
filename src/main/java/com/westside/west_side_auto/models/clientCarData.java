@@ -1,6 +1,8 @@
 package com.westside.west_side_auto.models;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,20 +20,20 @@ public class clientCarData {
     private String clientEmail;
     private String clientPhone;
     private String clientAddress;
-    private String todayDate ;
+    private Date todayDate ;
     private String clientCar ;
     private String clientCarMake;
     private String clientCarModel;
     private String clientCarYear;
-    private String clientCarServices;
+    private Date clientCarServices;
     private String clientCarPics ;
     private String anyComments ;
 
     public clientCarData() {
     }
     public clientCarData(String clientName, String clientEmail, String clientPhone, String clientAddress,
-            String todayDate, String clientCar, String clientCarMake, String clientCarModel, String clientCarYear,
-            String clientCarServices, String clientCarPics, String anyComments) {
+            Date todayDate, String clientCar, String clientCarMake, String clientCarModel, String clientCarYear,
+            Date clientCarServices, String clientCarPics, String anyComments) {
         this.clientName = clientName;
         this.clientEmail = clientEmail;
         this.clientPhone = clientPhone;
@@ -49,10 +51,10 @@ public class clientCarData {
     public String getClientName() {
         return clientName;
     }
-    public String getTodayDate() {
+    public Date getTodayDate() {
         return todayDate;
     }
-    public void setTodayDate(String todayDate) {
+    public void setTodayDate(Date todayDate) {
         this.todayDate = todayDate;
     }
     public void setClientName(String clientName) {
@@ -100,10 +102,10 @@ public class clientCarData {
     public void setClientCarYear(String clientCarYear) {
         this.clientCarYear = clientCarYear;
     }
-    public String getClientCarServices() {
+    public Date getClientCarServices() {
         return clientCarServices;
     }
-    public void setClientCarServices(String clientCarServices) {
+    public void setClientCarServices(Date clientCarServices) {
         this.clientCarServices = clientCarServices;
     }
     public String getClientCarPics() {

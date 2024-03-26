@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClientCarDataRepository extends JpaRepository<clientCarData, Integer> {
     ArrayList<clientCarData> findByUid(int uid);
-    ArrayList<clientCarData> findByTodayDate(String todayDate);
-
-
+    ArrayList<clientCarData> findByClientNameAndClientEmail(String clientName,String clientEmail);
+    ArrayList<clientCarData> findByClientPhone(String clientPhone);
+    ArrayList<clientCarData> deleteByClientPhone(String clientPhone);
 }
