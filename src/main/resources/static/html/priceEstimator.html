@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Detailing Service Price Estimate</title>
+    <style>
+        .section {
+            margin-bottom: 20px;
+        }
+        .option {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function clearForm() {
+            document.getElementById("detailingForm").reset();
+        }
+    </script>
+</head>
+<body>
+    <h2>Car Detailing Service Price Estimate Form</h2>
+    <form id="detailingForm" action="/calculatePrice" method="post">
+        <div class="section">
+            <h3>Starlight Headliner</h3>
+            <p>The starlights that we use are a fiber optic material. They have a twinkle effect, music mode, and can be controlled with a remote or through an app on your phone.</p>
+            <div class="option">
+                <input type="radio" id="lights299" name="headliner" value="299">
+                <label for="lights299">150 lights - $299</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="lights399" name="headliner" value="399">
+                <label for="lights399">200 lights - $399</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="lights499" name="headliner" value="499">
+                <label for="lights499">300 lights - $549</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="lights399" name="headliner" value="399">
+            <label for="lights399">450 lights - $799</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="lights399" name="headliner" value="399">
+            <label for="lights399">600 lights - $999</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="lights399" name="headliner" value="399">
+            <label for="lights399">750 lights - $1099</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="lights399" name="headliner" value="399">
+            <label for="lights399">850 lights - $1199</label>
+        </div>
+        <div class="option">
+            <input type="radio" id="lights399" name="headliner" value="399">
+            <label for="lights399">900 lights - $1299</label>
+        </div>
+        
+        <div class="section">
+            <h3>Ambient Lighting Packages</h3>
+            <p>Our ambient lighting include:</p>
+            <ul>
+                <li>LED Acrylic Fiber Optic Strips</li>
+                <li>Many colours and patterns</li>
+                <li>Can be controlled with physical buttons or through an app</li>
+                <li>Wiring is completely hidden</li>
+                <li>Lights are only powered when your car is on</li>
+            </ul>
+            <p><strong>Our packages includes:</strong></p>
+            <div class="option">
+                <input type="radio" id="frontPackage" name="ambientLighting" value="280">
+                <label for="frontPackage">Front Package- $280
+                    <ul>
+                        <li>2 Doors </li>
+                        <li>Dash (1-2 strips)</li>
+                        <li>4 footwells</li>
+                        <li>2 Door Storage Lights</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="fullPackage" name="ambientLighting" value="380">
+                <label for="fullPackage">Full Package- $380 
+                    <ul>
+                        <li>4 Doors </li>
+                        <li>Dash (1-2 strips)</li>
+                        <li>4 footwells</li>
+                        <li>4 Door Storage Lights</li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>New Black Suede Headliner</h3>
+            <p>Add a new black suede headliner for $200.</p>
+            <div class="option">
+                <input type="checkbox" id="newHeadliner" name="newHeadliner" value="200">
+                <label for="newHeadliner">New Black Suede Headliner - $200</label>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>Stereo Installation</h3>
+            <ul>
+                <li>Our prices include installation and a 6-month warranty. We use the Atoto F7 double din 7-inch stereo with wireless Apple CarPlay and Android Auto, known for its smooth performance and excellent reviews.
+                </li>
+                <li>We avoid Android stereos due to quality and longevity concerns,-ensuring reliable solutions for our customers.</li>
+            </ul>
+            <p>Our stereo installation includes:</p>
+            <div class="option">
+                <input type="radio" id="newStereo" name="stereo" value="350">
+                <label for="newStereo">New Stereo - $350</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="stereoWithCamera" name="stereo" value="480">
+                <label for="stereoWithCamera">Stereo + Backup Camera - $480</label>
+            </div>
+        </div>
+        
+        <button type="submit">Calculate Total Price</button>
+        <button type="button" onclick="clearForm()">Clear Form</button>
+    </form>
+</body>
+</html>
