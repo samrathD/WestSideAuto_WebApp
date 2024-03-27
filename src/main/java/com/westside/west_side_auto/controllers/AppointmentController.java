@@ -63,7 +63,7 @@ public class AppointmentController {
         String service = appointmentData.get("service");
         Date appointmentDate = null;
         String make = appointmentData.get("clientCarMake");
-        String model = appointmentData.get("clientCarModel");
+        String modelCar = appointmentData.get("clientCarModel");
         String year = appointmentData.get("clientCarYear");
         System.out.println(appointmentTime);
     
@@ -110,7 +110,7 @@ public class AppointmentController {
         return "appointment/appoinmentExistsConfirmation";
     }
 
-    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime,make,model,year);
+    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime,make,modelCar,year);
     appointmentRepo.save(appointment);
     
     //email being made
