@@ -20,18 +20,61 @@ public class userAppointment{
     private String service;
     //private LocalTime appointmentTime;
     private String appointmentTime;
+    private String carMake;
+    private String carModel;
+    private String carYear;
+
     public userAppointment() {
     }
     
+    // public userAppointment(String username, String email, String description, Date appointmentDate,
+    //         String appointmentTime, String service) {
+    //     this.username = username;
+    //     this.email = email;
+    //     this.description = description;
+    //     this.appointmentDate = appointmentDate;
+    //     this.appointmentTime = appointmentTime;
+    //     this.service = service;
+    // }
+
     public userAppointment(String username, String email, String description, Date appointmentDate,
-            String appointmentTime, String service) {
+            String service, String appointmentTime, String carMake, String carModel, String carYear) {
+        this.uid = uid;
         this.username = username;
         this.email = email;
         this.description = description;
         this.appointmentDate = appointmentDate;
-        this.appointmentTime = appointmentTime;
         this.service = service;
+        this.appointmentTime = appointmentTime;
+        this.carMake = carMake;
+        this.carModel = carModel;
+        this.carYear = carYear;
     }
+
+    public String getCarMake() {
+        return carMake;
+    }
+
+    public void setCarMake(String carMake) {
+        this.carMake = carMake;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    public String getCarYear() {
+        return carYear;
+    }
+
+    public void setCarYear(String carYear) {
+        this.carYear = carYear;
+    }
+
     public int getUid() {
         return uid;
     }

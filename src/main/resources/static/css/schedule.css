@@ -64,6 +64,20 @@ body {
   button[type="submit"]:hover {
     transform: scale(1.05);
   }
+  #next{
+    background-color: #385e8e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease; 
+  }
+  
+  #next:hover {
+    transform: scale(1.05);
+  }
   
   .validity {
     display: none;

@@ -62,6 +62,9 @@ public class AppointmentController {
         String appointmentTime = appointmentData.get("time");
         String service = appointmentData.get("service");
         Date appointmentDate = null;
+        String make = appointmentData.get("clientCarMake");
+        String model = appointmentData.get("clientCarModel");
+        String year = appointmentData.get("clientCarYear");
         System.out.println(appointmentTime);
     
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -84,6 +87,9 @@ public class AppointmentController {
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         model.addAttribute("service", service);
+        model.addAttribute("carMake",make);
+        model.addAttribute("carModel",model);
+        model.addAttribute("carYear",year);
         System.out.println("An appointment already exists for this date and time.");
         return "appointment/appointmentDateBooked";
     }
@@ -104,7 +110,7 @@ public class AppointmentController {
         return "appointment/appoinmentExistsConfirmation";
     }
 
-    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, appointmentTime, service);
+    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime,make,model,year);
     appointmentRepo.save(appointment);
     
     //email being made

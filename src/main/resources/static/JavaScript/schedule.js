@@ -6,6 +6,10 @@ let valid = document.querySelector("#valid");
 let timeSlotContainer = document.querySelector(".timeContainer");
 let selectedSlot = null;
 
+// let nextBtn = document.querySelector("#next");
+// let container1 = document.querySelector(".container1");
+// let container2 = document.querySelector(".container2");
+
 
 const times = [];//An array that stores all the time slots
 timeSlotGen();//Generate time slots and add to the 'times' list
@@ -81,10 +85,13 @@ function updateValidity(message) {
         valid.classList.add("invalid");
         valid.style.color = "red";
         submit.disabled = true;
+        nextBtn.disabled = true;
+        
     } else {
         valid.classList.add("valid");
         valid.style.color = "green";
         submit.disabled = false;
+        nextBtn.disabled = false;
     }
 }
 
@@ -175,17 +182,17 @@ function displayTimeSlots(){
             })  
             slot.addEventListener("click", () => {
                 // If the clicked slot is already selected, deselect it
-                if (slot === selectedSlot) {
-                    slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-                    slot.style.color = "white";
-                    selectedSlot = null; // Update selectedSlot to indicate no slot is selected
-                    timeInput.value = ""; // Clear the time input value
-                } else {
-                    // Deselect previously selected slot, if any
-                    if (selectedSlot) {
-                        selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-                        selectedSlot.style.color = "white";
-                    }
+                // if (slot === selectedSlot) {
+                //     slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
+                //     slot.style.color = "white";
+                //     selectedSlot = null; // Update selectedSlot to indicate no slot is selected
+                //     timeInput.value = ""; // Clear the time input value
+                // } else {
+                //     // Deselect previously selected slot, if any
+                //     if (selectedSlot) {
+                //         selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
+                //         selectedSlot.style.color = "white";
+                //     }
             
                     // Select the clicked slot
                     slot.style.backgroundColor = "white";
@@ -193,17 +200,25 @@ function displayTimeSlots(){
             
                     // Update the selected slot reference
                     selectedSlot = slot;
-            
+                    clicked++;
                     // Update the time input value
                     timeInput.value = time;
                     console.log(timeInput.value);
-                }
+               // }
             })
         }
         
     }
 }
 
-function removeTimeslot(){
-}
 
+// nextBtn.addEventListener("click",(event)=>{
+//     if (valid.textContent !== "Valid Date"){
+//         // nextBtn.disabled = true;
+//         event.preventDefault();
+//         alert("Please fill in all fields before submitting the form.");
+//     }
+//     // nextBtn.disabled = false;
+//     container1.style.display = "none";
+//     container2.style.display = "inline";
+// })
