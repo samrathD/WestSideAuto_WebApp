@@ -62,9 +62,9 @@ public class AppointmentController {
         String appointmentTime = appointmentData.get("time");
         String service = appointmentData.get("service");
         Date appointmentDate = null;
-        String make = appointmentData.get("clientCarMake");
-        String model = appointmentData.get("clientCarModel");
-        String year = appointmentData.get("clientCarYear");
+        String make = appointmentData.get("make");
+        String carModel = appointmentData.get("carModel");
+        String year = appointmentData.get("year");
         System.out.println(appointmentTime);
     
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -87,9 +87,9 @@ public class AppointmentController {
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         model.addAttribute("service", service);
-        model.addAttribute("carMake",make);
-        model.addAttribute("carModel",model);
-        model.addAttribute("carYear",year);
+        model.addAttribute("make",make);
+        model.addAttribute("carModel",carModel);
+        model.addAttribute("year",year);
         System.out.println("An appointment already exists for this date and time.");
         return "appointment/appointmentDateBooked";
     }
@@ -105,12 +105,15 @@ public class AppointmentController {
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         model.addAttribute("service", service);
+        model.addAttribute("make",make);
+        model.addAttribute("carModel",carModel);
+        model.addAttribute("year",year);
 
         System.out.println("An appointment already exists for this user and email.");
         return "appointment/appoinmentExistsConfirmation";
     }
 
-    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime,make,model,year);
+    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime, make, carModel, year);
     appointmentRepo.save(appointment);
     
     //email being made
@@ -138,7 +141,10 @@ public class AppointmentController {
             String description = formData.get("description");
             String service = formData.get("service");
             Date appointmentDate = null;
-			String appointmentTime = formData.get("appointmentDate"); //made change here
+			String appointmentTime = formData.get("appointmentTime"); //made change here
+            String make = formData.get("make");
+            String carModel = formData.get("carModel");
+            String year = formData.get("year");
 
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,7 +170,11 @@ public class AppointmentController {
                     appointment.setAppointmentDate(appointmentDate);
 					appointment.setAppointmentTime(appointmentTime);
                     appointment.setService(service);
+                    appointment.setMake(make);
+                    appointment.setCarModel(carModel);
+                    appointment.setYear(year);
                     appointmentRepo.save(appointment);
+                   
                 }
             }
             return "appointment/appointmentConfirmation";
@@ -186,13 +196,14 @@ public class AppointmentController {
     public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
+            appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
             //email being made
-    EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
-    "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+            EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
+            "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
             
     
-    System.out.println("It works here!");
-    emailSenderService.sendEmail(email, emailStructure);
+            System.out.println("It works here!");
+            emailSenderService.sendEmail(email, emailStructure);
             return "appointment/deleteConfirmation";
         } else {
             return "appointment/NoAppointment";

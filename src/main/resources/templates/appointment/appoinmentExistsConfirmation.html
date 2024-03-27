@@ -74,6 +74,7 @@
                 <li th:each="appointment : ${existingAppointments}">
                     <span th:text="${appointment.username}"></span> - <span th:text="${appointment.appointmentDate}"></span>
                     - <span th:text="${appointment.appointmentTime}"></span> - <span th:text="${appointment.service}"></span> - <span th:text="${appointment.description}"></span>
+                    - <span th:text="${appointment.make}"></span> - <span th:text="${appointment.carModel}"></span> - <span th:text="${appointment.year}"></span>
                 </li>
             </ul>
         </div>
@@ -86,6 +87,9 @@
             <p><strong>Description:</strong> <span th:text="${description}"></span></p>
             <p><strong>Appointment Date:</strong> <span th:text="${appointmentDate}"></span></p>
             <p><strong>Appointment Time:</strong> <span th:text="${appointmentTime}"></span></p>
+            <p><strong>Car Make:</strong> <span th:text="${make}"></span></p>
+            <p><strong>Car Model:</strong> <span th:text="${carModel}"></span></p>
+            <p><strong>Car Year:</strong> <span th:text="${year}"></span></p>
         </div>
        
         <div class="confirmation-buttons">
@@ -96,6 +100,11 @@
                 <input type="hidden" name="description" th:value="${description}" />
                 <input type="hidden" name="appointmentDate" th:value="${appointmentDate}" />
                 <input type="hidden" name="appointmentTime" th:value="${appointmentTime}" />
+                <input type="hidden" name="service" th:value="${service}" />
+
+                <input type="hidden" name="make" th:value="${make}" />
+                <input type="hidden" name="carModel" th:value="${carModel}" />
+                <input type="hidden" name="year" th:value="${year}" />
                 <button type="submit" name="replace" value="yes">Yes</button>
                 <button type="submit" name="replace" value="no">No</button>
             </form>

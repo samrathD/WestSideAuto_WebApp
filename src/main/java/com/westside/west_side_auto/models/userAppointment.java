@@ -20,9 +20,9 @@ public class userAppointment{
     private String service;
     //private LocalTime appointmentTime;
     private String appointmentTime;
-    private String carMake;
+    private String make;
     private String carModel;
-    private String carYear;
+    private String year;
 
     public userAppointment() {
     }
@@ -38,7 +38,7 @@ public class userAppointment{
     // }
 
     public userAppointment(String username, String email, String description, Date appointmentDate,
-            String service, String appointmentTime, String carMake, String carModel, String carYear) {
+            String service, String appointmentTime, String make, String carModel, String year) {
         this.uid = uid;
         this.username = username;
         this.email = email;
@@ -46,17 +46,17 @@ public class userAppointment{
         this.appointmentDate = appointmentDate;
         this.service = service;
         this.appointmentTime = appointmentTime;
-        this.carMake = carMake;
+        this.make = make;
         this.carModel = carModel;
-        this.carYear = carYear;
+        this.year = year;
     }
 
-    public String getCarMake() {
-        return carMake;
+    public String getMake() {
+        return make;
     }
 
-    public void setCarMake(String carMake) {
-        this.carMake = carMake;
+    public void setMake(String make) {
+        this.make = make;
     }
 
     public String getCarModel() {
@@ -67,12 +67,12 @@ public class userAppointment{
         this.carModel = carModel;
     }
 
-    public String getCarYear() {
-        return carYear;
+    public String getYear() {
+        return year;
     }
 
-    public void setCarYear(String carYear) {
-        this.carYear = carYear;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public int getUid() {
