@@ -8,7 +8,7 @@
     <nav class="top-nav">
         <a href="/">Home</a>
         <a href="/bookAppointment">Schedule Appointment</a>
-        <a href="feedbackForm.html">Update</a>
+        <a href="feedbackForm.html">Feedback</a>
         <a href="/login">Sign In</a>
       </nav>
 </head>
@@ -100,7 +100,7 @@
 
     <!--Get all the existing appointment info -->
     <div th:each = "appointment:${appointment}" style = "color:white">
-        <span class = "existingAppointments" th:attr = "data-time = ${appointment.appointmentTime}, 
+        <span class = "existingAppointments" th:attr = "data-time = ${appointment.appointmentTime},
         data-date = ${appointment.appointmentDate}"></span>
     </div>
     <!-- <script src="/JavaScript/schedule.js"></script> -->

@@ -50,7 +50,7 @@ public class AppointmentController {
 		}
 		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
         model.addAttribute("appointment",appointments);
-    	return "/appointment/schedule";
+    	return "appointment/schedule";
     }
 
     @PostMapping("/appointments/add")
@@ -114,7 +114,11 @@ public class AppointmentController {
     appointmentRepo.save(appointment);
     
     //email being made
-    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed");
+    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
+    "Your appointment is confirmed. Appointment Details:\n" +
+    "Date: " + dateFormat.format(appointmentDate) + "\n" +
+    "Time: " + appointmentTime);
+
     
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
@@ -182,9 +186,11 @@ public class AppointmentController {
     public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
-            appointmentRepo.deleteAll(appointmentsToDelete);
             //email being made
-    EmailStructure emailStructure = new EmailStructure("Cancel Appointment Confirmation", "Your appointment has been cancelled");
+    EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
+    "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+            
+    
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
             return "appointment/deleteConfirmation";
