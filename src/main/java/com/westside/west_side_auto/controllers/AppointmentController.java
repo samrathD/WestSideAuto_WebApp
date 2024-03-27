@@ -196,6 +196,7 @@ public class AppointmentController {
     public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
+            appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
             //email being made
             EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
             "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
