@@ -85,13 +85,13 @@ function updateValidity(message) {
         valid.classList.add("invalid");
         valid.style.color = "red";
         submit.disabled = true;
-        nextBtn.disabled = true;
+      //  nextBtn.disabled = true;
         
     } else {
         valid.classList.add("valid");
         valid.style.color = "green";
         submit.disabled = false;
-        nextBtn.disabled = false;
+       // nextBtn.disabled = false;
     }
 }
 
