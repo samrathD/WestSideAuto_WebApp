@@ -50,7 +50,7 @@ public class AppointmentController {
 		}
 		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
         model.addAttribute("appointment",appointments);
-    	return "/appointment/schedule";
+    	return "appointment/schedule";
     }
 
     @PostMapping("/appointments/add")
