@@ -108,7 +108,11 @@ public class AppointmentController {
     appointmentRepo.save(appointment);
     
     //email being made
-    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", "Your appointment is confirmed");
+    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
+    "Your appointment is confirmed. Appointment Details:\n" +
+    "Date: " + dateFormat.format(appointmentDate) + "\n" +
+    "Time: " + appointmentTime);
+
     
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
