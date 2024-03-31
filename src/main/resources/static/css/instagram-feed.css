@@ -1,0 +1,38 @@
+#instagram-section{
+  max-width: 25rem;
+}
+
+#instagram-feed {
+  height: 400px;
+  overflow-y: scroll;
+  background-color: #e9eef7;
+}
+
+#instagram-header {
+  background-color: #cedbf0;
+}
+
+#follower-count{
+  margin-bottom: 0;
+}
+
+#following-count{
+  margin-bottom: 0;
+}
+
+.post-container{
+  padding: 20px 10px 20px 3rem;
+  margin-bottom: 2rem;
+
+  background-color: #dce6f5;
+}
+
+.post-image{
+  max-width: 15rem;
+}
+
+.post-text{
+  text-decoration: none;
+  color: black;
+  margin-top: 0px;
+}
