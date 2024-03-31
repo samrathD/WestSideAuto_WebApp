@@ -211,14 +211,83 @@ function displayTimeSlots(){
     }
 }
 
+const tabs = document.getElementsByClassName("tab");
+const next = document.querySelector("#next");
+const previous = document.querySelector("#previous");
+const steps = document.getElementsByClassName("step");
+let currentTab = 0;
+showTab(currentTab);
+//Function only shows the specific form page
+function showTab(n){
+    console.log(tabs.length);
+    for(let i = 0; i<tabs.length ; i++){
+        tabs[i].style.display = "none";
+    }
+    tabs[n].style.display = "block";
+    //Disable previous button on the right time
+    if(n == 0){
+        previous.style.display = "none";
+    }
+    else{
+        previous.style.display = "inline";
+    }
+    //Disable next button on the right time
+    if(n==(tabs.length-1)){
+        next.style.display = "none";
+        submit.style.display = "inline";
+    }
+    else{
+        next.style.display = "inline";
+        submit.style.display = "none";
+    }
+    //Call the function that displays the correct steps of the form
+    fixStepIndicator(n);
+}
 
-// nextBtn.addEventListener("click",(event)=>{
-//     if (valid.textContent !== "Valid Date"){
-//         // nextBtn.disabled = true;
-//         event.preventDefault();
-//         alert("Please fill in all fields before submitting the form.");
-//     }
-//     // nextBtn.disabled = false;
-//     container1.style.display = "none";
-//     container2.style.display = "inline";
-// })
+function fixStepIndicator(n){
+    for(let i = 0; i<steps.length; i++){
+        steps[i].className = steps[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class to the current step:
+    steps[n].className += " active";
+}
+
+
+next.addEventListener("click",()=>{
+    if(validateForm){
+        currentTab = currentTab + 1;
+        showTab(currentTab);
+    }
+    
+})
+previous.addEventListener("click",()=>{
+    currentTab = currentTab - 1;
+    showTab(currentTab);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
