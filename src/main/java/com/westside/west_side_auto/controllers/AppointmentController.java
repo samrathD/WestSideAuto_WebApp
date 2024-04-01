@@ -177,6 +177,13 @@ public class AppointmentController {
                    
                 }
             }
+            //email being made
+    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
+    "Your appointment is confirmed. Appointment Details:\n" +
+    "Date: " + dateFormat.format(appointmentDate) + "\n" +
+    "Time: " + appointmentTime);
+    System.out.println("It works here!");
+    emailSenderService.sendEmail(email, emailStructure);
             return "appointment/appointmentConfirmation";
         } else {
             // Redirect to the add appointment page after 5 seconds
@@ -196,12 +203,10 @@ public class AppointmentController {
     public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
         List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
         if (!appointmentsToDelete.isEmpty()) {
+        //email being made
+        EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
+        "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
             appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
-            //email being made
-            EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
-            "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
-            
-    
             System.out.println("It works here!");
             emailSenderService.sendEmail(email, emailStructure);
             return "appointment/deleteConfirmation";
@@ -214,11 +219,7 @@ public class AppointmentController {
 	public String getMethodName(Model model) {
 		// List<userAppointment> appointments = appointmentRepo.findAll();
 		List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointmentDate", "appointmentTime"));
-
-
 		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
-
-
 		model.addAttribute("appointments", appointments);
         System.out.println("view page show");
 

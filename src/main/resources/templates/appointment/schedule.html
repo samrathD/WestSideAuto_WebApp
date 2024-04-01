@@ -20,7 +20,7 @@
         <div class="container">
 
             <!-- First container that allows users to book appointment -->
-            <!-- <div class="container1"> -->
+            <div class="tab">
                 <div>
                     <label for="slots">Please choose your slot:</label>
                     <input
@@ -61,8 +61,7 @@
                         <option value="Sound and Stereo Installs">Sound and Stereo Installs</option>
                         <option value="Chrome deletes and De-badging">Chrome deletes and De-badging</option>
                         <option value="Headlight Restoration">Headlight Restoration</option>
-                        <option value="BodyKit Installs">BodyKit Installs</option>
-                        
+                        <option value="BodyKit Installs">BodyKit Installs</option>   
                     </select>
                 </div>
                 <div>
@@ -72,9 +71,9 @@
                 <!-- <div>
                     <button id = "next">Next</button>
                 </div> -->
-            <!-- </div> -->
+            </div>
 
-            <!-- <div class="container2" style = "display:none"> -->
+            <div class="tab" >
                 <div class="form-field">
                     <label for="make">Car Make:</label>
                     <input type="text" id="make" name="make" placeholder = "Car Make" required>
@@ -88,14 +87,30 @@
                     <input type="text" id="year" name="year" placeholder = "Make Year" required>
                 </div>
 
+                <!-- <div>
+                     <button type="submit" id="submit" value = "Book">Book</button>
+                </div> -->
+            </div>
+
+            <div class="tab">
                 <div>
+                    <div id="estimateDetails" style="display:none;"></div>
                      <button type="submit" id="submit" value = "Book">Book</button>
                 </div>
-            <!-- </div> -->
 
-        
-            
+            </div>
+
+            <div style="float:right;">
+                <button type="button" id="previous">Previous</button>
+                <button type="button" id="next">Next</button>
+              </div>
         </div>
+
+        <div style="text-align:center;margin-top:40px;color:white;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
     </form>
 
     <!--Get all the existing appointment info -->

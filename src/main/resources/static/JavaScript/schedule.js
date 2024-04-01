@@ -1,7 +1,53 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Define a mapping of services to their respective costs
+    const serviceCosts = {
+        "Starlight Headliner": 200,
+        "Ambient Lighting": 150,
+        "Vinyl Wrap": 500,
+        "Sound and Stereo Installs": 300,
+        "Chrome deletes and De-badging": 100,
+        "Headlight Restoration": 80,
+        "BodyKit Installs": 600
+        // Add more services and costs as needed
+    };
+
+    // Function to calculate and display the estimated cost
+    // Function to calculate and display the estimated cost
+function calculateEstimatedCost() {
+    const service = document.getElementById("service").value;
+    const estimatedCost = serviceCosts[service] || 0;
+    const make = document.getElementById("make").value;
+    const model = document.getElementById("carModel").value;
+    const year = document.getElementById("year").value;
+
+    const estimateDetailsContainer = document.getElementById("estimateDetails");
+    estimateDetailsContainer.innerHTML = `
+        <p>Service: ${service}</p>
+        <p>Car Make: ${make}</p>
+        <p>Car Model: ${model}</p>
+        <p>Year: ${year}</p>
+        <p>Estimated Cost: $${estimatedCost}</p>`;
+    estimateDetailsContainer.style.display = "block";
+}
+
+    // Event listener for service selection
+    document.getElementById("service").addEventListener("change", calculateEstimatedCost);
+
+    // Validate and handle form submission
+    const submit = document.querySelector("#submit");
+    submit.addEventListener("click", function (event) {
+        const valid = document.querySelector("#valid");
+        if (valid.textContent !== "Valid Date") {
+            event.preventDefault();
+            alert("Please fill in all fields before submitting the form.");
+        }
+    });
+
 let slots = document.querySelector("#slots");
 let emailInput = document.querySelector("#email");
 let descriptionInput = document.querySelector("#description");
-let submit = document.querySelector("#submit");
+// let submit = document.querySelector("#submit");
 let valid = document.querySelector("#valid");
 let timeSlotContainer = document.querySelector(".timeContainer");
 let selectedSlot = null;
@@ -210,14 +256,84 @@ function displayTimeSlots(){
     }
 }
 
+const tabs = document.getElementsByClassName("tab");
+const next = document.querySelector("#next");
+const previous = document.querySelector("#previous");
+const steps = document.getElementsByClassName("step");
+let currentTab = 0;
+showTab(currentTab);
+//Function only shows the specific form page
+function showTab(n){
+    console.log(tabs.length);
+    for(let i = 0; i<tabs.length ; i++){
+        tabs[i].style.display = "none";
+    }
+    tabs[n].style.display = "block";
+    //Disable previous button on the right time
+    if(n == 0){
+        previous.style.display = "none";
+    }
+    else{
+        previous.style.display = "inline";
+    }
+    //Disable next button on the right time
+    if(n==(tabs.length-1)){
+        next.style.display = "none";
+        submit.style.display = "inline";
+    }
+    else{
+        next.style.display = "inline";
+        submit.style.display = "none";
+    }
+    //Call the function that displays the correct steps of the form
+    fixStepIndicator(n);
+}
 
-// nextBtn.addEventListener("click",(event)=>{
-//     if (valid.textContent !== "Valid Date"){
-//         // nextBtn.disabled = true;
-//         event.preventDefault();
-//         alert("Please fill in all fields before submitting the form.");
-//     }
-//     // nextBtn.disabled = false;
-//     container1.style.display = "none";
-//     container2.style.display = "inline";
-// })
+function fixStepIndicator(n){
+    for(let i = 0; i<steps.length; i++){
+        steps[i].className = steps[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class to the current step:
+    steps[n].className += " active";
+}
+
+
+next.addEventListener("click",()=>{
+    if(validateForm){
+        currentTab = currentTab + 1;
+        showTab(currentTab);
+    }
+    
+})
+previous.addEventListener("click",()=>{
+    currentTab = currentTab - 1;
+    showTab(currentTab);
+})
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
