@@ -241,7 +241,7 @@ function displayTimeSlots(){
             
                     // Select the clicked slot
                     slot.style.backgroundColor = "black";
-                    slot.style.color = "rgba(17, 24, 39, 1)";
+                    slot.style.color = "white";
             
                     // Update the selected slot reference
                     selectedSlot = slot;
