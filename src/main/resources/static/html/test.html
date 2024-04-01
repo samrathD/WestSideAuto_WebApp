@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Schedule an Appointment</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* Add your custom styles here */
         body {
             background-color: #f8f9fa;
             color: #333;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
         }
 
         .navbar {
@@ -24,15 +25,28 @@
         }
 
         .navbar-nav .nav-link {
-            color: #fff;
+            color: #FAF9F6!important;
+            position: relative; /* Add position relative to the link */
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #ffc107;
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the underline height */
+            bottom: 0;
+            left: 0;
+            background-color: transparent; /* Set initial background color */
+            transition: background-color 0.3s ease; /* Add transition effect */
         }
 
-        .form-container {
-            max-width: 400px;
+        .navbar-nav .nav-link:hover::before {
+            background-color: #FAF9F6; /* Change the background color on hover */
+        }
+
+
+        .schedule {
+            max-width: 600px;
             margin: auto;
             padding: 20px;
             background-color: #fff;
@@ -46,25 +60,23 @@
             text-align: center;
         }
 
-        .input-group {
-            margin-bottom: 15px;
+        .form-field {
+            margin-bottom: 20px;
         }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
+        .form-field label {
+            font-weight: bold;
         }
 
-        .input-group input {
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field textarea,
+        .form-field select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-        }
-
-        .submit {
-            text-align: center;
         }
 
         .sign {
@@ -78,22 +90,30 @@
             border: 2px solid #000; /* Adding a black border on hover */
             font-weight: 500;
             font-size: 1em;
+            width: 100%;
         }
-        
+
         .sign:hover {
             background-color: #fff; /* Changing background color to white on hover */
             color: #000; /* Changing text color to black on hover */
             border: 2px solid #000; /* Adding a black border on hover */
-        }        
-
-        .account {
-            text-align: center;
-            margin-top: 15px;
         }
+
+        .timeContainer{
+            height: 400px;
+            width: 400px;
+            border:2px solid white;
+            justify-content: space-between;
+            align-items: center;
+            padding:4px;
+            display:none;
+            flex-wrap: wrap;
+            flex-direction: row;
+            cursor:pointer;
+          }
     </style>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -103,7 +123,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -113,7 +133,7 @@
                         <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feedbackForm.html">Update</a>
+                        <a class="nav-link" href="feedbackForm.html">Feedback</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Sign In</a>
@@ -127,30 +147,60 @@
                 </ul>
             </div>
         </div>
-    </nav>    
+    </nav>
 
+    <form class="schedule mt-5 mb-5" action="/appointments/add" method="post" style="margin-bottom: 50px;">
+        <h1 class="title">Schedule an Appointment</h1>
+        <h2 class="text-center mb-4">Hours of Operation</h2>
+        <h3 class="text-center">8:00 AM To 8:00 PM</h3>
+        <div class="container">
 
-<div class="form-container mt-5">
-    <p class="title">Sign In</p>
-    <form class="form" action="/login" method="post">
-        <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-        </div>
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-        </div>
-        <div class="submit">
-            <input class="sign" type="submit" value="Sign in">
+            <div class="form-field">
+                <label for="slots">Please choose your slot:</label>
+                <input type="date" id="slots" name="slots" min="" required>
+                <span class="validity" id="valid"></span>
+            </div>
+            <div class="timeContainer"></div>
+            <div class="form-field">
+                <label for="name" required>Please Enter your Full-Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+            </div>
+
+            <div class="form-field">
+                <label for="email">Please Enter your email:</label>
+                <input type="email" id="email" name="email" placeholder="e.g., example@example.com" required>
+            </div>
+
+            <div class="form-field">
+                <label for="service">Select a Service:</label>
+                <select id="service" name="service">
+                    <option value="Service 1">Select</option>
+                    <option value="Starlight Headliner">Starlight Headliner</option>
+                    <option value="Ambient Lighting">Ambient Lighting</option>
+                    <option value="Vinyl Wrap">Vinyl Wrap</option>
+                    <option value="Sound and Stereo Installs">Sound and Stereo Installs</option>
+                    <option value="Chrome deletes and De-badging">Chrome deletes and De-badging</option>
+                    <option value="Headlight Restoration">Headlight Restoration</option>
+                    <option value="BodyKit Installs">BodyKit Installs</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="description">Please provide a description of your service:</label>
+                <textarea id="description" rows="4" name="description" placeholder="Description"></textarea>
+            </div>
+
+            <div>
+                <button class="sign" type="submit" id="submit">Book</button>
+            </div>
+
         </div>
     </form>
-    <p class="account">Don't have an account? <a href="/html/signup.html">Sign Up</a></p>
-</div>
 
-<!-- Bootstrap JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS and jQuery -->
+    <script src="/JavaScript/schedule.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

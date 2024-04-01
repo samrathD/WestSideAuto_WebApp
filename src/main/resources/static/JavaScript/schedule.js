@@ -162,24 +162,23 @@ function displayTimeSlots(){
             const slot = document.createElement("div");
             slot.id = "timeSlot";
             slot.innerHTML = time;
-            slot.style.border = "2px solid white";
+            // slot.style.border = "2px solid white";
             slot.style.borderRadius = "10px";
             slot.style.padding = "3px";
-            slot.style.color = "white";
             timeSlotContainer.appendChild(slot);
 
             //Add hover effect
-            slot.addEventListener("mouseover",()=>{
-                slot.style.backgroundColor = "white";
-                slot.style.color = "rgba(17, 24, 39, 1)";
-            })
-            slot.addEventListener("mouseout",()=>{
-                if (clicked == 0){
-                    slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-                    slot.style.color = "white"; 
-                }
+            // slot.addEventListener("mouseover",()=>{
+            //     slot.style.backgroundColor = "white";
+            //     slot.style.color = "rgba(17, 24, 39, 1)";
+            // })
+            // slot.addEventListener("mouseout",()=>{
+            //     if (clicked == 0){
+            //         slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
+            //         slot.style.color = "white"; 
+            //     }
                 
-            })  
+            // })  
             slot.addEventListener("click", () => {
                 // If the clicked slot is already selected, deselect it
                 // if (slot === selectedSlot) {
@@ -195,7 +194,7 @@ function displayTimeSlots(){
                 //     }
             
                     // Select the clicked slot
-                    slot.style.backgroundColor = "white";
+                    slot.style.backgroundColor = "black";
                     slot.style.color = "rgba(17, 24, 39, 1)";
             
                     // Update the selected slot reference
