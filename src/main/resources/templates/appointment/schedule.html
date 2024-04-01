@@ -20,7 +20,7 @@
         <div class="container">
 
             <!-- First container that allows users to book appointment -->
-            <!-- <div class="container1"> -->
+            <div class="tab">
                 <div>
                     <label for="slots">Please choose your slot:</label>
                     <input
@@ -71,10 +71,10 @@
                 <!-- <div>
                     <button id = "next">Next</button>
                 </div> -->
-            <!-- </div> -->
+            </div>
 
-            <!-- <div class="container2" style = "display:none"> -->
-                <!-- <div class="form-field">
+            <div class="tab" >
+                <div class="form-field">
                     <label for="make">Car Make:</label>
                     <input type="text" id="make" name="make" placeholder = "Car Make" required>
                 </div>
@@ -87,38 +87,30 @@
                     <input type="text" id="year" name="year" placeholder = "Make Year" required>
                 </div>
 
-                <div>
+                <!-- <div>
                      <button type="submit" id="submit" value = "Book">Book</button>
                 </div> -->
-                <button type="button" id="nextToCarDetailsBtn">Next</button>
-            <!-- </div> -->
+            </div>
 
-        
-            
-        </div>
-        <div id="carDetailsSection" style="display: none;">
-            <h2>Car Details</h2>
-            <div class="form-field">
-                <label for="make">Car Make:</label>
-                <input type="text" id="make" name="make" placeholder="Car Make" required>
+            <div class="tab">
+                <div>
+                    <div id="estimateDetails" style="display:none;"></div>
+                     <button type="submit" id="submit" value = "Book">Book</button>
+                </div>
+
             </div>
-            <div class="form-field">
-                <label for="model">Car Model:</label>
-                <input type="text" id="carModel" name="carModel" placeholder="Car Model" required>
-            </div>
-            <div class="form-field">
-                <label for="year">Make Year:</label>
-                <input type="text" id="year" name="year" placeholder="Make Year" required>
-            </div>
-            <button type="button" id="nextToEstimatedCostBtn">Next</button>
-        </div>
-        <!-- Section for estimated cost -->
-        <div id="estimatedCostSection" style="display: none;">
-            <h2>Estimated Cost</h2>
-            <p>Estimated Cost: <span id="estimatedCostValue"></span></p>
-            <button type="submit">Book</button>
+
+            <div style="float:right;">
+                <button type="button" id="previous">Previous</button>
+                <button type="button" id="next">Next</button>
+              </div>
         </div>
 
+        <div style="text-align:center;margin-top:40px;color:white;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
     </form>
 
     <!--Get all the existing appointment info -->
