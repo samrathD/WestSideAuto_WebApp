@@ -204,10 +204,9 @@
                         <option value="Starlight Headliner">Starlight Headliner</option>
                         <option value="Ambient Lighting">Ambient Lighting</option>
                         <option value="Vinyl Wrap">Vinyl Wrap</option>
-                        <option value="Sound and Stereo Installs">Sound and Stereo Installs</option>
-                        <option value="Chrome deletes and De-badging">Chrome deletes and De-badging</option>
-                        <option value="Headlight Restoration">Headlight Restoration</option>
-                        <option value="BodyKit Installs">BodyKit Installs</option>   
+                        <option value="Stereo Upgrade">Stereo Upgrade</option>
+                        <option value="Backup Camera">Backup Camera</option>
+                        <option value="Body Kit">BodyKit</option>   
                     </select>
                 </div>
             </div>
@@ -310,6 +309,23 @@
             }
         });
     </script>    
-    
+    <script>
+            // Function to pre-fill service field based on query parameter
+            function preFillServiceField() {
+                // Get the query parameter value for service
+                const urlParams = new URLSearchParams(window.location.search);
+                const service = urlParams.get('service');
+        
+                // If service parameter exists, pre-fill the service field in the form
+                if (service) {
+                    document.getElementById('service').value = service;
+                }
+            }
+        
+            // Call the function when the page loads
+            window.onload = function() {
+                preFillServiceField();
+            };
+    </script>
 </body>
 </html>
