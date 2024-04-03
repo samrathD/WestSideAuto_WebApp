@@ -204,12 +204,14 @@ const timeInput = document.querySelector("#time");
 //Getting all the existing appointments
 const existingAppointments = document.querySelectorAll(".existingAppointments");
 
+
 //A function to display all the time slots
 function displayTimeSlots(){
     let userDate = new Date(slots.value+"T00:00");
     for(let time of times){
         let found = false;
-
+        let count = 0;//Counter to keep track of same appointments
+        
         existingAppointments.forEach((appointment)=>{
             let existingTime = appointment.dataset.time;
             let existingDate = new Date(appointment.dataset.date);
@@ -225,34 +227,42 @@ function displayTimeSlots(){
             // Compare the year, month, day and time to check for appointment conflicts
             if (userYear === existingYear && userMonth === existingMonth && 
                 userDay === existingDay && time == existingTime) {
-                found = true;
-                return;
+                count++;
+                //Two people can book appointment at the same time
+                if(count == 2){
+                    found = true;
+                    return; 
+                }
+                
             }
         })
 
         if(!found){
             //If the appointment does not exist display the time slot
-            let clicked = 0;
+            let clicked = false;
             const slot = document.createElement("div");
             slot.id = "timeSlot";
             slot.innerHTML = time;
-            // slot.style.border = "2px solid white";
+            slot.style.cursor = "pointer";
+            // slot.style.border = "2px solid black";
             slot.style.borderRadius = "10px";
             slot.style.padding = "3px";
             timeSlotContainer.appendChild(slot);
 
             //Add hover effect
-            // slot.addEventListener("mouseover",()=>{
-            //     slot.style.backgroundColor = "white";
-            //     slot.style.color = "rgba(17, 24, 39, 1)";
-            // })
-            // slot.addEventListener("mouseout",()=>{
-            //     if (clicked == 0){
-            //         slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-            //         slot.style.color = "white"; 
-            //     }
+            slot.addEventListener("mouseover",()=>{
+                slot.style.backgroundColor = "black";
+                slot.style.color = "white";
+                console.log(`cliked on mouseover is ${clicked}`);
+            })
+            slot.addEventListener("mouseout",()=>{
+                if (clicked == false){
+                    slot.style.backgroundColor = "white";
+                    slot.style.color = "black"; 
+                }
                 
-            // })  
+            }
+            )  
             slot.addEventListener("click", () => {
                 // If the clicked slot is already selected, deselect it
                 // if (slot === selectedSlot) {
@@ -266,18 +276,27 @@ function displayTimeSlots(){
                 //         selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
                 //         selectedSlot.style.color = "white";
                 //     }
-            
-                    // Select the clicked slot
-                    slot.style.backgroundColor = "black";
-                    slot.style.color = "white";
-            
-                    // Update the selected slot reference
-                    selectedSlot = slot;
-                    clicked++;
-                    // Update the time input value
-                    timeInput.value = time;
-                    console.log(timeInput.value);
-               // }
+                
+                //******For all the time slots in the js make them normal and then do this */
+                let allSlots = document.querySelectorAll("#timeSlot");
+                allSlots.forEach((slot)=>{
+                    slot.style.backgroundColor = "white";
+                    slot.style.color = "black";
+                    clicked = false;
+                })
+
+                // Select the clicked slot
+                slot.style.backgroundColor = "black";
+                slot.style.color = "white";
+        
+                // Update the selected slot reference
+               // selectedSlot = slot;
+                clicked = true;
+                console.log(clicked);
+                // Update the time input value
+                timeInput.value = time;
+                console.log(timeInput.value);
+        // }
             })
         }
         
@@ -326,12 +345,7 @@ function fixStepIndicator(n){
     steps[n].className += "active";
 }
 
-//****************************************************** */
-//Create function that checks all the fields and if they are empty it gives them a message to fill those fields out
-// let slots = document.querySelector("#slots");
-// let nameInput = document.querySelector("#name")
-// let emailInput = document.querySelector("#email");
-// let descriptionInput = document.querySelector("#description");
+
 let validateMsg = document.querySelector("#validate");
 let emailError = document.getElementById("emailError");
 let phoneError = document.getElementById("phoneError");
