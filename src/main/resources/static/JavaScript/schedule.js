@@ -23,9 +23,7 @@ function calculateEstimatedCost() {
     const estimateDetailsContainer = document.getElementById("estimateDetails");
     estimateDetailsContainer.innerHTML = `
         <p>Service: ${service}</p>
-        <p>Car Make: ${make}</p>
-        <p>Car Model: ${model}</p>
-        <p>Year: ${year}</p>
+        
         <p>Estimated Cost: $${estimatedCost}</p>`;
     estimateDetailsContainer.style.display = "block";
 }
@@ -325,7 +323,7 @@ function showTab(n){
         previous.style.display = "inline";
     }
     //Disable next button on the right time
-    if(n==(tabs.length-1)){
+    if(n == (tabs.length)-1){
         next.style.display = "none";
         submit.style.display = "inline";
     }
@@ -384,24 +382,44 @@ function validateTab2(){
 
 
 
+// next.addEventListener("click",()=>{
+// //Check if all form feilds are filled
+//     if(currentTab == 0 ){
+//         if(validateTab1()){            
+//             currentTab = currentTab + 1;
+//             showTab(currentTab);
+//             return;
+//         }
+//     }
+// //Check if all form feilds are filled
+//     if(currentTab == 1){
+//         if(validateTab2()){
+//             currentTab = currentTab + 1;
+//             showTab(currentTab);
+//             return;
+//         }
+//     }
+//     // if(currentTab == 2){
+//     //     currentTab = currentTab + 1;
+//     //     showTab(currentTab);
+//     //     return;
+//     // }
+// })
 next.addEventListener("click",()=>{
-//Check if all form feilds are filled
-    if(currentTab == 0 ){
-        if(validateTab1()){            
-            currentTab = currentTab + 1;
-            showTab(currentTab);
+    if (currentTab === 0) {
+        if (!validateTab1()) {
             return;
         }
     }
-//Check if all form feilds are filled
-    if(currentTab == 1){
-        if(validateTab2()){
-            currentTab = currentTab + 1;
-            showTab(currentTab);
+    if (currentTab === 1) {
+        if (!validateTab2()) {
             return;
         }
     }
-})
+    currentTab++;
+    showTab(currentTab);
+});
+g
 previous.addEventListener("click",()=>{
     currentTab = currentTab - 1;
     showTab(currentTab);
