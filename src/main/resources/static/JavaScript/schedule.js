@@ -1,4 +1,6 @@
 
+const submit = document.querySelector("#submit");
+
 document.addEventListener("DOMContentLoaded", function () {
     // Define a mapping of services to their respective costs
     const serviceCosts = {
@@ -34,7 +36,7 @@ function calculateEstimatedCost() {
     document.getElementById("service").addEventListener("change", calculateEstimatedCost);
 
     // Validate and handle form submission
-    const submit = document.querySelector("#submit");
+   // const submit = document.querySelector("#submit");
     submit.addEventListener("click", function (event) {
         const valid = document.querySelector("#valid");
         if (valid.textContent !== "Valid Date") {
@@ -53,7 +55,7 @@ let serviceInput = document.querySelector("#service");
 let carMake = document.querySelector("#make");
 let carModel = document.querySelector("#carModel");
 let carYear = document.querySelector("#year");
-// let submit = document.querySelector("#submit");
+//let submit = document.querySelector("#submit");
 let valid = document.querySelector("#valid");
 let timeSlotContainer = document.querySelector(".timeContainer");
 let selectedSlot = null;
@@ -312,11 +314,12 @@ showTab(currentTab);
 
 //Function only shows the specific form page
 function showTab(n){
-    console.log(tabs.length);
+    console.log(`length of the tabs is ${tabs.length}`);
     for(let i = 0; i<tabs.length ; i++){
         tabs[i].style.display = "none";
     }
     tabs[n].style.display = "block";
+    console.log(`Showing tab ${n}`);
     //Disable previous button on the right time
     if(n == 0){
         previous.style.display = "none";
@@ -324,8 +327,8 @@ function showTab(n){
     else{
         previous.style.display = "inline";
     }
-    //Disable next button on the right time
-    if(n==(tabs.length-1)){
+   // Disable next button on the right time
+    if(n==(tabs.length)-1){
         next.style.display = "none";
         submit.style.display = "inline";
     }
@@ -334,16 +337,16 @@ function showTab(n){
         submit.style.display = "none";
     }
     //Call the function that displays the correct steps of the form
-    fixStepIndicator(n);
+   // fixStepIndicator(n);
 }
 
-function fixStepIndicator(n){
-    for(let i = 0; i<steps.length; i++){
-        steps[i].className = steps[i].className.replace("active", "");
-    }
-    //... and adds the "active" class to the current step:
-    steps[n].className += "active";
-}
+// function fixStepIndicator(n){
+//     for(let i = 0; i<steps.length; i++){
+//         steps[i].className = steps[i].className.replace("active", "");
+//     }
+//     //... and adds the "active" class to the current step:
+//     steps[n].className += "active";
+// }
 
 
 let validateMsg = document.querySelector("#validate");
@@ -380,6 +383,7 @@ function validateTab2(){
         validateMsg.style.display = "flex";
         return false;
     }
+    return true;
 }
 
 
@@ -387,7 +391,7 @@ function validateTab2(){
 next.addEventListener("click",()=>{
 //Check if all form feilds are filled
     if(currentTab == 0 ){
-        if(validateTab1()){            
+        if(validateTab1()){  
             currentTab = currentTab + 1;
             showTab(currentTab);
             return;
@@ -395,13 +399,16 @@ next.addEventListener("click",()=>{
     }
 //Check if all form feilds are filled
     if(currentTab == 1){
+        console.log("hello");
         if(validateTab2()){
             currentTab = currentTab + 1;
+            console.log(currentTab);
             showTab(currentTab);
             return;
         }
     }
 })
+
 previous.addEventListener("click",()=>{
     currentTab = currentTab - 1;
     showTab(currentTab);
