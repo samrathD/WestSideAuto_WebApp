@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Function to calculate and display the estimated cost
-    // Function to calculate and display the estimated cost
 function calculateEstimatedCost() {
     const service = document.getElementById("service").value;
     const estimatedCost = serviceCosts[service] || 0;
@@ -45,8 +44,15 @@ function calculateEstimatedCost() {
     });
 
 let slots = document.querySelector("#slots");
+let nameInput = document.querySelector("#name");
+
 let emailInput = document.querySelector("#email");
 let descriptionInput = document.querySelector("#description");
+let phoneInput = document.querySelector("#phoneNumber");
+let serviceInput = document.querySelector("#service");
+let carMake = document.querySelector("#make");
+let carModel = document.querySelector("#carModel");
+let carYear = document.querySelector("#year");
 // let submit = document.querySelector("#submit");
 let valid = document.querySelector("#valid");
 let timeSlotContainer = document.querySelector(".timeContainer");
@@ -55,7 +61,6 @@ let selectedSlot = null;
 // let nextBtn = document.querySelector("#next");
 // let container1 = document.querySelector(".container1");
 // let container2 = document.querySelector(".container2");
-
 
 const times = [];//An array that stores all the time slots
 timeSlotGen();//Generate time slots and add to the 'times' list
@@ -74,55 +79,76 @@ slots.min = min;
 
 // Event handler for the appointment input
 slots.onchange = function() {
-    validateForm();
+    //validateForm();
+    validateDate();
 }
 
-descriptionInput.oninput = function() {
-    validateForm();
-}
+// descriptionInput.oninput = function() {
+//     validateForm();
+// }
 
-function validateForm() {
+function validateDate(){
     let appointment = new Date(slots.value);
-    let min_date = new Date(min);
-    let max_date = new Date("2024-12-31T17:00");
-
     // Check if the appointment is on a weekend
     if (appointment.getDay() === 5 || appointment.getDay() === 6) {
         updateValidity("Invalid Date");
         timeSlotContainer.style.display = "none";
         return;
     }
-
     // If time is valid display the time slots for that day
     updateValidity("Valid Date");
     timeSlotContainer.style.display = "flex";
     let deleteSlots = document.querySelectorAll("#timeSlot");
+
+    //Remove the old time slots in order to avoide the overlapping of times
     if(deleteSlots.length > 0){
         deleteSlots.forEach((slot)=>{
             slot.remove();
         })
-    //Empty the array to display new time slots
-        // if(times.length > 0){
-        //     times.length = 0;
-        // }
     }
+
+    //Display all the time slots
     displayTimeSlots();
 
-
-    // Check if email field is empty
-    if (emailInput.value.trim() === "") {
-        //alert("Please enter your email.");
-        emailInput.focus();
-        return;
-    }
-
-    // Check if description field is empty
-    if (descriptionInput.value.trim() === "") {
-        //alert("Please provide a description of your service.");
-        descriptionInput.focus();
-        return;
-    }
 }
+
+// function validateForm() {
+//     // let appointment = new Date(slots.value);
+//     // // Check if the appointment is on a weekend
+//     // if (appointment.getDay() === 5 || appointment.getDay() === 6) {
+//     //     updateValidity("Invalid Date");
+//     //     timeSlotContainer.style.display = "none";
+//     //     return;
+//     // }
+//     // // If time is valid display the time slots for that day
+//     // updateValidity("Valid Date");
+//     // timeSlotContainer.style.display = "flex";
+//     // let deleteSlots = document.querySelectorAll("#timeSlot");
+
+//     // //Remove the old time slots in order to avoide the overlapping of times
+//     // if(deleteSlots.length > 0){
+//     //     deleteSlots.forEach((slot)=>{
+//     //         slot.remove();
+//     //     })
+//     // }
+
+//     // //Display all the time slots
+//     // displayTimeSlots();
+
+
+//     // // Check if email field is empty
+//     // if (emailInput.value.trim() === "") {
+//     //     emailInput.focus();
+//     //     return;
+//     // }
+
+//     // // Check if description field is empty
+//     // if (descriptionInput.value.trim() === "") {
+//     //     descriptionInput.focus();
+//     //     return;
+//     // }
+// }
+
 
 function updateValidity(message) {
     valid.textContent = message;
@@ -174,20 +200,22 @@ console.log(times);
 }
 //A hidden input field that stores the time that user wants to book
 const timeInput = document.querySelector("#time");
+
 //Getting all the existing appointments
 const existingAppointments = document.querySelectorAll(".existingAppointments");
 
+
+//A function to display all the time slots
 function displayTimeSlots(){
     let userDate = new Date(slots.value+"T00:00");
     for(let time of times){
         let found = false;
+        let count = 0;//Counter to keep track of same appointments
+        
         existingAppointments.forEach((appointment)=>{
             let existingTime = appointment.dataset.time;
             let existingDate = new Date(appointment.dataset.date);
             
-            // console.log(`ExistingTime is -${existingTime}    userTime is-${time}`);
-            // console.log(`ExistingDate is -${existingDate}`);
-            // console.log(`userDate is-${userDate}`);
             let existingYear = existingDate.getFullYear();
             let existingMonth = existingDate.getMonth();
             let existingDay = existingDate.getDate();
@@ -199,32 +227,42 @@ function displayTimeSlots(){
             // Compare the year, month, day and time to check for appointment conflicts
             if (userYear === existingYear && userMonth === existingMonth && 
                 userDay === existingDay && time == existingTime) {
-                found = true;
-                return;
+                count++;
+                //Two people can book appointment at the same time
+                if(count == 2){
+                    found = true;
+                    return; 
+                }
+                
             }
         })
+
         if(!found){
-            let clicked = 0;
+            //If the appointment does not exist display the time slot
+            let clicked = false;
             const slot = document.createElement("div");
             slot.id = "timeSlot";
             slot.innerHTML = time;
-            // slot.style.border = "2px solid white";
+            slot.style.cursor = "pointer";
+            // slot.style.border = "2px solid black";
             slot.style.borderRadius = "10px";
             slot.style.padding = "3px";
             timeSlotContainer.appendChild(slot);
 
             //Add hover effect
-            // slot.addEventListener("mouseover",()=>{
-            //     slot.style.backgroundColor = "white";
-            //     slot.style.color = "rgba(17, 24, 39, 1)";
-            // })
-            // slot.addEventListener("mouseout",()=>{
-            //     if (clicked == 0){
-            //         slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-            //         slot.style.color = "white"; 
-            //     }
+            slot.addEventListener("mouseover",()=>{
+                slot.style.backgroundColor = "black";
+                slot.style.color = "white";
+                console.log(`cliked on mouseover is ${clicked}`);
+            })
+            slot.addEventListener("mouseout",()=>{
+                if (clicked == false){
+                    slot.style.backgroundColor = "white";
+                    slot.style.color = "black"; 
+                }
                 
-            // })  
+            }
+            )  
             slot.addEventListener("click", () => {
                 // If the clicked slot is already selected, deselect it
                 // if (slot === selectedSlot) {
@@ -238,18 +276,27 @@ function displayTimeSlots(){
                 //         selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
                 //         selectedSlot.style.color = "white";
                 //     }
-            
-                    // Select the clicked slot
-                    slot.style.backgroundColor = "black";
-                    slot.style.color = "white";
-            
-                    // Update the selected slot reference
-                    selectedSlot = slot;
-                    clicked++;
-                    // Update the time input value
-                    timeInput.value = time;
-                    console.log(timeInput.value);
-               // }
+                
+                //******For all the time slots in the js make them normal and then do this */
+                let allSlots = document.querySelectorAll("#timeSlot");
+                allSlots.forEach((slot)=>{
+                    slot.style.backgroundColor = "white";
+                    slot.style.color = "black";
+                    clicked = false;
+                })
+
+                // Select the clicked slot
+                slot.style.backgroundColor = "black";
+                slot.style.color = "white";
+        
+                // Update the selected slot reference
+               // selectedSlot = slot;
+                clicked = true;
+                console.log(clicked);
+                // Update the time input value
+                timeInput.value = time;
+                console.log(timeInput.value);
+        // }
             })
         }
         
@@ -262,6 +309,7 @@ const previous = document.querySelector("#previous");
 const steps = document.getElementsByClassName("step");
 let currentTab = 0;
 showTab(currentTab);
+
 //Function only shows the specific form page
 function showTab(n){
     console.log(tabs.length);
@@ -291,19 +339,68 @@ function showTab(n){
 
 function fixStepIndicator(n){
     for(let i = 0; i<steps.length; i++){
-        steps[i].className = steps[i].className.replace(" active", "");
+        steps[i].className = steps[i].className.replace("active", "");
     }
     //... and adds the "active" class to the current step:
-    steps[n].className += " active";
+    steps[n].className += "active";
 }
 
 
-next.addEventListener("click",()=>{
-    if(validateForm){
-        currentTab = currentTab + 1;
-        showTab(currentTab);
+let validateMsg = document.querySelector("#validate");
+let emailError = document.getElementById("emailError");
+let phoneError = document.getElementById("phoneError");
+
+//Helper function to check if all the form feilds are filled
+function validateTab1(){
+    //Check if slot is empty
+    if(slots.value == "" || timeInput.value == "" || nameInput.value == "" || 
+    emailInput.value == "" || phoneInput.value == "" || serviceInput.value == "Service 1"){
+        
+        validateMsg.style.display = "flex";
+        return false;
+        
     }
+
+    //Check if email is inputted correctly
+    if (!emailInput.validity.valid){
+        emailError.style.display = 'block';
+        return false;
+    }
+
+    emailError.style.display = "none";
+    validateMsg.style.display = "none";
     
+    return true;
+    
+}
+
+//Helper function to check if all the form feilds are filled
+function validateTab2(){
+    if(carMake.value == "" || carModel.value == ""|| carYear.value == ""){
+        validateMsg.style.display = "flex";
+        return false;
+    }
+}
+
+
+
+next.addEventListener("click",()=>{
+//Check if all form feilds are filled
+    if(currentTab == 0 ){
+        if(validateTab1()){            
+            currentTab = currentTab + 1;
+            showTab(currentTab);
+            return;
+        }
+    }
+//Check if all form feilds are filled
+    if(currentTab == 1){
+        if(validateTab2()){
+            currentTab = currentTab + 1;
+            showTab(currentTab);
+            return;
+        }
+    }
 })
 previous.addEventListener("click",()=>{
     currentTab = currentTab - 1;

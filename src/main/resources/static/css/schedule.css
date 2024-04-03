@@ -169,7 +169,7 @@ body {
   height: 15px;
   width: 15px;
   margin: 0 2px;
-  background-color: #bbbbbb;
+  background-color: black;
   border: none;  
   border-radius: 50%;
   display: inline-block;
@@ -183,4 +183,13 @@ body {
 /* Mark the steps that are finished and valid: */
 .step.finish {
   background-color: #04AA6D;
+}
+
+/* #timeSlot{
+  background-color: white;
+  color: black;
+} */
+#timeSlot:hover{
+  background-color: black;
+  color:white;
 }

@@ -10,9 +10,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.RestController;
@@ -77,28 +79,28 @@ public class AppointmentController {
     }
 
     // Check if there's an existing appointment for the same date and time
-    List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
-    if (!existingAppointments.isEmpty()) {
-        model.addAttribute("description", "An appointment already exists for this date and time.");
-        model.addAttribute("existingAppointments", existingAppointments);
-        model.addAttribute("name", name); 
-        model.addAttribute("email", email);
-        model.addAttribute("description", description);
-        model.addAttribute("appointmentDate", dateString);
-        model.addAttribute("appointmentTime", appointmentTime);
-        model.addAttribute("service", service);
-        model.addAttribute("make",make);
-        model.addAttribute("carModel",carModel);
-        model.addAttribute("year",year);
-        System.out.println("An appointment already exists for this date and time.");
-        return "appointment/appointmentDateBooked";
-    }
+    // List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
+    // if (!existingAppointments.isEmpty()) {
+    //     model.addAttribute("description", "An appointment already exists for this date and time.");
+    //     model.addAttribute("existingAppointments", existingAppointments);
+    //     model.addAttribute("name", name); 
+    //     model.addAttribute("email", email);
+    //     model.addAttribute("description", description);
+    //     model.addAttribute("appointmentDate", dateString);
+    //     model.addAttribute("appointmentTime", appointmentTime);
+    //     model.addAttribute("service", service);
+    //     model.addAttribute("make",make);
+    //     model.addAttribute("carModel",carModel);
+    //     model.addAttribute("year",year);
+    //     System.out.println("An appointment already exists for this date and time.");
+    //     return "appointment/appointmentDateBooked";
+    // }
 
-    // Check if there's an existing appointment for the user and email
-    List<userAppointment> existingAppointmentsByNameAndEmail = appointmentRepo.findByUsernameAndEmail(name, email);
-    if (!existingAppointmentsByNameAndEmail.isEmpty()) {
-        model.addAttribute("description", "An appointment already exists for this user and email.");
-        model.addAttribute("existingAppointments", existingAppointmentsByNameAndEmail);
+    // Check if there's an existing appointment for the email
+    List<userAppointment> existingAppointmentsByEmail = appointmentRepo.findByEmail(email);
+    if (!existingAppointmentsByEmail.isEmpty()) {
+        model.addAttribute("description", "An appointment already exists for this email.");
+        model.addAttribute("existingAppointments", existingAppointmentsByEmail);
         model.addAttribute("name", name); 
         model.addAttribute("email", email);
         model.addAttribute("description", description);
@@ -214,6 +216,33 @@ public class AppointmentController {
             return "appointment/NoAppointment";
         }
     }
+
+//     @Transactional
+//     @PostMapping("/appointments/deleteFromList")
+//     public ResponseEntity<String> deleteAppointmentFromList( @RequestParam String name, @RequestParam String email) {
+//         List<userAppointment> appointmentOptional = appointmentRepo.findByUsernameAndEmail(name, email);
+//         if (!appointmentOptional.isEmpty()) {
+//             for (userAppointment appointment : appointmentOptional) {
+//             if (appointment.getUsername().equals(name) && appointment.getEmail().equals(email)) {
+//                 appointmentRepo.delete(appointment);
+//                 // Send confirmation email
+//                 EmailStructure emailStructure = new EmailStructure("Cancel Confirmation",
+//                     "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+//                 emailSenderService.sendEmail(email, emailStructure);
+//                 return ResponseEntity.ok().build();
+//             }
+//         }
+        
+//     }
+//     return ResponseEntity.notFound().build();
+// }
+
+@GetMapping("/appointments/delete/{uid}")
+public String deleteAppointment(@PathVariable Integer uid) {
+    appointmentRepo.deleteById(uid);
+    return "appointment/showAllAppointments"; // Redirect to the showAllAppointments page after deletion
+}
+
 
 	@GetMapping("/appointments/view")
 	public String getMethodName(Model model) {
