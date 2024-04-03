@@ -184,3 +184,12 @@ body {
 .step.finish {
   background-color: #04AA6D;
 }
+
+/* #timeSlot{
+  background-color: white;
+  color: black;
+} */
+#timeSlot:hover{
+  background-color: black;
+  color:white;
+}
