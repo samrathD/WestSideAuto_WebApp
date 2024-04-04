@@ -125,6 +125,36 @@
             flex-direction: row;
             cursor:pointer;
         }
+
+        #service:focus {
+            outline: none;
+            border-color: white;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+        .step{
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: */
+        .step.active {
+            opacity: 1;
+            background-color: black;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+         background-color: black;
+        }
+
+
     </style>
 </head>
 <body>
@@ -263,10 +293,10 @@
 
             <div class="sign-container">
                 <div>
-                    <button class="sign previous" id="previous">Previous</button>
+                    <button class="sign previous" type = "button" id="previous">Previous</button>
                 </div>
                 <div>
-                    <button class="sign next" id="next">Next</button>
+                    <button class="sign next" type = "button" id="next">Next</button>
                 </div>
             </div>
 
@@ -277,8 +307,7 @@
 
         </div>
 
-
-        <div style="text-align:center;margin-top:40px;color:black;">
+        <div style="text-align:center;margin-top:40px;">
             <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>
@@ -297,43 +326,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="/JavaScript/schedule.js"></script>
-    <!-- <script>
-        // Function to check if all fields are filled before allowing to proceed
-        function validateForm() {
-            var isValid = true;
-            // Get all input elements
-            var inputs = document.getElementsByTagName('input');
-            // Check if each input has a value
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].value === '') {
-                    isValid = false;
-                    break;
-                }
-            }
-            // Get the select element
-            var select = document.getElementById('service');
-            // Check if the select has a value
-            if (select.value === 'Service 1') {
-                isValid = false;
-            }
-            // Get the textarea element
-            var textarea = document.getElementById('description');
-            // Check if the textarea has a value
-            if (textarea.value === '') {
-                isValid = false;
-            }
-            // Return true if all fields are filled, else return false
-            return isValid;
-        }
-    
-        // Function to handle next button click
-        document.getElementById('next').addEventListener('click', function(event) {
-            if (!validateForm()) {
-                event.preventDefault(); // Prevent default form submission behavior
-                alert('Please fill out all the fields before proceeding.');
-            }
-        });
-    </script>     -->
+
     <script>
             // Function to pre-fill service field based on query parameter
             function preFillServiceField() {
