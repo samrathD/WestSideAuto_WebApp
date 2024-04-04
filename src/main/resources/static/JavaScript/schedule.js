@@ -6,10 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "Starlight Headliner": 200,
         "Ambient Lighting": 150,
         "Vinyl Wrap": 500,
-        "Sound and Stereo Installs": 300,
-        "Chrome deletes and De-badging": 100,
-        "Headlight Restoration": 80,
-        "BodyKit Installs": 600
+        "Stereo Upgrade": 300,
+        "Backup Camera": 100,
+        "Body Kit": 600
         // Add more services and costs as needed
     };
 
@@ -316,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function validateTab1(){
         //Check if slot is empty
         if(slots.value == "" || timeInput.value == "" || nameInput.value == "" || 
-        emailInput.value == "" || phoneInput.value == "" || serviceInput.value == "Service 1"){
+        emailInput.value == "" || phoneInput.value == "" || serviceInput.value == "Service"){
             
             validateMsg.style.display = "flex";
             return false;

@@ -32,6 +32,7 @@
                     <h2 class="appointment-name" th:text="${appointment.username}"></h2>
                     <ul class="appointment-info">
                         <li><strong>Email:</strong> <span th:text="${appointment.email}"></span></li>
+                        <li><strong>Phone Number:</strong> <span th:text="${appointment.phoneNumber}"></span></li>
                         <li><strong>Date:</strong> <span th:text="${appointment.appointmentDate}"></span></li>
                         <li><strong>Time:</strong> <span th:text="${appointment.appointmentTime}"></span></li>
                         <li><strong>Service:</strong> <span th:text="${appointment.service}"></span></li>
@@ -40,6 +41,8 @@
                         <li><strong>Car Model:</strong> <span th:text="${appointment.carModel}"></span></li>
                         <li><strong>Car Year:</strong> <span th:text="${appointment.year}"></span></li>
                         <li><strong>Uid:</strong> <span th:text="${appointment.uid}"></span></li>
+                        
+
                         <li>
                             <button th:id="${appointment.uid}" class="btn btn-danger update">Update</button>
                             <button th:id="${appointment.uid}" class="btn btn-danger delete">Delete</button> 
