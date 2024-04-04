@@ -54,6 +54,7 @@ function getInstagramFeed() {
                         video.style.width = '100%'; // Adjust width
                         video.style.height = '200px'; // Set height to match images
                         video.style.objectFit = 'cover'; // Ensure the video covers the entire space
+                        video.style.borderRadius = '10px'; // Set border radius to match image cards
                         postLink.appendChild(video); // Append video to anchor tag
                     } else {
                         // Create card image
