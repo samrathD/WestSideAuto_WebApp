@@ -14,6 +14,7 @@ public class userAppointment{
 	private int uid;
 	
 	private String username;
+    private String phoneNumber;
 	private String email;
 	private String description;
     private Date appointmentDate;
@@ -38,7 +39,7 @@ public class userAppointment{
     // }
 
     public userAppointment(String username, String email, String description, Date appointmentDate,
-            String service, String appointmentTime, String make, String carModel, String year) {
+            String service, String appointmentTime, String make, String carModel, String year, String phoneNumber) {
         this.uid = uid;
         this.username = username;
         this.email = email;
@@ -49,6 +50,7 @@ public class userAppointment{
         this.make = make;
         this.carModel = carModel;
         this.year = year;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getMake() {
@@ -118,6 +120,14 @@ public class userAppointment{
 
     public void setService(String service) {
         this.service = service;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
     
 

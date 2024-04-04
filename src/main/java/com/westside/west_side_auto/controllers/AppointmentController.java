@@ -67,8 +67,9 @@ public class AppointmentController {
         String make = appointmentData.get("make");
         String carModel = appointmentData.get("carModel");
         String year = appointmentData.get("year");
+        String phoneNumber = appointmentData.get("phoneNumber");
         System.out.println(appointmentTime);
-    
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
         appointmentDate = dateFormat.parse(dateString);
@@ -110,12 +111,13 @@ public class AppointmentController {
         model.addAttribute("make",make);
         model.addAttribute("carModel",carModel);
         model.addAttribute("year",year);
+        model.addAttribute("phoneNumber", phoneNumber);
 
         System.out.println("An appointment already exists for this user and email.");
         return "appointment/appoinmentExistsConfirmation";
     }
 
-    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime, make, carModel, year);
+    userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime, make, carModel, year, phoneNumber);
     appointmentRepo.save(appointment);
     
     //email being made
@@ -147,6 +149,8 @@ public class AppointmentController {
             String make = formData.get("make");
             String carModel = formData.get("carModel");
             String year = formData.get("year");
+            String phoneNumber = formData.get("phoneNumber");
+
 
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -175,8 +179,8 @@ public class AppointmentController {
                     appointment.setMake(make);
                     appointment.setCarModel(carModel);
                     appointment.setYear(year);
+                    appointment.setPhoneNumber(phoneNumber);
                     appointmentRepo.save(appointment);
-                   
                 }
             }
             //email being made
@@ -188,16 +192,24 @@ public class AppointmentController {
     emailSenderService.sendEmail(email, emailStructure);
             return "appointment/appointmentConfirmation";
         } else {
-            // Redirect to the add appointment page after 5 seconds
-            model.addAttribute("redirectDelay", 5000); // 5 seconds delay
+            // // Redirect to the add appointment page after 5 seconds
+            // model.addAttribute("redirectDelay", 5000); // 5 seconds delay
             return "redirect:/appointments/add";
         }
     }
 
 	@GetMapping("/appointments/add")
-    public String showAddAppointmentForm() {
+    public String showAddAppointmentForm(HttpServletRequest request, Model model, HttpSession session) {
         // Return the view name for the add appointment form
-        return "redirect:/html/schedule.html"; // Adjust the view name as per your application
+        User user = (User) session.getAttribute("session_user");
+		if(user != null) model.addAttribute("user", user);
+		else {
+			User emptyUser = new User();
+			model.addAttribute(emptyUser);
+		}
+		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
+        model.addAttribute("appointment",appointments);
+        return "appointment/schedule"; // Adjust the view name as per your application
     }
 
 	@Transactional
