@@ -165,6 +165,15 @@ document.addEventListener("DOMContentLoaded", function () {
     //Getting all the existing appointments
     const existingAppointments = document.querySelectorAll(".existingAppointments");
 
+    function handelMouseOver(slot){
+        slot.style.backgroundColor = "black";
+        slot.style.color = "white";
+        console.log("Mouse over");
+    }
+    function handelMouseOut(slot){
+        slot.style.backgroundColor = "white";
+        slot.style.color = "black";
+    }
 
     //A function to display all the time slots
     function displayTimeSlots(){
@@ -203,61 +212,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 let clicked = false;
                 const slot = document.createElement("div");
                 slot.id = "timeSlot";
+                slot.className = "hoverEffect";
                 slot.innerHTML = time;
                 slot.style.cursor = "pointer";
-                // slot.style.border = "2px solid black";
                 slot.style.borderRadius = "10px";
                 slot.style.padding = "3px";
                 timeSlotContainer.appendChild(slot);
 
-                //Add hover effect
-                slot.addEventListener("mouseover",()=>{
-                    slot.style.backgroundColor = "black";
-                    slot.style.color = "white";
-                    console.log(`cliked on mouseover is ${clicked}`);
-                })
-                slot.addEventListener("mouseout",()=>{
-                    if (clicked == false){
-                        slot.style.backgroundColor = "white";
-                        slot.style.color = "black"; 
-                    }
-                    
-                }
-                )  
                 slot.addEventListener("click", () => {
-                    // If the clicked slot is already selected, deselect it
-                    // if (slot === selectedSlot) {
-                    //     slot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-                    //     slot.style.color = "white";
-                    //     selectedSlot = null; // Update selectedSlot to indicate no slot is selected
-                    //     timeInput.value = ""; // Clear the time input value
-                    // } else {
-                    //     // Deselect previously selected slot, if any
-                    //     if (selectedSlot) {
-                    //         selectedSlot.style.backgroundColor = "rgba(17, 24, 39, 1)";
-                    //         selectedSlot.style.color = "white";
-                    //     }
-                    
-                    //******For all the time slots in the js make them normal and then do this */
-                    let allSlots = document.querySelectorAll("#timeSlot");
-                    allSlots.forEach((slot)=>{
-                        slot.style.backgroundColor = "white";
-                        slot.style.color = "black";
-                        clicked = false;
-                    })
-
-                    // Select the clicked slot
-                    slot.style.backgroundColor = "black";
-                    slot.style.color = "white";
-            
+                    // If a slot is already selected, deselect it
+                    if(selectedSlot!=null){
+                        let allSlots = document.querySelectorAll("#timeSlot");
+                        allSlots.forEach((slot)=>{
+                            slot.classList.remove("hoverAfter");
+                            slot.classList.add("hoverEffect");
+                        })
+                    }
+                    //Remove the hover effect from the timeslots
+                    slot.classList.remove("hoverEffect");
+                    slot.classList.add("hoverAfter");
+                    console.log(slot.class);
                     // Update the selected slot reference
-                // selectedSlot = slot;
+                    selectedSlot = slot;
                     clicked = true;
                     console.log(clicked);
                     // Update the time input value
                     timeInput.value = time;
                     console.log(timeInput.value);
-            // }
                 })
             }
             
