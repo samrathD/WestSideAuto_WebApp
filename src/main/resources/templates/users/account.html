@@ -162,7 +162,7 @@
 
 <h1 class="text-center mt-4">Welcome <span th:text="${user.username}"></span>!</h1>
 
-<form class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
+<section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
     <h2 class="title">Your Appointments</h2>
     <table class="table">
         <thead>
@@ -178,9 +178,9 @@
            <td> <form action="/updateAppointment" method="post"> <input type="text" name="uid" th:value="${app.uid}" hidden> <input class="sign" type="submit" value="Update"></input> </form> </td>
          </tr>
       </table>
-</form>
+</section>
 
-<section>
+<section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
     <h2 class="title">Edit User Profile</h2>
     <form action="/users/edit" method="post" onsubmit="return validateForm()">
         <div class="form-field">
