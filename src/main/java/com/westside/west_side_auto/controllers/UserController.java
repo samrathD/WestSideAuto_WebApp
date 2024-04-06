@@ -37,11 +37,20 @@ public class UserController {
 	// 	return new RedirectView("/html/home.html");
 	// }
 
-	@GetMapping("/")
-	public String showHomePage() {
-    return "home"; 
-	}
+	// @GetMapping("/")
+	// public String showHomePage() {
+    // return "home"; 
+	// }
 
+	@GetMapping("/")
+	public String showHomePage(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("session_user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
+		return "home";
+	}
+	
 	
 	@PostMapping("/users/add")
 	public String addUser(@RequestParam Map<String,String> newUser, HttpServletResponse response) {
@@ -57,7 +66,7 @@ public class UserController {
 			return "redirect:/login";
 		}
 		else {
-			return "redirect:/html/signup.html";
+			return "redirect:/signup";
 		}
 		
 		
@@ -89,6 +98,7 @@ public class UserController {
 	public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
     User user = (User) session.getAttribute("session_user");
     if(user == null) {
+		System.out.println("hello it works here!");
         return "users/login";
     } else {
 
@@ -98,16 +108,18 @@ public class UserController {
         // Check if user email matches 'wsa@gmail.com' before adding to the model
         if(user.getEmail().equals("wsa@gmail.com")) {
             model.addAttribute("showAllAppointments", true);
+			System.out.println("hi");
         }
         model.addAttribute("user", user);
         
         List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
         model.addAttribute("appointments", userAppointments);
-        
+        // Debug statement to print out the email address
+		System.out.println("User email Try 2: " + user.getEmail());
+
         return "users/account";
     }
 }
-
 	
 	@PostMapping("/login")
 	public String loginUser(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session) {
@@ -156,6 +168,18 @@ public class UserController {
 			return "/users/updateError";
 		}
 	}
+
+	@GetMapping("/signup")
+	public String showSignupForm(Model model, HttpSession session) {
+    // Check if there's an active session and retrieve user information if available
+    User user = (User) session.getAttribute("session_user");
+    if (user != null) {
+        model.addAttribute("user", user);
+    }
+
+    return "signup";
+}
+
 }
 
 
