@@ -45,7 +45,7 @@
 
 
         .schedule {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             padding: 20px;
             background-color: #fff;
@@ -124,6 +124,28 @@
             flex-direction: row;
             cursor:pointer;
         }
+
+        .appointment-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .appointment-name {
+            font-weight: bold;
+        }
+        .appointment-info {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .appointment-btn{
+          margin-top: 1rem;
+        }
+
+
     </style>
 </head>
 <body>
@@ -163,21 +185,31 @@
 <h1 class="text-center mt-4">Welcome <span th:text="${user.username}"></span>!</h1>
 
 <section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
-    <h2 class="title">Your Appointments</h2>
-    <table class="table">
-        <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Description</th>
-        <tr>
-         <tr th:each="app:${appointments}">
-           <td th:text="${app.appointmentDate}"></td>
-           <td th:text="${app.appointmentTime}"></td>
-           <td th:text="${app.description}"></td>
-           <td> <form action="/updateAppointment" method="post"> <input type="text" name="uid" th:value="${app.uid}" hidden> <input class="sign" type="submit" value="Update"></input> </form> </td>
-         </tr>
-      </table>
+    <h2 class="title">Your Appointment</h2>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div  class="col-md-12">
+          <div th:each="appointment:${appointments}" class="appointment-card">
+            <h2 class="appointment-name" th:text="${appointment.username}"></h2>
+            <ul class="appointment-info">
+                <li><strong>Email:</strong> <span th:text="${appointment.email}"></span></li>
+                <li><strong>Phone Number:</strong> <span th:text="${appointment.phoneNumber}"></span></li>
+                <li><strong>Date:</strong> <span th:text="${appointment.appointmentDate}"></span></li>
+                <li><strong>Time:</strong> <span th:text="${appointment.appointmentTime}"></span></li>
+                <li><strong>Service:</strong> <span th:text="${appointment.service}"></span></li>
+                <li><strong>Description:</strong> <span th:text="${appointment.description}"></span></li>
+                <li><strong>Car Make:</strong> <span th:text="${appointment.make}"></span></li>
+                <li><strong>Car Model:</strong> <span th:text="${appointment.carModel}"></span></li>
+                <li><strong>Car Year:</strong> <span th:text="${appointment.year}"></span></li>
+                <li>
+                  <form action="/updateAppointment" method="post" class="appointment-btn"> <input type="text" name="uid" th:value="${appointment.uid}" hidden> <button class="btn btn-danger update" type="submit" value="Update">Update</button> </form>
+                  <form action="/deleteAppointment" method="post" class="appointment-btn"> <input type="text" name="uid" th:value="${appointment.uid}" hidden> <button class="btn btn-danger delete" type="submit" value="Delete">Delete</button> </form>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
 
 <section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
