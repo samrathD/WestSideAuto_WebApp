@@ -3,12 +3,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Define a mapping of services to their respective costs
     const serviceCosts = {
-        "Starlight Headliner": 200,
-        "Ambient Lighting": 150,
-        "Vinyl Wrap": 500,
-        "Stereo Upgrade": 300,
-        "Backup Camera": 100,
-        "Body Kit": 600
+        "Starlight Headliner": "$299 - $1299",
+        "Ambient Lighting": "$280-$380",
+        "Vinyl Wrap": "$500",
+        "Stereo Upgrade": "$350-$480",
+        "Backup Camera": "$130",
+        "Body Kit": "$1500-$3000"
         // Add more services and costs as needed
     };
 
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         estimateDetailsContainer.innerHTML = `
             <p>Service: ${service}</p>
             
-            <p>Estimated Cost: $${estimatedCost}</p>`;
+            <p>Estimated Cost: ${estimatedCost}</p>`;
         estimateDetailsContainer.style.display = "block";
     }
 
