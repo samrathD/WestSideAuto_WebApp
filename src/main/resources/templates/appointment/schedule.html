@@ -119,6 +119,7 @@
             border:2px solid white;
             justify-content: space-between;
             align-items: center;
+            margin: auto;
             padding:4px;
             display:none;
             flex-wrap: wrap;
@@ -175,7 +176,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="/photos/logo.jpeg" alt="Company Logo" height="60"> <!-- Adjust the height here -->
             </a>
             <!-- Rest of the navbar content -->
@@ -198,7 +199,7 @@
                         <a class="nav-link" href="/appointments/view">See All Appointments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Sign In <i class="fas fa-sign-in-alt"></i></a>
+                        <a class="nav-link" href="/login">Account <i class="fas fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -206,9 +207,9 @@
     </nav>
 
     <form class="schedule mt-5 mb-5" action="/appointments/add" method="post" style="margin-bottom: 50px;">
-        <h1 class="title">Schedule an Appointment</h1>
-        <h2 class="text-center mb-4">Hours of Operation</h2>
-        <h3 class="text-center">8:00 AM To 8:00 PM</h3>
+        <h2 class="title">Schedule an Appointment</p>
+        <h6 class="text-center">Hours of Operation</h6>
+        <h6 class="text-center mb-4">8:00 AM - 8:00 PM</h6>
         <div class="container">
 
             <!-- First container that allows users to book appointment -->
@@ -248,7 +249,7 @@
                         <div>
                             <label for="phoneNumber">Please Enter Your Phone Number:</label>
                             <br>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
+                            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
                         </div>
                         <span id="phoneError" style="color: red; display: none;">Please enter a valid Phone Number.</span>
                     </div>
@@ -304,11 +305,10 @@
             </div>
 
             <div class="tab">
-                <div style="float:right;">
                     <div id="estimateDetails" style="display:none;"></div>
-                     <button type="submit" class="sign next" id="submit" value = "Book">Book</button>
-                </div>
-
+                    <div class="sign-container">
+                        <button type="submit" class="sign next" id="submit" value = "Book">Book</button>
+                    </div>
             </div>
 
             <div class="sign-container">

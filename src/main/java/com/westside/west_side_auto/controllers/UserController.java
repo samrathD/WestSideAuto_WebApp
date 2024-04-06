@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,10 +32,16 @@ public class UserController {
 	@Autowired
 	private appointmentRepository appointmentRepo;
 	
+	// @GetMapping("/")
+	// public RedirectView process() {
+	// 	return new RedirectView("/html/home.html");
+	// }
+
 	@GetMapping("/")
-	public RedirectView process() {
-		return new RedirectView("/html/home.html");
+	public String showHomePage() {
+    return "home"; 
 	}
+
 	
 	@PostMapping("/users/add")
 	public String addUser(@RequestParam Map<String,String> newUser, HttpServletResponse response) {
@@ -63,19 +71,43 @@ public class UserController {
 		return "/users/showAll";
 	}
 	
+	// @GetMapping("/login")
+	// public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
+	// 	User user = (User) session.getAttribute("session_user");
+	// 	if(user == null) return "users/login";
+	// 	else {
+	// 		model.addAttribute("user", user);
+			
+	// 		List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
+	// 		model.addAttribute("appointments", userAppointments);
+			
+	// 		return "users/account";
+	// 	}
+	// }
+
 	@GetMapping("/login")
 	public String getLogin(Model model, HttpServletRequest request, HttpSession session) {
-		User user = (User) session.getAttribute("session_user");
-		if(user == null) return "users/login";
-		else {
-			model.addAttribute("user", user);
-			
-			List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
-			model.addAttribute("appointments", userAppointments);
-			
-			return "users/account";
-		}
-	}
+    User user = (User) session.getAttribute("session_user");
+    if(user == null) {
+        return "users/login";
+    } else {
+
+		// Debug statement to print out the email address
+		System.out.println("User email: " + user.getEmail());
+
+        // Check if user email matches 'wsa@gmail.com' before adding to the model
+        if(user.getEmail().equals("wsa@gmail.com")) {
+            model.addAttribute("showAllAppointments", true);
+        }
+        model.addAttribute("user", user);
+        
+        List<userAppointment> userAppointments = appointmentRepo.findByEmail(user.getEmail());
+        model.addAttribute("appointments", userAppointments);
+        
+        return "users/account";
+    }
+}
+
 	
 	@PostMapping("/login")
 	public String loginUser(@RequestParam Map<String,String> formData, Model model, HttpServletRequest request, HttpSession session) {
@@ -124,7 +156,6 @@ public class UserController {
 			return "/users/updateError";
 		}
 	}
-	
 }
 
 
