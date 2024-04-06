@@ -211,6 +211,23 @@ public class AppointmentController {
             return "appointment/NoAppointment";
         }
     }
+	
+	@Transactional
+    @PostMapping("/appointments/deleteById")
+    public String deleteAppointment(@RequestParam String uid) {
+        List<userAppointment> appointmentsToDelete = appointmentRepo.findByUid(Integer.parseInt(uid));
+        if (!appointmentsToDelete.isEmpty()) {
+        //email being made
+        EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
+        "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+            appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
+            System.out.println("It works here!");
+            emailSenderService.sendEmail(appointmentsToDelete.get(0).getEmail(), emailStructure);
+            return "appointment/deleteConfirmation";
+        } else {
+            return "appointment/NoAppointment";
+        }
+    }
 
 //     @Transactional
 //     @PostMapping("/appointments/deleteFromList")
@@ -237,6 +254,8 @@ public String deleteAppointment(@PathVariable Integer uid) {
     appointmentRepo.deleteById(uid);
     return "redirect:/appointments/view";
 }
+	
+	
 
 
 	@GetMapping("/appointments/view")

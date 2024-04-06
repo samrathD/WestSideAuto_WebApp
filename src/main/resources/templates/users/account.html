@@ -203,7 +203,7 @@
                 <li><strong>Car Year:</strong> <span th:text="${appointment.year}"></span></li>
                 <li>
                   <form action="/updateAppointment" method="post" class="appointment-btn"> <input type="text" name="uid" th:value="${appointment.uid}" hidden> <button class="btn btn-danger update" type="submit" value="Update">Update</button> </form>
-                  <form action="/deleteAppointment" method="post" class="appointment-btn"> <input type="text" name="uid" th:value="${appointment.uid}" hidden> <button class="btn btn-danger delete" type="submit" value="Delete">Delete</button> </form>
+                  <form action="/appointments/deleteById" method="post" class="appointment-btn"> <input type="text" name="uid" th:value="${appointment.uid}" hidden> <button class="btn btn-danger delete" type="submit" value="Delete">Delete</button> </form>
                 </li>
             </ul>
           </div>
