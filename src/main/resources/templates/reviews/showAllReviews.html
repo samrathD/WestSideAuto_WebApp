@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Reviews</title>
+</head>
+<body>
+    <h2>All Reviews</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="review : ${reviews}">
+                <td th:text="${review.username}">Username</td>
+                <td th:text="${#dates.format(review.date, 'yyyy-MM-dd HH:mm:ss')}">Date</td>
+                <td th:text="${review.rating}">Rating</td>
+                <td th:text="${review.review}">Review</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
