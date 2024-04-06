@@ -170,7 +170,10 @@ public class AppointmentController {
     EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
     "Your appointment is confirmed. Appointment Details:\n" +
     "Date: " + dateFormat.format(appointmentDate) + "\n" +
-    "Time: " + appointmentTime);
+    "Time: " + appointmentTime +
+	"\nSincerely,\n"+
+	"West Side Autoworks Team");
+    
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
             return "appointment/appointmentConfirmation";

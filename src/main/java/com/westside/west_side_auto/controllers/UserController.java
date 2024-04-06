@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.westside.west_side_auto.models.EmailStructure;
 import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.UserRepository;
 import com.westside.west_side_auto.models.appointmentRepository;
 import com.westside.west_side_auto.models.userAppointment;
+import com.westside.west_side_auto.service.EmailSenderService;
 
 import org.springframework.stereotype.Controller;
 
@@ -31,6 +33,12 @@ public class UserController {
 	
 	@Autowired
 	private appointmentRepository appointmentRepo;
+	private EmailSenderService emailSenderService;
+
+	@Autowired
+    public UserController(EmailSenderService emailSenderService){
+        this.emailSenderService = emailSenderService;
+    }
 	
 	// @GetMapping("/")
 	// public RedirectView process() {
@@ -54,8 +62,20 @@ public class UserController {
 		if(userRepo.findByEmail(newEmail).size()==0) {
 			userRepo.save(new User(newName, newEmail, newPassword));
 			response.setStatus(201);
+			
+			//email being made
+			EmailStructure emailStructure = new EmailStructure("Account Confirmation", 
+			"Your account has been made successfully made at West Side Autoworks.\n"+
+			"Account details - \n" +
+			"Username: " + newName + "\n" +
+			"Email: " + newEmail +
+			"\nSincerely,\n"+
+			"West Side Autoworks Team");
+			emailSenderService.sendEmail(newEmail, emailStructure);
+			System.out.println("It works here!");
 			return "redirect:/login";
 		}
+
 		else {
 			return "redirect:/html/signup.html";
 		}
