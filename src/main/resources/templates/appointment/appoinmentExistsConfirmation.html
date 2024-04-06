@@ -71,17 +71,10 @@
         }
     
         .visitAccount button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 10px;
-        }
-    
-        .visitAccount button:hover {
-            background-color: #0056b3;
         }
     
         .home-link {
@@ -125,7 +118,7 @@
                         <a class="nav-link" href="/appointments/view">See All Appointments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Sign In <i class="fas fa-sign-in-alt"></i></a>
+                        <a class="nav-link" href="/login">Account <i class="fas fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -140,7 +133,7 @@
             flex-wrap:wrap; flex-direction:column; gap:2rem;">
                  Visit account information to update your appointment
                  <br>
-                <button onclick = "document.location = '/login'">Account Info</button> 
+                <button class="btn btn-outline-dark" onclick = "document.location = '/login'">Account Info</button> 
             </div>
 
             <div class = "Login">
@@ -150,7 +143,7 @@
         </div>
        
         <div class="home-link">
-            <a href="/html/home.html">Go to Home</a>
+            <a href="/">Go to Home</a>
         </div>
     </div>
 </body>

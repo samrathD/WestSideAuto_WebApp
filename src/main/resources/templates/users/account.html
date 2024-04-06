@@ -152,7 +152,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="/photos/logo.jpeg" alt="Company Logo" height="60"> <!-- Adjust the height here -->
             </a>
             <!-- Rest of the navbar content -->
@@ -175,7 +175,7 @@
                         <a class="nav-link" href="/appointments/view">See All Appointments</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+                        <a class="nav-link" href="/login">Account <i class="fas fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -183,6 +183,7 @@
     </nav>
 
 <h1 class="text-center mt-4">Welcome <span th:text="${user.username}"></span>!</h1>
+<a href="/logout" class="d-block text-center mt-4">Logout</a>
 
 <section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
     <h2 class="title">Your Appointment</h2>
