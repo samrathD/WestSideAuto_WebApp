@@ -79,24 +79,6 @@ public class AppointmentController {
         // Handle parsing exception here
     }
 
-    // Check if there's an existing appointment for the same date and time
-    // List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
-    // if (!existingAppointments.isEmpty()) {
-    //     model.addAttribute("description", "An appointment already exists for this date and time.");
-    //     model.addAttribute("existingAppointments", existingAppointments);
-    //     model.addAttribute("name", name); 
-    //     model.addAttribute("email", email);
-    //     model.addAttribute("description", description);
-    //     model.addAttribute("appointmentDate", dateString);
-    //     model.addAttribute("appointmentTime", appointmentTime);
-    //     model.addAttribute("service", service);
-    //     model.addAttribute("make",make);
-    //     model.addAttribute("carModel",carModel);
-    //     model.addAttribute("year",year);
-    //     System.out.println("An appointment already exists for this date and time.");
-    //     return "appointment/appointmentDateBooked";
-    // }
-
     // Check if there's an existing appointment for the email
     List<userAppointment> existingAppointmentsByEmail = appointmentRepo.findByEmail(email);
     if (!existingAppointmentsByEmail.isEmpty()) {
@@ -169,9 +151,10 @@ public class AppointmentController {
 
 
             // Replace the existing appointment
-            List<userAppointment> existingAppointments = appointmentRepo.findByUsernameAndEmail(name, email);
+            List<userAppointment> existingAppointments = appointmentRepo.findByEmail(email);
             if (!existingAppointments.isEmpty()) {
                 for (userAppointment appointment : existingAppointments) {
+                    appointment.setUsername(name);
                     appointment.setDescription(description);
                     appointment.setAppointmentDate(appointmentDate);
 					appointment.setAppointmentTime(appointmentTime);
@@ -252,7 +235,7 @@ public class AppointmentController {
 @GetMapping("/appointments/delete/{uid}")
 public String deleteAppointment(@PathVariable Integer uid) {
     appointmentRepo.deleteById(uid);
-    return "appointment/showAllAppointments"; // Redirect to the showAllAppointments page after deletion
+    return "redirect:/appointments/view";
 }
 
 
@@ -275,6 +258,7 @@ public String deleteAppointment(@PathVariable Integer uid) {
 			model.addAttribute("user", user);
 			List<userAppointment> selectedAppointment = appointmentRepo.findByUid(Integer.parseInt(uid));
 			model.addAttribute("appt", selectedAppointment.get(0));
+			System.out.println(selectedAppointment.get(0).getMake());
 		}
 		
 		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
@@ -292,6 +276,11 @@ public String deleteAppointment(@PathVariable Integer uid) {
         String description = appointmentData.get("description");
         String appointmentTime = appointmentData.get("time");
         Date appointmentDate = null;
+        String service = appointmentData.get("service");
+        String make = appointmentData.get("make");
+        String carModel = appointmentData.get("carModel");
+        String year = appointmentData.get("year");
+        String phoneNumber = appointmentData.get("phoneNumber");
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
@@ -308,7 +297,11 @@ public String deleteAppointment(@PathVariable Integer uid) {
     	editAppointment.setAppointmentDate(appointmentDate);
     	editAppointment.setDescription(description);
     	editAppointment.setAppointmentTime(appointmentTime);
-        // editAppointment.setService(service);
+    	editAppointment.setService(service);
+    	editAppointment.setMake(make);
+    	editAppointment.setCarModel(carModel);
+    	editAppointment.setYear(year);
+    	editAppointment.setPhoneNumber(phoneNumber);
     	
     	appointmentRepo.save(editAppointment);
     	response.setStatus(201);
