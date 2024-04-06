@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,23 @@
         <p>Today Date: <input type="Date" th:field="*{todayDate}" required/></p>
         <p>Rating: <input type="number" min="1" max="5" th:field="*{rating}" required/></p>
         <p>Review: <textarea th:field="*{review}" required></textarea></p>
+        <p><button type="submit">Submit Review</button></p>
+    </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Form</title>
+</head>
+<body>
+    <h2>Submit a Review</h2>
+    <form action="/submitReview" method="post">
+        <p>Username: <input type="text" name="username" required /></p>
+        <p>Today Date: <input type="date" name="date" required/></p>
+        <p>Rating: <input type="number" min="1" max="5" name="rating" required/></p>
+        <p>Review: <textarea name="review" required></textarea></p>
         <p><button type="submit">Submit Review</button></p>
     </form>
 </body>

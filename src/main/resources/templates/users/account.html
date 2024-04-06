@@ -145,6 +145,9 @@
           margin-top: 1rem;
         }
 
+        .submit {
+            text-align: center;
+        }
 
     </style>
 </head>
@@ -171,7 +174,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/html/delete.html">Delete Appointment</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" th:if="${user != null && user.email == 'wsa@gmail.com'}">
                         <a class="nav-link" href="/appointments/view">See All Appointments</a>
                     </li>
                     <li class="nav-item">
@@ -182,8 +185,10 @@
         </div>
     </nav>
 
-<h1 class="text-center mt-4">Welcome <span th:text="${user.username}"></span>!</h1>
-<a href="/logout" class="d-block text-center mt-4">Logout</a>
+<div class="submit mt-4">
+    <h1>Welcome <span th:text="${user.username}"></span>!</h1>
+    <a href="/logout" class="btn btn-dark">Logout</a>
+</div>
 
 <section class="schedule mt-5 mb-5" style="margin-bottom: 50px;">
     <h2 class="title">Your Appointment</h2>
