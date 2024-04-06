@@ -258,6 +258,7 @@ public String deleteAppointment(@PathVariable Integer uid) {
 			model.addAttribute("user", user);
 			List<userAppointment> selectedAppointment = appointmentRepo.findByUid(Integer.parseInt(uid));
 			model.addAttribute("appt", selectedAppointment.get(0));
+			System.out.println(selectedAppointment.get(0).getMake());
 		}
 		
 		List<userAppointment>appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC,"uid"));
@@ -275,6 +276,11 @@ public String deleteAppointment(@PathVariable Integer uid) {
         String description = appointmentData.get("description");
         String appointmentTime = appointmentData.get("time");
         Date appointmentDate = null;
+        String service = appointmentData.get("service");
+        String make = appointmentData.get("make");
+        String carModel = appointmentData.get("carModel");
+        String year = appointmentData.get("year");
+        String phoneNumber = appointmentData.get("phoneNumber");
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
@@ -291,7 +297,11 @@ public String deleteAppointment(@PathVariable Integer uid) {
     	editAppointment.setAppointmentDate(appointmentDate);
     	editAppointment.setDescription(description);
     	editAppointment.setAppointmentTime(appointmentTime);
-        // editAppointment.setService(service);
+    	editAppointment.setService(service);
+    	editAppointment.setMake(make);
+    	editAppointment.setCarModel(carModel);
+    	editAppointment.setYear(year);
+    	editAppointment.setPhoneNumber(phoneNumber);
     	
     	appointmentRepo.save(editAppointment);
     	response.setStatus(201);
