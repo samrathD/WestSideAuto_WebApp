@@ -235,6 +235,7 @@ public class AppointmentController {
 @GetMapping("/appointments/delete/{uid}")
 public String deleteAppointment(@PathVariable Integer uid) {
     appointmentRepo.deleteById(uid);
+    //return "appointment/showAllAppointments"; // Redirect to the showAllAppointments page after deletion
     return "redirect:/appointments/view";
 }
 
