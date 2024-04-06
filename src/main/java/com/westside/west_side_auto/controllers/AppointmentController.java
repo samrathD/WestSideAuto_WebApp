@@ -79,24 +79,6 @@ public class AppointmentController {
         // Handle parsing exception here
     }
 
-    // Check if there's an existing appointment for the same date and time
-    // List<userAppointment> existingAppointments = appointmentRepo.findByAppointmentDateAndAppointmentTime(appointmentDate, appointmentTime);
-    // if (!existingAppointments.isEmpty()) {
-    //     model.addAttribute("description", "An appointment already exists for this date and time.");
-    //     model.addAttribute("existingAppointments", existingAppointments);
-    //     model.addAttribute("name", name); 
-    //     model.addAttribute("email", email);
-    //     model.addAttribute("description", description);
-    //     model.addAttribute("appointmentDate", dateString);
-    //     model.addAttribute("appointmentTime", appointmentTime);
-    //     model.addAttribute("service", service);
-    //     model.addAttribute("make",make);
-    //     model.addAttribute("carModel",carModel);
-    //     model.addAttribute("year",year);
-    //     System.out.println("An appointment already exists for this date and time.");
-    //     return "appointment/appointmentDateBooked";
-    // }
-
     // Check if there's an existing appointment for the email
     List<userAppointment> existingAppointmentsByEmail = appointmentRepo.findByEmail(email);
     if (!existingAppointmentsByEmail.isEmpty()) {
@@ -169,9 +151,10 @@ public class AppointmentController {
 
 
             // Replace the existing appointment
-            List<userAppointment> existingAppointments = appointmentRepo.findByUsernameAndEmail(name, email);
+            List<userAppointment> existingAppointments = appointmentRepo.findByEmail(email);
             if (!existingAppointments.isEmpty()) {
                 for (userAppointment appointment : existingAppointments) {
+                    appointment.setUsername(name);
                     appointment.setDescription(description);
                     appointment.setAppointmentDate(appointmentDate);
 					appointment.setAppointmentTime(appointmentTime);
@@ -252,7 +235,7 @@ public class AppointmentController {
 @GetMapping("/appointments/delete/{uid}")
 public String deleteAppointment(@PathVariable Integer uid) {
     appointmentRepo.deleteById(uid);
-    return "appointment/showAllAppointments"; // Redirect to the showAllAppointments page after deletion
+    return "redirect:/appointments/view";
 }
 
 
