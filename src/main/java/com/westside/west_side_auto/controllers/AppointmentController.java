@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.westside.west_side_auto.models.EmailStructure;
 import com.westside.west_side_auto.models.User;
+import com.westside.west_side_auto.models.UserRepository;
 import com.westside.west_side_auto.models.appointmentRepository;
 import com.westside.west_side_auto.models.userAppointment;
 import com.westside.west_side_auto.service.EmailSenderService;
@@ -32,7 +33,7 @@ import jakarta.transaction.Transactional;
 
 @Controller
 public class AppointmentController {
-
+    
     @Autowired
 	private appointmentRepository appointmentRepo;
     private EmailSenderService emailSenderService;
@@ -55,82 +56,22 @@ public class AppointmentController {
     	return "appointment/schedule";
     }
 
-//     @PostMapping("/appointments/add")
-//     public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
-//         String name = appointmentData.get("name");
-//         String email = appointmentData.get("email");
-//         String dateString = appointmentData.get("slots");
-//         String description = appointmentData.get("description");
-//         String appointmentTime = appointmentData.get("time");
-//         String service = appointmentData.get("service");
-//         Date appointmentDate = null;
-//         String make = appointmentData.get("make");
-//         String carModel = appointmentData.get("carModel");
-//         String year = appointmentData.get("year");
-//         String phoneNumber = appointmentData.get("phoneNumber");
-//         System.out.println(appointmentTime);
+    @PostMapping("/appointments/add")
+    public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model) {
+        String name = appointmentData.get("name");
+        String email = appointmentData.get("email");
+        String dateString = appointmentData.get("slots");
+        String description = appointmentData.get("description");
+        String appointmentTime = appointmentData.get("time");
+        String service = appointmentData.get("service");
+        Date appointmentDate = null;
+        String make = appointmentData.get("make");
+        String carModel = appointmentData.get("carModel");
+        String year = appointmentData.get("year");
+        String phoneNumber = appointmentData.get("phoneNumber");
+        System.out.println(appointmentTime);
 
-//         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//     try {
-//         appointmentDate = dateFormat.parse(dateString);
-//         // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
-//     } catch (ParseException | DateTimeParseException e) {
-//         e.printStackTrace(); 
-//         // Handle parsing exception here
-//     }
-
-//     // Check if there's an existing appointment for the email
-//     List<userAppointment> existingAppointmentsByEmail = appointmentRepo.findByEmail(email);
-//     if (!existingAppointmentsByEmail.isEmpty()) {
-//         model.addAttribute("description", "An appointment already exists for this email.");
-//         model.addAttribute("existingAppointments", existingAppointmentsByEmail);
-//         model.addAttribute("name", name); 
-//         model.addAttribute("email", email);
-//         model.addAttribute("description", description);
-//         model.addAttribute("appointmentDate", dateString);
-//         model.addAttribute("appointmentTime", appointmentTime);
-//         model.addAttribute("service", service);
-//         model.addAttribute("make",make);
-//         model.addAttribute("carModel",carModel);
-//         model.addAttribute("year",year);
-//         model.addAttribute("phoneNumber", phoneNumber);
-
-//         System.out.println("An appointment already exists for this user and email.");
-//         return "appointment/appoinmentExistsConfirmation";
-//     }
-
-//     userAppointment appointment = new userAppointment(name, email, description, appointmentDate, service, appointmentTime, make, carModel, year, phoneNumber);
-//     appointmentRepo.save(appointment);
-    
-//     //email being made
-//     EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
-//     "Your appointment is confirmed. Appointment Details:\n" +
-//     "Date: " + dateFormat.format(appointmentDate) + "\n" +
-//     "Time: " + appointmentTime);
-
-    
-//     System.out.println("It works here!");
-//     emailSenderService.sendEmail(email, emailStructure);
-//     return "appointment/appointmentConfirmation";
-//     // return "/src/main/resources/templates/appointment/appointmentConfirmation.html";
-// }
-
-@PostMapping("/appointments/add")
-public String addAppointment(@RequestParam Map<String,String> appointmentData, Model model, HttpSession session) {
-    String name = appointmentData.get("name");
-    String email = appointmentData.get("email");
-    String dateString = appointmentData.get("slots");
-    String description = appointmentData.get("description");
-    String appointmentTime = appointmentData.get("time");
-    String service = appointmentData.get("service");
-    Date appointmentDate = null;
-    String make = appointmentData.get("make");
-    String carModel = appointmentData.get("carModel");
-    String year = appointmentData.get("year");
-    String phoneNumber = appointmentData.get("phoneNumber");
-    System.out.println(appointmentTime);
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     try {
         appointmentDate = dateFormat.parse(dateString);
         // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
@@ -150,9 +91,9 @@ public String addAppointment(@RequestParam Map<String,String> appointmentData, M
         model.addAttribute("appointmentDate", dateString);
         model.addAttribute("appointmentTime", appointmentTime);
         model.addAttribute("service", service);
-        model.addAttribute("make", make);
-        model.addAttribute("carModel", carModel);
-        model.addAttribute("year", year);
+        model.addAttribute("make",make);
+        model.addAttribute("carModel",carModel);
+        model.addAttribute("year",year);
         model.addAttribute("phoneNumber", phoneNumber);
 
         System.out.println("An appointment already exists for this user and email.");
@@ -171,10 +112,8 @@ public String addAppointment(@RequestParam Map<String,String> appointmentData, M
     
     System.out.println("It works here!");
     emailSenderService.sendEmail(email, emailStructure);
-
-    // Add user to session
-    session.setAttribute("session_user", new User(name, email, null)); // Assuming no need to set password here
     return "appointment/appointmentConfirmation";
+    // return "/src/main/resources/templates/appointment/appointmentConfirmation.html";
 }
 
 @PostMapping("/appointments/addConfirmation")
