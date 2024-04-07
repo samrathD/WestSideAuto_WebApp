@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule an Appointment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: black!important;
+        }
+
+        .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #FAF9F6!important;
+            position: relative; /* Add position relative to the link */
+        }
+
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px; /* Adjust the underline height */
+            bottom: 0;
+            left: 0;
+            background-color: transparent; /* Set initial background color */
+            transition: background-color 0.3s ease; /* Add transition effect */
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            background-color: #FAF9F6; /* Change the background color on hover */
+        }
+
+
+        .schedule {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        .form-field label {
+            font-weight: bold;
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="email"],
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .sign {
+            background-color: #000; /* Setting the background color to black */
+            color: #fff; /* Setting the text color to white */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; /* Adding transition for background color and text color */
+            border: 2px solid #000; /* Adding a black border on hover */
+            font-weight: 500;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .sign:hover {
+            background-color: #fff; /* Changing background color to white on hover */
+            color: #000; /* Changing text color to black on hover */
+            border: 2px solid #000; /* Adding a black border on hover */
+        }
+
+        .sign-container {
+            margin-top: 20px; /* Add margin to the container */
+            display: flex;
+            justify-content: space-between; /* Align buttons at opposite ends */
+        }
+
+        .next {
+            float: right; /* Align to the right */
+        }
+
+        .previous {
+            float: left; /* Align to the left */
+        }
+
+        .timeContainer{
+            height: 400px;
+            width: 400px;
+            border:2px solid white;
+            justify-content: space-between;
+            align-items: center;
+            padding:4px;
+            display:none;
+            flex-wrap: wrap;
+            flex-direction: row;
+            cursor:pointer;
+        }
+
+        #service:focus {
+            outline: none;
+            border-color: white;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+        .step{
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: */
+        .step.active {
+            opacity: 1;
+            background-color: black;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+         background-color: black;
+        }
+
+        /* Add hover effect to the time slots */
+        #timeSlot:hover{
+            color:white;
+            background-color: black;
+        }
+
+        .hoverEffect:hover{
+            color:white;
+            background-color:black;
+        }
+
+        .hoverAfter{
+            color:white;
+            background-color:black;
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/photos/logo.jpeg" alt="Company Logo" height="60"> <!-- Adjust the height here -->
+            </a>
+            <!-- Rest of the navbar content -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/html/delete.html">Delete Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/appointments/view">See All Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Sign In <i class="fas fa-sign-in-alt"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form class="schedule mt-5 mb-5" action="/appointments/update/{uid}" method="post" style="margin-bottom: 50px;">
+        <input type="text" name="uid" th:value="${appointment.uid}" hidden>
+        <h1 class="title">Schedule an Appointment</h1>
+        <h2 class="text-center mb-4">Hours of Operation</h2>
+        <h3 class="text-center">8:00 AM To 8:00 PM</h3>
+        <div class="container">
+
+            <!-- First container that allows users to book appointment -->
+            <div class="form-field">
+                <div class="tab">
+                    <div>
+                        <label for="slots">Please choose your slot:</label>
+                        <input type="date" id="slots" name="slots" min="" required>
+                        <span class="validity" id="valid"></span>
+                    </div>
+
+
+                    <!-- A container that displays all the time slots -->
+                    <div class="timeContainer">
+                        <div class="hoverEffect">
+
+                        </div>
+                        <div class="hoverAfter">
+
+                        </div>
+                    </div>
+
+                    <!-- A display:none text box that stores the time -->
+                    <div>
+                        <input type = "text" id = "time" name = "time"
+                        style = "display:none">
+                    </div>
+
+                    <div class="form-field">
+                        <div>
+                            <label for="name">Please Enter your Full Name:</label>
+                            <input type="text" id="name" name="name" th:value="${appointment.username}" placeholder="Your Full Name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div>
+                            <label for="phoneNumber">Please Enter Your Phone Number:</label>
+                            <br>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" th:value="${appointment.phoneNumber}" required>
+                        </div>
+                        <span id="phoneError" style="color: red; display: none;">Please enter a valid Phone Number.</span>
+                    </div>
+                    <div class="form-field">
+                        <div>
+                            <label for="email">Please Enter your email:</label>
+                            <input type="email" id="email" name = "email" placeholder="e.g., example@example.com" th:value="${appointment.email}" readonly required>
+                        </div>
+                        <span id="emailError" style="color: red; display: none;">Please enter a valid email address.</span>
+                    </div>
+                    <div class="form-field">
+                        <div>
+                            <label for="service">Select a Service:</label>
+                            <select id="service" name="service" required>
+                                <option value="Service">Select</option>
+                                <option value="Starlight Headliner">Starlight Headliner</option>
+                                <option value="Ambient Lighting">Ambient Lighting</option>
+                                <option value="Vinyl Wrap">Vinyl Wrap</option>
+                                <option value="Stereo Upgrade">Stereo Upgrade</option>
+                                <option value="Backup Camera">Backup Camera</option>
+                                <option value="Body Kit">BodyKit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <div>
+                            <label for="description" >Please provide a description of your service (optional):</label>
+                            <textarea id="description" rows="4" name = "description" th:text="${appointment.description}" ></textarea>
+                        </div>
+                    </div>
+                <!-- <div>
+                    <button id = "next">Next</button>
+                </div> -->
+            </div>
+
+            <div class="tab" >
+                <div class="form-field">
+                    <label for="make">Car Make:</label>
+                    <input type="text" id="make" name="make" placeholder = "Car Make" th:value="${appointment.make}" required>
+                </div>
+                <div class="form-field">
+                    <label for="model">Car Model:</label>
+                    <input type="text" id="carModel" name="carModel" placeholder = "Car Model" th:value="${appointment.carModel}" required>
+                </div>
+                <div class="form-field">
+                    <label for="year">Make Year:</label>
+                    <input type="text" id="year" name="year" placeholder = "Make Year" th:value="${appointment.year}" required>
+                </div>
+
+                <!-- <div>
+                     <button type="submit" id="submit" value = "Book">Book</button>
+                </div> -->
+            </div>
+
+            <div class="tab">
+                <div style="float:right;">
+                    <div id="estimateDetails" style="display:none;"></div>
+                     <button type="submit" class="sign next" id="submit" value = "Book">Book</button>
+                </div>
+
+            </div>
+
+            <div class="sign-container">
+                <div>
+                    <button class="sign previous" type = "button" id="previous">Previous</button>
+                </div>
+                <div>
+                    <button class="sign next" type = "button" id="next">Next</button>
+                </div>
+            </div>
+
+            <div id = "validate" style = "display:flex; text-align: center; justify-content: center; color:red;
+            display:none">
+                <p>***Please fill all the form feilds***</p>
+            </div>
+
+        </div>
+
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
+    </form>
+
+     <!--Get all the existing appointment info -->
+     <div th:each = "appointment:${appointment}" style = "color:white">
+        <span class = "existingAppointments" th:attr = "data-time = ${appointment.appointmentTime},
+        data-date = ${appointment.appointmentDate}"></span>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/JavaScript/schedule.js"></script>
+
+    <script>
+            // Function to pre-fill service field based on query parameter
+            function preFillServiceField() {
+                // Get the query parameter value for service
+                const urlParams = new URLSearchParams(window.location.search);
+                const service = urlParams.get('service');
+
+                // If service parameter exists, pre-fill the service field in the form
+                if (service) {
+                    document.getElementById('service').value = service;
+                }
+            }
+
+            // Call the function when the page loads
+            window.onload = function() {
+                preFillServiceField();
+            };
+    </script>
+</body>
+</html>

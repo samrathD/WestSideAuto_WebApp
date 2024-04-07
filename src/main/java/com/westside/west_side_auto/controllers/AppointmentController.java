@@ -321,6 +321,61 @@ public String deleteAppointment(@PathVariable Integer uid) {
     return "redirect:/appointments/view";
 }
 	
+@GetMapping("/appointments/update/{uid}")
+    public String showUpdateForm(@PathVariable Integer uid, Model model) {
+        // Logic to retrieve appointment by ID
+        List<userAppointment> optionalAppointment = appointmentRepo.findByUid(uid);
+        if (!optionalAppointment.isEmpty()) {
+            userAppointment appointment = optionalAppointment.get(0);
+            model.addAttribute("appointment",appointment);
+            return "appointment/showAllUpdate"; // Return the name of the HTML file for the update form
+        } else {
+            // Handle case where appointment with the given ID is not found
+            return "errorPage"; // Return the name of the HTML file for error page
+        }
+    }
+
+    @PostMapping("/appointments/update/{uid}")
+    public String updateShowAppointment(@RequestParam Map<String,String> appointmentData, HttpServletResponse response) {
+		int uid = Integer.parseInt(appointmentData.get("uid"));
+		String name = appointmentData.get("name");
+        String email = appointmentData.get("email");
+        String dateString = appointmentData.get("slots");
+        String description = appointmentData.get("description");
+        String appointmentTime = appointmentData.get("time");
+        Date appointmentDate = null;
+        String service = appointmentData.get("service");
+        String make = appointmentData.get("make");
+        String carModel = appointmentData.get("carModel");
+        String year = appointmentData.get("year");
+        String phoneNumber = appointmentData.get("phoneNumber");
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+        appointmentDate = dateFormat.parse(dateString);
+        // appointmentTime = LocalTime.parse(dateString.substring(11)); // Extract time part
+    } catch (ParseException | DateTimeParseException e) {
+        e.printStackTrace(); 
+        // Handle parsing exception here
+    }    
+    
+    	userAppointment editAppointment = appointmentRepo.findByUid(uid).get(0);
+    	editAppointment.setUsername(name);
+    	editAppointment.setEmail(email);
+    	editAppointment.setAppointmentDate(appointmentDate);
+    	editAppointment.setDescription(description);
+    	editAppointment.setAppointmentTime(appointmentTime);
+    	editAppointment.setService(service);
+    	editAppointment.setMake(make);
+    	editAppointment.setCarModel(carModel);
+    	editAppointment.setYear(year);
+    	editAppointment.setPhoneNumber(phoneNumber);
+    	
+    	appointmentRepo.save(editAppointment);
+    	response.setStatus(201);
+		return "redirect:/appointments/view";
+	}
+    
 	
 
 
