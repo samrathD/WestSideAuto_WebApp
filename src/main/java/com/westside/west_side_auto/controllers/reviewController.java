@@ -2,13 +2,16 @@ package com.westside.west_side_auto.controllers;
 
 import com.westside.west_side_auto.models.ReviewRepository;
 import com.westside.west_side_auto.models.review;
+import com.westside.west_side_auto.models.userAppointment;
 
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +50,7 @@ public class reviewController{
     @PostMapping("/submitReview")
 public String submitReview(@RequestParam Map<String,String> clientReview, Model model){
     String username = clientReview.get("username");
-    String dateString = clientReview.get("todayDate");
+    String dateString = clientReview.get("date");
     String ratingString = clientReview.get("rating"); 
 
 
@@ -55,11 +58,11 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
         return "/reviews/reviewForm";
     }
 
-    Date todayDate = null;
+    Date date = null;
     if (dateString != null && !dateString.isEmpty()) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            todayDate = dateFormat.parse(dateString);
+            date = dateFormat.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
             
@@ -74,13 +77,23 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
 
     String review = clientReview.get("review");
 
-    review newReview = new review(username, todayDate, rating, review);
+    review newReview = new review(username, date, rating, review);
     reviewRepository.save(newReview);
-    return "/reviews/reviewSubmitted";
+    return "redirect:/reviews/view";
 }
 
 
 
+@GetMapping("/reviews/view")
+	public String getMethodName(Model model) {
+		// List<userAppointment> appointments = appointmentRepo.findAll();
+		List<review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
+		model.addAttribute("reviews", reviews);
+        System.out.println("view page show");
+
+		return"reviews/showAllReviews";
+	}
 
 
 }

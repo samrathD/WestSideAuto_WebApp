@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -24,5 +24,62 @@
             </tr>
         </tbody>
     </table>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Review</title>
+    <link rel="stylesheet" href="/css/review.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section id="testimonials">
+        <div class="testimonial-heading">
+            <span>Comments</span>
+            <h1>Clients Says</h1>   
+        </div>
+        <div class="testimonial-box-container">
+            <!-- Iterate over reviews and generate testimonial boxes -->
+            <div th:each="review : ${reviews}" class="testimonial-box">
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="profile-img">
+                             <img th:src="@{/photos/profile.jpg}" alt="Profile Image"/>
+                        </div>
+                        <div class="name-user">
+                            <strong th:text="${review.username}">Sample User</strong>
+                            <span th:text="${#dates.format(review.date, 'yyyy-MM-dd')}">Date</span> <!-- Updated expression to "${#dates.format(review.date, 'yyyy-MM-dd')}" -->
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <!-- Generate star ratings based on review.rating -->
+                        <span th:if="${review.rating == 5}">
+                            <span th:each="star : ${#numbers.sequence(1, 5)}">
+                                <i class="fas fa-star"></i>
+                            </span>
+                        </span>
+                        <span th:unless="${review.rating == 5}">
+                            <span th:each="star : ${#numbers.sequence(1, review.rating)}">
+                                <i class="fas fa-star"></i>
+                            </span>
+                            <!-- Generate empty stars for remaining -->
+                            <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}">
+                                <i class="far fa-star"></i>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="client-comment">
+                    <p th:text="${review.review}">Lorem ipsum dolor sit amet...</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

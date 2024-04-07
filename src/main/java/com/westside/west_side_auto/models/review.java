@@ -18,21 +18,21 @@ public class review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
 
-    String username;
-    Date todayDate;
-    int rating;
-    String review;
+    private String username;
+    private Date date;
+    private int rating;
+    private String review;
 
     public review() {
         this.username = "";
-        this.todayDate = new Date(0);
+        this.date = new Date(0);
         this.rating = 0;
         this.review = "";
     }
 
-    public review(String username, Date todayDate, int rating, String review) {
+    public review(String username, Date date, int rating, String review) {
         this.username = username;
-        this.todayDate = todayDate;
+        this.date = date;
         this.rating = rating;
         this.review = review;
     }
@@ -46,11 +46,11 @@ public class review {
     }
 
     public Date getDate() {
-        return todayDate;
+        return date;
     }
 
-    public void setDate(Date todayDate) {
-        this.todayDate = todayDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getRating() {

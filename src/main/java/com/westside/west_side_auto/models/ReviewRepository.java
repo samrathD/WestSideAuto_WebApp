@@ -6,5 +6,5 @@ import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReviewRepository extends JpaRepository<review,Integer>{
-    ArrayList<review> findByTodayDate(Date todayDate);
+    ArrayList<review> findByDate(Date date);
 }
