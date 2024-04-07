@@ -59,12 +59,19 @@
                     </div>
                     <div class="reviews">
                         <!-- Generate star ratings based on review.rating -->
-                        <span th:each="star : ${#numbers.sequence(1, review.rating)}">
-                            <i class="fas fa-star"></i>
+                        <span th:if="${review.rating == 5}">
+                            <span th:each="star : ${#numbers.sequence(1, 5)}">
+                                <i class="fas fa-star"></i>
+                            </span>
                         </span>
-                        <!-- Generate empty stars for remaining -->
-                        <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}">
-                            <i class="far fa-star"></i>
+                        <span th:unless="${review.rating == 5}">
+                            <span th:each="star : ${#numbers.sequence(1, review.rating)}">
+                                <i class="fas fa-star"></i>
+                            </span>
+                            <!-- Generate empty stars for remaining -->
+                            <span th:each="star : ${#numbers.sequence(review.rating + 1, 5)}">
+                                <i class="far fa-star"></i>
+                            </span>
                         </span>
                     </div>
                 </div>

@@ -1,34 +1,94 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Review Form</title>
-</head>
-<body>
-    <h2>Submit a Review</h2>
-    <form action="/submitReview" method="post">
-        <p>Username: <input type="text" name="username" th:field="*{username}" required /></p>
-        <p>Today Date: <input type="Date" th:field="*{todayDate}" required/></p>
-        <p>Rating: <input type="number" min="1" max="5" th:field="*{rating}" required/></p>
-        <p>Review: <textarea th:field="*{review}" required></textarea></p>
-        <p><button type="submit">Submit Review</button></p>
-    </form>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Review Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-xY9c6H+67mrg5mfr59Suyy9zFfU9C+9E1js/ZBuAgTl2dj3ugij5FV7j+7N3bZlW9W9n6NH1G9/uc9gIn+bF1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        form p {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 50px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Submit a Review</h2>
-    <form action="/submitReview" method="post">
-        <p>Username: <input type="text" name="username" required /></p>
-        <p>Today Date: <input type="date" name="date" required/></p>
-        <p>Rating: <input type="number" min="1" max="5" name="rating" required/></p>
-        <p>Review: <textarea name="review" required></textarea></p>
-        <p><button type="submit">Submit Review</button></p>
-    </form>
+    <div class="container">
+        <h2>Submit a Review</h2>
+        <form action="/submitReview" method="post">
+            <p>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required />
+            </p>
+            <p>
+                <label for="date">Today Date:</label>
+                <input type="date" name="date" id="date" required/>
+            </p>
+            <p>
+                <label for="rating">Rating:</label>
+                <input type="number" min="1" max="5" name="rating" id="rating" required/>
+            </p>
+            <p>
+                <label for="review">Review:</label>
+                <textarea name="review" id="review" required></textarea>
+            </p>
+            <p>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Submit Review</button>
+            </p>
+        </form>
+    </div>
 </body>
 </html>
