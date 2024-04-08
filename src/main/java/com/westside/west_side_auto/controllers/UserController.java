@@ -33,11 +33,13 @@ public class UserController {
 	
 	@Autowired
 	private appointmentRepository appointmentRepo;
+	
+	@Autowired
 	private EmailSenderService emailSenderService;
 
-	@Autowired
-    public UserController(EmailSenderService emailSenderService){
-        this.emailSenderService = emailSenderService;
+	
+    public UserController(){
+
     }
 	
 	// @GetMapping("/")
