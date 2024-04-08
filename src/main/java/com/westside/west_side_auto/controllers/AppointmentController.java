@@ -386,4 +386,15 @@ public String deleteAppointment(@PathVariable Integer uid) {
     	response.setStatus(201);
 		return "appointment/appointmentConfirmation";
 	}
+
+    @GetMapping("/delete")
+    public String showDeleteForm(Model model, HttpSession session) {
+    User user = (User) session.getAttribute("session_user");
+    if (user != null) {
+        model.addAttribute("user", user);
+    }
+    return "appointment/delete"; // Return the name of the HTML file for the delete form
+    }
+
+
 }

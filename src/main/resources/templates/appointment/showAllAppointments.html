@@ -27,7 +27,10 @@
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1 class="text-center mb-4">Appointments</h1>
+                <h1 class="text-center mb-3">Appointments</h1>
+                <div class="text-center mb-3">
+                    <a href="/" class="btn btn-dark">Go Back to Home</a>
+                </div>
                 <div th:each="appointment:${appointments}" class="appointment-card">
                     <h2 class="appointment-name" th:text="${appointment.username}"></h2>
                     <ul class="appointment-info">
@@ -47,9 +50,6 @@
                             <button th:id="${appointment.uid}" class="btn btn-danger delete">Delete</button> 
                         </li>
                     </ul>
-                </div>
-                <div class="text-center">
-                    <a href="/" class="btn btn-primary">Go Back to Home</a>
                 </div>
             </div>
         </div>
