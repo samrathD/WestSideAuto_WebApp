@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,19 +65,20 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	void shouldBringThisUserToLoginPageWhenClickingLoginButton() throws Exception{
-		mockMvc.perform(get("/login"))
-		.andExpect(content().string(containsString("<form class=\"form\" action=\"/login\" method=\"post\">")));
+	void adminShouldSeeAllAppointmentsOption() throws Exception{
+		HashMap<String, Object> sessionAttr = new HashMap<String, Object>();
+		sessionAttr.put("session_user", new User("WestSideAuto","wsa@gmail.com","Wsa123"));
+		
+		mockMvc.perform(get("/login")
+			.sessionAttrs(sessionAttr))
+			.andExpect(model().attribute("showAllAppointments", true));
 	}
 	
-//	@Test
-//	void shouldAllowThisUserToLogin() throws Exception{
-//		mockMvc.perform(post("/login")
-//			.param("email", "abc123@gmail.com")
-//			.param("password", "password"))
-//		.andExpect(content().string(containsString("<h1>Welcome <span th:text=\"${user.username}\"></span>!</h1>")));
-//		
-//	}
+	@Test
+	void shouldBringThisUserToLoginPageWhenClickingLoginButton() throws Exception{
+		mockMvc.perform(get("/login"))
+			.andExpect(content().string(containsString("<form class=\"form\" action=\"/login\" method=\"post\">")));
+	}
 	
 	@Test 
 	void userEditsTheirProfileSuccessfully() throws Exception{
