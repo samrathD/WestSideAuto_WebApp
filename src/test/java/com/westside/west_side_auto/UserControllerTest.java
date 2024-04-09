@@ -46,9 +46,6 @@ public class UserControllerTest {
 	private appointmentRepository appointmentRepo;
 	@MockBean
 	private EmailSenderService emailService;
-	@Autowired
-	private UserController uController = new UserController();
-	
 	
 	@Test
 	void shouldGoToHomePage() throws Exception{
