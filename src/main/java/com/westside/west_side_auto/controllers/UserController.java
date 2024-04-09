@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.westside.west_side_auto.models.EmailStructure;
+import com.westside.west_side_auto.models.ReviewRepository;
 import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.UserRepository;
 import com.westside.west_side_auto.models.appointmentRepository;
+import com.westside.west_side_auto.models.review;
 import com.westside.west_side_auto.models.userAppointment;
 import com.westside.west_side_auto.service.EmailSenderService;
 
@@ -36,6 +39,9 @@ public class UserController {
 	
 	@Autowired
 	private EmailSenderService emailSenderService;
+
+	@Autowired
+    private ReviewRepository reviewRepository;
 
 	
     public UserController(){
@@ -58,6 +64,11 @@ public class UserController {
 		if (user != null) {
 			model.addAttribute("user", user);
 		}
+		// List<userAppointment> appointments = appointmentRepo.findAll();
+		List<review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
+		model.addAttribute("reviews", reviews);
+        System.out.println("view page show");
 		return "home";
 	}
 	

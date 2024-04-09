@@ -95,16 +95,16 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
 		return"reviews/showAllReviews";
 	}
 
-    @GetMapping("/reviews/home")
-	public String getMethodName2(Model model) {
-		// List<userAppointment> appointments = appointmentRepo.findAll();
-		List<review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
-		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
-		model.addAttribute("reviews", reviews);
-        System.out.println("view page show");
+    // @GetMapping("/reviews/home")
+	// public String getMethodName2(Model model) {
+	// 	// List<userAppointment> appointments = appointmentRepo.findAll();
+	// 	List<review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+	// 	// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
+	// 	model.addAttribute("reviews", reviews);
+    //     System.out.println("view page show");
 
-		return"/home";
-	}
+	// 	return"/home";
+	// }
 
 
 
