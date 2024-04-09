@@ -278,6 +278,52 @@
         </div>
     </section>
     
+    <section id="reviews" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Customer Reviews</h2>
+            <div id="reviewCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Iterate over reviews and generate carousel items -->
+                    <div th:each="review, iterStat : ${reviews}" class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active'">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${review.username}">John Doe</h5>
+                                <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(review.date, 'yyyy-MM-dd')}">2024-01-01</h6>
+                                <p class="card-text" th:text="${review.review}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <!-- Add star ratings based on review.rating -->
+                                <div th:switch="${review.rating}">
+                                    <div th:case="'5'">
+                                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                    </div>
+                                    <div th:case="'4'">
+                                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;</span>
+                                    </div>
+                                    <div th:case="'3'">
+                                        <span class="text-warning">&#9733;&#9733;&#9733;</span>
+                                    </div>
+                                    <div th:case="'2'">
+                                        <span class="text-warning">&#9733;&#9733;</span>
+                                    </div>
+                                    <div th:case="'1'">
+                                        <span class="text-warning">&#9733;</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add previous and next arrows -->
+                <a class="carousel-control-prev" href="#reviewCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#reviewCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer bg-dark text-white text-center py-4">
         <div class="container">

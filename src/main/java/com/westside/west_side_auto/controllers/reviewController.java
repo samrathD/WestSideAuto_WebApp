@@ -106,8 +106,6 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
 		return"reviews/testHome";
 	}
 
-
-
 }
 
 
