@@ -35,6 +35,43 @@
             color: white;
         }
 
+        .hero-video {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust height as needed */
+            overflow: hidden;
+        }
+    
+        .hero-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Maintain aspect ratio while covering container */
+        }
+    
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+    
+        @media (max-width: 768px) {
+            .hero-text {
+                width: 80%; /* Adjust the width of the text container */
+            }
+            
+            .hero-text h1 {
+                font-size: 1.5rem; /* Reduce font size for smaller screens */
+            }
+    
+            .hero-text .btn {
+                margin-top: 15px; /* Adjust margin for smaller screens */
+            }
+        }
+
         .navbar {
             background-color: black!important;
         }
@@ -132,6 +169,84 @@
 
         .carousel-control-next {
             right: -40px;
+        }
+
+        /* Style for modal form */
+        .modal-content {
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            background-color: black;
+            color: white;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 50px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="button"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button[type="button"]:hover {
+            background-color: black;
+        }
+
+        button[type="submit"]:hover {
+            background-color: black;
         }
 
     </style>
@@ -314,6 +429,8 @@
     <section id="reviews" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Customer Reviews</h2>
+            <!-- Button to trigger modal -->
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#reviewModal">Leave a Review</button>
             <div id="reviewCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <!-- Iterate over reviews and generate carousel items -->
@@ -357,6 +474,43 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Leave a Review</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Review form -->
+                    <form action="/submitReview" method="post">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" name="username" id="username" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Today Date:</label>
+                            <input type="date" name="date" id="date" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating:</label>
+                            <input type="number" min="1" max="5" name="rating" id="rating" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="review">Review:</label>
+                            <textarea name="review" id="review" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit"><i class="fas fa-paper-plane"></i> Submit Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <footer class="footer bg-dark text-white text-center py-4">
         <div class="container">

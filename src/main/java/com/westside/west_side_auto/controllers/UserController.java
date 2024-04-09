@@ -41,7 +41,7 @@ public class UserController {
 	private EmailSenderService emailSenderService;
 
 	@Autowired
-	private ReviewRepository reviewRepository;
+    private ReviewRepository reviewRepository;
 
 	
     public UserController(){
@@ -64,9 +64,11 @@ public class UserController {
 		if (user != null) {
 			model.addAttribute("user", user);
 		}
+		// List<userAppointment> appointments = appointmentRepo.findAll();
 		List<review> reviews = reviewRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+		// List<userAppointment> appointments = appointmentRepo.findAll(Sort.by(Sort.Direction.ASC, "appointment_date"));
 		model.addAttribute("reviews", reviews);
-        System.out.println("view page show");	
+        System.out.println("view page show");
 		return "home";
 	}
 	
