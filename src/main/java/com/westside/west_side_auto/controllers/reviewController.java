@@ -103,7 +103,7 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
 		model.addAttribute("reviews", reviews);
         System.out.println("view page show");
 
-		return"reviews/testHome";
+		return"/home";
 	}
 
 
