@@ -79,7 +79,7 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
 
     review newReview = new review(username, date, rating, review);
     reviewRepository.save(newReview);
-    return "redirect:/reviews/view";
+    return "redirect:/";
 }
 
 
