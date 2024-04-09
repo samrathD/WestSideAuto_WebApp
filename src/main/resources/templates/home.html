@@ -104,6 +104,36 @@
         .footer {
             background-color: black!important;
         }
+
+                /* Carousel styles */
+        .carousel-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform ease 0.3s; 
+        }
+
+        .carousel-item:hover img {
+            transform: translateY(-10px); 
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(100%); 
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-control-prev {
+            left: -40px; 
+        }
+
+        .carousel-control-next {
+            right: -40px;
+        }
+
     </style>
 </head>
 <body>
@@ -146,6 +176,7 @@
             <a href="/bookAppointment" class="btn btn-outline-light btn-lg">Book Now</a>
         </div>
     </div>-->
+    
 
     <div class="hero-video">
         <video autoplay loop muted width="100%" height="auto">
@@ -228,6 +259,8 @@
         </div>
     </section>
 
+  
+
 
 
     <section>
@@ -277,7 +310,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="reviews" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Customer Reviews</h2>
@@ -285,7 +318,7 @@
                 <div class="carousel-inner">
                     <!-- Iterate over reviews and generate carousel items -->
                     <div th:each="review, iterStat : ${reviews}" class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active'">
-                        <div class="card">
+                        <div class="card border-0 shadow">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${review.username}">John Doe</h5>
                                 <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(review.date, 'yyyy-MM-dd')}">2024-01-01</h6>
@@ -296,16 +329,16 @@
                                         <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                                     </div>
                                     <div th:case="'4'">
-                                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;</span>
+                                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
                                     </div>
                                     <div th:case="'3'">
-                                        <span class="text-warning">&#9733;&#9733;&#9733;</span>
+                                        <span class="text-warning">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
                                     </div>
                                     <div th:case="'2'">
-                                        <span class="text-warning">&#9733;&#9733;</span>
+                                        <span class="text-warning">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
                                     </div>
                                     <div th:case="'1'">
-                                        <span class="text-warning">&#9733;</span>
+                                        <span class="text-warning">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +357,7 @@
             </div>
         </div>
     </section>
-
+    
     <footer class="footer bg-dark text-white text-center py-4">
         <div class="container">
             <div class="row">
