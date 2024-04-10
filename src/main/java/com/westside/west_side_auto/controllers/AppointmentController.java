@@ -223,7 +223,7 @@ public class AppointmentController {
         if (!appointmentsToDelete.isEmpty()) {
         //email being made
         EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
-        "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+        "Your appointment has been successfully cancelled.\n");
             appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
             System.out.println("It works here!");
             emailSenderService.sendEmail(appointmentsToDelete.get(0).getEmail(), emailStructure);

@@ -40,7 +40,7 @@ public class userAppointment{
 
     public userAppointment(String username, String email, String description, Date appointmentDate,
             String service, String appointmentTime, String make, String carModel, String year, String phoneNumber) {
-        this.uid = uid;
+        // this.uid = uid;
         this.username = username;
         this.email = email;
         this.description = description;

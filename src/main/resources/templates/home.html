@@ -493,7 +493,7 @@
                         </div>
                         <div class="form-group">
                             <label for="date">Today Date:</label>
-                            <input type="date" name="date" id="date" required/>
+                            <input type="date" name="date" id="date" readonly required/>
                         </div>
                         <div class="form-group">
                             <label for="rating">Rating:</label>
@@ -531,6 +531,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/JavaScript/instagram-feed.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            var today = new Date().toISOString().slice(0,10);
+            $('#date').val(today);
+        });
+    </script>
 </body>
 </html>
 

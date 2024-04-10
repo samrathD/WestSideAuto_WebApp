@@ -124,7 +124,7 @@
                         <a class="nav-link" href="/bookAppointment">Schedule Appointment</a>
                     </li>
                     <li class="nav-item" th:if="${user != null && user.email == 'wsa@gmail.com'}">
-                        <a class="nav-link" href="/delete">Delete Appointment</a>
+                        <a class="nav-link" href="/delete">Cancel Appointment</a>
                     </li>
                     <li class="nav-item" th:if="${user != null && user.email == 'wsa@gmail.com'}">
                         <a class="nav-link" href="/appointments/view">See All Appointments</a>
@@ -138,7 +138,7 @@
     </nav>
 
     <div class="form-container mt-5">
-        <p class="title">Delete Appointment</p>
+        <p class="title">Cancel Appointment</p>
         <form action="/appointments/delete" method="post">
             <div class="input-group">
                 <label for="name">Name:</label>
