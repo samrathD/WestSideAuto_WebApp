@@ -28,6 +28,7 @@ import org.springframework.util.LinkedMultiValueMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.westside.west_side_auto.controllers.UserController;
+import com.westside.west_side_auto.models.ReviewRepository;
 import com.westside.west_side_auto.models.User;
 import com.westside.west_side_auto.models.UserRepository;
 import com.westside.west_side_auto.models.appointmentRepository;
@@ -47,6 +48,8 @@ public class UserControllerTest {
 	private appointmentRepository appointmentRepo;
 	@MockBean
 	private EmailSenderService emailService;
+	@MockBean
+	private ReviewRepository reviewRepo;
 	
 	@Test
 	void shouldGoToHomePage() throws Exception{
