@@ -116,74 +116,74 @@ public class AppointmentController {
     // return "/src/main/resources/templates/appointment/appointmentConfirmation.html";
 }
 
-@PostMapping("/appointments/addConfirmation")
-    public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
+// @PostMapping("/appointments/addConfirmation")
+//     public String addAppointmentConfirmation(@RequestParam Map<String,String> formData, Model model) {
         
-        String replaceOption = formData.get("replace");
+//         String replaceOption = formData.get("replace");
 
-        if ("yes".equals(replaceOption)) {
-            String name = formData.get("name");
-            String email = formData.get("email");
-            String dateString = formData.get("appointmentDate");
-            String description = formData.get("description");
-            String service = formData.get("service");
-            Date appointmentDate = null;
-			String appointmentTime = formData.get("appointmentTime"); //made change here
-            String make = formData.get("make");
-            String carModel = formData.get("carModel");
-            String year = formData.get("year");
-            String phoneNumber = formData.get("phoneNumber");
-
-
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                appointmentDate = dateFormat.parse(dateString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            //change here(commented)
-
-			// try {
-			// 	appointmentTime = LocalTime.parse(dateString.substring(11)); 
-			// } catch (Exception e) {
-			// 	e.printStackTrace();
-			// }
+//         if ("yes".equals(replaceOption)) {
+//             String name = formData.get("name");
+//             String email = formData.get("email");
+//             String dateString = formData.get("appointmentDate");
+//             String description = formData.get("description");
+//             String service = formData.get("service");
+//             Date appointmentDate = null;
+// 			String appointmentTime = formData.get("appointmentTime"); //made change here
+//             String make = formData.get("make");
+//             String carModel = formData.get("carModel");
+//             String year = formData.get("year");
+//             String phoneNumber = formData.get("phoneNumber");
 
 
-            // Replace the existing appointment
-            List<userAppointment> existingAppointments = appointmentRepo.findByEmail(email);
-            if (!existingAppointments.isEmpty()) {
-                for (userAppointment appointment : existingAppointments) {
-                    appointment.setUsername(name);
-                    appointment.setDescription(description);
-                    appointment.setAppointmentDate(appointmentDate);
-					appointment.setAppointmentTime(appointmentTime);
-                    appointment.setService(service);
-                    appointment.setMake(make);
-                    appointment.setCarModel(carModel);
-                    appointment.setYear(year);
-                    appointment.setPhoneNumber(phoneNumber);
-                    appointmentRepo.save(appointment);
-                }
-            }
-            //email being made
-    EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
-    "Your appointment is confirmed. Appointment Details:\n" +
-    "Date: " + dateFormat.format(appointmentDate) + "\n" +
-    "Time: " + appointmentTime +
-	"\nSincerely,\n"+
-	"West Side Autoworks Team");
+
+//             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//             try {
+//                 appointmentDate = dateFormat.parse(dateString);
+//             } catch (ParseException e) {
+//                 e.printStackTrace();
+//             }
+//             //change here(commented)
+
+// 			// try {
+// 			// 	appointmentTime = LocalTime.parse(dateString.substring(11)); 
+// 			// } catch (Exception e) {
+// 			// 	e.printStackTrace();
+// 			// }
+
+
+//             // Replace the existing appointment
+//             List<userAppointment> existingAppointments = appointmentRepo.findByEmail(email);
+//             if (!existingAppointments.isEmpty()) {
+//                 for (userAppointment appointment : existingAppointments) {
+//                     appointment.setUsername(name);
+//                     appointment.setDescription(description);
+//                     appointment.setAppointmentDate(appointmentDate);
+// 					appointment.setAppointmentTime(appointmentTime);
+//                     appointment.setService(service);
+//                     appointment.setMake(make);
+//                     appointment.setCarModel(carModel);
+//                     appointment.setYear(year);
+//                     appointment.setPhoneNumber(phoneNumber);
+//                     appointmentRepo.save(appointment);
+//                 }
+//             }
+//             //email being made
+//     EmailStructure emailStructure = new EmailStructure("Appointment Confirmation", 
+//     "Your appointment is confirmed. Appointment Details:\n" +
+//     "Date: " + dateFormat.format(appointmentDate) + "\n" +
+//     "Time: " + appointmentTime +
+// 	"\nSincerely,\n"+
+// 	"West Side Autoworks Team");
     
-    System.out.println("It works here!");
-    emailSenderService.sendEmail(email, emailStructure);
-            return "appointment/appointmentConfirmation";
-        } else {
-            // // Redirect to the add appointment page after 5 seconds
-            // model.addAttribute("redirectDelay", 5000); // 5 seconds delay
-            return "redirect:/appointments/add";
-        }
-    }
+//     System.out.println("It works here!");
+//     emailSenderService.sendEmail(email, emailStructure);
+//             return "appointment/appointmentConfirmation";
+//         } else {
+//             // // Redirect to the add appointment page after 5 seconds
+//             // model.addAttribute("redirectDelay", 5000); // 5 seconds delay
+//             return "redirect:/appointments/add";
+//         }
+//     }
 
 	@GetMapping("/appointments/add")
     public String showAddAppointmentForm(HttpServletRequest request, Model model, HttpSession session) {
@@ -202,11 +202,11 @@ public class AppointmentController {
 	@Transactional
     @PostMapping("/appointments/delete")
     public String deleteAppointment(@RequestParam String name, @RequestParam String email) {
-        List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name, email);
+        List<userAppointment> appointmentsToDelete = appointmentRepo.findByUsernameAndEmail(name.trim(), email.trim());
         if (!appointmentsToDelete.isEmpty()) {
         //email being made
-        EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
-        "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
+            EmailStructure emailStructure = new EmailStructure("Cancel Confirmation", 
+            "Your appointment has been successfully cancelled. Deleted Appointment Details:\n");
             appointmentRepo.deleteAll(appointmentsToDelete); // Delete the appointments
             System.out.println("It works here!");
             emailSenderService.sendEmail(email, emailStructure);
@@ -395,6 +395,7 @@ public String deleteAppointment(@PathVariable Integer uid) {
     }
     return "appointment/delete"; // Return the name of the HTML file for the delete form
     }
+
 
 
 }

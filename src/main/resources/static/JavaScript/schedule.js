@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function calculateEstimatedCost() {
         const service = document.getElementById("service").value;
         const estimatedCost = serviceCosts[service] || 0;
-        const make = document.getElementById("make").value;
+        const make = document.getElementById("make").innerHTML;
+        console.log(make);
         const model = document.getElementById("carModel").value;
         const year = document.getElementById("year").value;
 
@@ -24,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
         estimateDetailsContainer.innerHTML = `
             <p>Service: ${service}</p>
             
-            <p>Estimated Cost: ${estimatedCost}</p>`;
+            <p>Estimated Cost: ${estimatedCost}</p>
+            <p>Car Make: ${make}`;
+
         estimateDetailsContainer.style.display = "block";
     }
 
