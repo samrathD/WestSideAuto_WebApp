@@ -47,7 +47,7 @@ public class reviewController{
     //     return "/reviews/reviewSubmitted";
     // }
 
-    @PostMapping("/submitReview")
+   @PostMapping("/submitReview")
 public String submitReview(@RequestParam Map<String,String> clientReview, Model model){
     String username = clientReview.get("username");
     String dateString = clientReview.get("date");
@@ -62,7 +62,7 @@ public String submitReview(@RequestParam Map<String,String> clientReview, Model 
     if (dateString != null && !dateString.isEmpty()) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            date = dateFormat.parse(dateString);
+             date = dateFormat.parse(dateString);
         } catch (ParseException e) {
             e.printStackTrace();
             
