@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         estimateDetailsContainer.innerHTML = `
             <p>Service: ${service}</p>
             
-            <p>Estimated Cost: ${estimatedCost}</p>
-            <p>Car Make: ${make}`;
+            <p>Estimated Cost: ${estimatedCost}</p>`;
 
         estimateDetailsContainer.style.display = "block";
     }
